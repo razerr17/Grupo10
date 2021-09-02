@@ -5,10 +5,9 @@ import {Col,Row} from 'react-bootstrap'
 const AdminCrearNotifi = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"notificacione12s"}/>
             <div className="contenido">
                 <div className="Principal2">
-                   
                     <div className="cont"> 
                         <h4>Seleccione tipo de notificacion : </h4>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example">

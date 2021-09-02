@@ -1,7 +1,25 @@
-import React from 'react'
+import React ,{useState,useEffect}from 'react'
+import axios from 'axios'
 import AdminBar from '../Administracion/AdminBar'
+import '../styles/AdminAsignarTutor.css'
 import {Row,Col} from 'react-bootstrap'
 const AdminAsignarTutor = () => {
+    const baseUrl=`http://localhost:4000/estudiantes`;
+//    const[idEstudiante,setIdEstudiante]=useState([''])
+    const[data,setData]=useState([])
+    const peticionGet=async()=>{
+        await axios.get(baseUrl)
+        .then(response=>{
+          setData(response.data);
+          
+        }).catch(error=>{
+          console.log(error);
+        })
+        
+      } 
+      useEffect(()=>{
+        peticionGet();
+      })
     return (
         <div>
             <AdminBar/>
@@ -9,92 +27,26 @@ const AdminAsignarTutor = () => {
                 <div className="Principal2">
                 <div className="cont">
                         <h5>Lista de alumnos :</h5>
-                        <div className="TablaHacerTutor">
-                            <div className="col tableScrollHacerTutor scrollHacerTutor"> 
+                        <div className="TablaAsignarTutor">
+                            <div className="col tableScrollAsignarTutor scrollAsignarTutor"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead className="colTable">
                                             <tr>
                                                 <th>Nro</th>
-                                                <th>Curso</th>
-                                                <th>Estudiante</th>
-                                                <th>Detalles</th>
+                                                <th>Codigos</th>
+                                                <th>Nombres y apellidos</th>
+                                                
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
+                                            {data.map((estudiante,index)=>(
+                                                <tr key={index}>
+                                                    <td>{index+1}</td>
+                                                    <td>{estudiante.IDEstudiante }</td>
+                                                    <td>{estudiante.Nombres +"   "+ estudiante.ApPaterno +"   "+estudiante.ApMaterno}</td>
+                                                </tr>
+                                            ))}                   
 
                                         </tbody>
                                     </table>

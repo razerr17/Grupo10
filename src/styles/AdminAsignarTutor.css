@@ -1,0 +1,26 @@
+.tableScrollAsignarTutor {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+.scrollAsignarTutor {
+  display: block;
+}
+.TablaAsignarTutor {
+  height: 55%;
+  margin: 1%;
+  padding: 1%;
+  background: #efefef;
+  border-radius: 10px;
+}
+.inpuT {
+  width: 700px;
+}
+.btnG {
+  background: #ed9b40;
+  border-radius: 20px;
+  width: 100px;
+  margin-left: 20px;
+}
