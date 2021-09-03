@@ -40,11 +40,11 @@ CREATE TABLE TDocente
 	-- Lista de atributos
 	CodDocente tyCodDocente,
 	Nombres VARCHAR(30) NOT NULL,
-	DNI	varchar(8) check (DNI like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	ApPaterno VARCHAR(15) NOT NULL,
 	ApMaterno VARCHAR(15) NOT NULL,
+	DNI	varchar(8) check (DNI like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	Categoria VARCHAR(15) NOT NULL,
-	Celular	varchar(9) check (Celular like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	Celular	varchar(9) check (Celular like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	Email VARCHAR(50) NOT NULL,
 	Direccion VARCHAR(50) NOT NULL,
 	EsTutor VARCHAR(2) check (EsTutor like 'Si' or EsTutor like 'No')
@@ -278,25 +278,25 @@ go
 use BDSistema_Tutorias
 go
 -- DATOS TABLA DOCENTE
-INSERT INTO TDocente VALUES ( 'D000001','JOSE MAURO','PILLCO', 'QUISPE','ASOCIADO','Jose.Pillco@unsaac.edu.pe','D1')
-INSERT INTO TDocente VALUES ( 'D000002','WILLIAN','ZAMALLOA' ,'PARO','AUXILIAR','Wlliam.Zamalloa@unsaac.edu.pe','D2')
-INSERT INTO TDocente VALUES ( 'D000003','LINO PRISCILIANO','FLORES' ,'PACHECO','ASOCIADO','Lino.Flores@unsaac.edu.pe','D3')
-INSERT INTO TDocente VALUES ( 'D000004','RONY','VILLAFUERTE', 'SERNA','ASOCIADO','Rony.Villafuerte@unsaac.edu.pe','D4')
-INSERT INTO TDocente VALUES ( 'D000005','JOSE LUIS','SONCCO' ,'ALVAREZ','AUXILIAR','Jose.Soncco@unsaac.edu.pe','D5')
-INSERT INTO TDocente VALUES ( 'D000006','VANESA MARIBEL','CHOQUE', 'SOTO','AUXILIAR','Vanessa.Choque@unsaac.edu.pe','D6')
-INSERT INTO TDocente VALUES ( 'D000007','VICTOR DARIO','SOSA', 'JAUREGUI','AUXILIAR','Victor.Sosa@unsaac.edu.pe','D7')
-INSERT INTO TDocente VALUES ( 'D000008','ROXANA LISETTE','QUINTANILLA' ,'PORTUGAL','AUXILIAR','Roxana.Quintanilla@unsaac.edu.pe','D8')
-INSERT INTO TDocente VALUES ( 'D000009','LUIS BELTRAN','PALMA', 'TTITO','ASOCIADO','Luis.Palma@unsaac.edu.pe','D9')
-INSERT INTO TDocente VALUES ( 'D000010','ROBERT','ALZAMORA' ,'PAREDES','ASOCIADO','Robert.Alzamora@unsaac.edu.pe','D10')
-INSERT INTO TDocente VALUES ( 'D000011','EMILIO','PALOMINO' ,'OLIVERA','PRINCIPAL','Emilio.Palomino@unsaac.edu.pe','D11')
-INSERT INTO TDocente VALUES ( 'D000012','WALDO ELIO','IBARRA', 'ZANBRANO','AUXILIAR','Waldo.Ibarra@unsaac.edu.pe','D12')
-INSERT INTO TDocente VALUES ( 'D000013','IVAN CESAR','MEDRANO', 'VALENCIA','ASOCIADO','Ivan.Medrano@unsaac.edu.pe','D13')
-INSERT INTO TDocente VALUES ( 'D000014','GUZMAN','TICONA','PARI','ASOCIADO','Guzman.Ticona@unsaac.edu.pe','D14')
-INSERT INTO TDocente VALUES ( 'D000015','JAVIER ARTURO','ROZAS' ,'HUACHO','PRINCIPAL','Javier.Rozas@unsaac.edu.pe','D15')
-INSERT INTO TDocente VALUES ( 'D000016','DAVID REYNALDO','BERRIOS', 'BARCENA','AUXILIAR','David.Berrios@unsaac.edu.pe','D16')
-INSERT INTO TDocente VALUES ( 'D000017','LAURO','ENCISO', 'RODAS','PRINCIPAL','Lauro.Enciso@unsaac.edu.pe','D17')
-INSERT INTO TDocente VALUES ( 'D000018','JULIO CESAR','CARBAJAL', 'LUNA','PRINCIPAL','Julio.Carbajal@unsaac.edu.pe','D18')
-INSERT INTO TDocente VALUES ( 'D000019','DENNIS IVAN','CANDIA', 'OVIEDO','ASOCIADO','Dennis.Candia@unsaac.edu.pe','D19')
-INSERT INTO TDocente VALUES ( 'D000020','KARELIA','MEDINA', 'MIRANDA','ASOCIADO','Karelia.Medina@unsaac.edu.pe','D20')
-INSERT INTO TDocente VALUES ( 'D000021','JAVIER DAVID','CHAVEZ', 'CENTENO','ASOCIADO','Javier.Chavez@unsaac.edu.pe','D21')
+INSERT INTO TDocente VALUES ( 'D000001','JOSE MAURO','PILLCO', 'QUISPE','45698745','ASOCIADO','916122333','Jose.Pillco@unsaac.edu.pe','D1','No')
+INSERT INTO TDocente VALUES ( 'D000002','WILLIAN','ZAMALLOA' ,'PARO','45698745','AUXILIAR','916122333','Wlliam.Zamalloa@unsaac.edu.pe','D2','No')
+INSERT INTO TDocente VALUES ( 'D000003','LINO PRISCILIANO','FLORES' ,'PACHECO','45698745','ASOCIADO','916122333','Lino.Flores@unsaac.edu.pe','D3','No')
+INSERT INTO TDocente VALUES ( 'D000004','RONY','VILLAFUERTE', 'SERNA','45698745','ASOCIADO','916122333','Rony.Villafuerte@unsaac.edu.pe','D4','No')
+INSERT INTO TDocente VALUES ( 'D000005','JOSE LUIS','SONCCO' ,'ALVAREZ','45698745','AUXILIAR','916122333','Jose.Soncco@unsaac.edu.pe','D5','No')
+INSERT INTO TDocente VALUES ( 'D000006','VANESA MARIBEL','CHOQUE', 'SOTO','45698745','AUXILIAR','916122333','Vanessa.Choque@unsaac.edu.pe','D6','No')
+INSERT INTO TDocente VALUES ( 'D000007','VICTOR DARIO','SOSA', 'JAUREGUI','45698745','AUXILIAR','916122333','Victor.Sosa@unsaac.edu.pe','D7','No')
+INSERT INTO TDocente VALUES ( 'D000008','ROXANA LISETTE','QUINTANILLA' ,'PORTUGAL','45698745','AUXILIAR','916122333','Roxana.Quintanilla@unsaac.edu.pe','D8','No')
+INSERT INTO TDocente VALUES ( 'D000009','LUIS BELTRAN','PALMA', 'TTITO','45698745','ASOCIADO','916122333','Luis.Palma@unsaac.edu.pe','D9','No')
+INSERT INTO TDocente VALUES ( 'D000010','ROBERT','ALZAMORA' ,'PAREDES','45698745','ASOCIADO','916122333','Robert.Alzamora@unsaac.edu.pe','D10','No')
+INSERT INTO TDocente VALUES ( 'D000011','EMILIO','PALOMINO' ,'OLIVERA','45698745','PRINCIPAL','916122333','Emilio.Palomino@unsaac.edu.pe','D11','No')
+INSERT INTO TDocente VALUES ( 'D000012','WALDO ELIO','IBARRA', 'ZANBRANO','45698745','AUXILIAR','916122333','Waldo.Ibarra@unsaac.edu.pe','D12','No')
+INSERT INTO TDocente VALUES ( 'D000013','IVAN CESAR','MEDRANO', 'VALENCIA','45698745','ASOCIADO','916122333','Ivan.Medrano@unsaac.edu.pe','D13','No')
+INSERT INTO TDocente VALUES ( 'D000014','GUZMAN','TICONA','PARI','45698745','ASOCIADO','916122333','Guzman.Ticona@unsaac.edu.pe','D14','No')
+INSERT INTO TDocente VALUES ( 'D000015','JAVIER ARTURO','ROZAS' ,'HUACHO','45698745','PRINCIPAL','916122333','Javier.Rozas@unsaac.edu.pe','D15','No')
+INSERT INTO TDocente VALUES ( 'D000016','DAVID REYNALDO','BERRIOS', 'BARCENA','45698745','AUXILIAR','916122333','David.Berrios@unsaac.edu.pe','D16','No')
+INSERT INTO TDocente VALUES ( 'D000017','LAURO','ENCISO', 'RODAS','45698745','PRINCIPAL','916122333','Lauro.Enciso@unsaac.edu.pe','D17','No')
+INSERT INTO TDocente VALUES ( 'D000018','JULIO CESAR','CARBAJAL', 'LUNA','45698745','PRINCIPAL','916122333','Julio.Carbajal@unsaac.edu.pe','D18','No')
+INSERT INTO TDocente VALUES ( 'D000019','DENNIS IVAN','CANDIA', 'OVIEDO','45698745','ASOCIADO','916122333','Dennis.Candia@unsaac.edu.pe','D19','No')
+INSERT INTO TDocente VALUES ( 'D000020','KARELIA','MEDINA', 'MIRANDA','45698745','ASOCIADO','916122333','Karelia.Medina@unsaac.edu.pe','D20','No')
+INSERT INTO TDocente VALUES ( 'D000021','JAVIER DAVID','CHAVEZ', 'CENTENO','45698745','ASOCIADO','916122333','Javier.Chavez@unsaac.edu.pe','D21','No')
 go
