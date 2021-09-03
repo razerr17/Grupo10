@@ -8,6 +8,8 @@ const router=Router();
 router.get('/estudiantes',getEstudiantes);
 //funcion para obtener una estudiantes por id el cual es el codigo
 router.get('/estudiantes/:id',getEstudianteById);
+//funcion para obtener una estudiantes por id el cual es el codigo
+//router.get('/estudiantes/:id',getTutores);
 //funcion para agregar un estudiante nuevo
 router.post('/estudiantes',addEstudiante);
 //funcion para agregar varios estudiantes

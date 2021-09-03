@@ -5,12 +5,16 @@ export const queries={
     addNewEstudiantes:"Insert into TEstudiante Values (@IDEstudiante,@Nombres,@ApPaterno,@ApMaterno,@Email,@Direccion,@Celular)",
     deleteEstudianteById:"delete from TEstudiante where IDEstudiante=@IDEstudiante",
     updateEstudianteById:"update TEstudiante set IDEstudiante=@IDEstudiante,Nombres=@Nombres,ApPaterno=@ApPaterno,ApMaterno=@ApMaterno,Email=@Email,Direccion=@Direccion,Celular=@Celular where IDEstudiante=@IDEstudiante",
+
     // Queries Docentes
     getAllDocentes:"Select * from TDocente",
     getDocenteById:"Select * from TDocente where IDDocente=@IDDocente",
-    addNewDocente:"Insert into TDocente Values (@IDDocente,@Nombre,@DNI,@Correo,@Celular,@Direccion)",
-    deleteDocenteById:"delete from TDocente where IDDocente=@IDDocente",
-    updateDocenteById:"update TDocente set Nombre=@Nombre,DNI=@DNI,Correo=@Correo,Celular=@Celular,Direccion=@Direccion where IDDocente=@IDDocente",
+    getTutores:"Select * from TDocente where EsTutor='Si'",
+    addNewDocente:"Insert into TDocente Values (@IdDocente,@DNI,@Nombres,@ApPaterno,@ApMaterno,@Categoria,@Email,@Direccion,@Celular,@EsTutor)",
+    deleteDocenteById:"delete from TDocente where IdDocente=@IdDocente",
+    updateDocenteById:"update TDocente set DNI=@DNI, Nombres= @Nombres, ApPaterno=@ApPaterno, ApMaterno=@ApMaterno,Categoria=@Categoria, Email=@Email, Direccion=@Direccion, Celular=@Celular, EsTutor=@EsTutor where IdDocente=@IdDocente",
+
+
     // Queries Tutor
     getAllTutor:"Select * from TTutor",
     getTutorById:"Select * from TTutor where IDTutor=@IDTutor",

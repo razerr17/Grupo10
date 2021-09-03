@@ -24,6 +24,7 @@ export const getEstudianteById=async (req,res)=>{
         res.send(error.message);
     }
 };
+
 export const addEstudiante=async (req,res)=>{
     try{
         const {IDEstudiante,Nombres,ApPaterno,ApMaterno,Email,Direccion,Celular}=req.body;
