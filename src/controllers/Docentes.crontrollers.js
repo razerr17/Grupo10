@@ -15,7 +15,7 @@ export const getDocenteById=async (req,res)=>{
     try{
         const { id }=req.params;
         const pool=await getConnection();
-        const result=await pool.request().input("IDDocente",sql.VarChar,id)
+        const result=await pool.request().input("CodDocente",sql.VarChar,id)
         .query(queries.getDocenteById);
         console.log('getDocenteById executed',id);  
         res.json(result.recordset);
@@ -26,18 +26,22 @@ export const getDocenteById=async (req,res)=>{
 };
 export const addDocente=async (req,res)=>{
     try{
-        const {IDDocente,Nombre,DNI,Correo,Celular,Direccion}=req.body;
+        const {CodDocente,Nombres,ApPaterno,ApMaterno,DNI,Categoria,Celular,Email,Direccion,EsTutor}=req.body;
         const pool=await getConnection();
         await pool.request()
-            .input("IDDocente",sql.VarChar,IDDocente)
-            .input("Nombre",sql.VarChar,Nombre)
+            .input("CodDocente",sql.VarChar,CodDocente)
+            .input("Nombres",sql.VarChar,Nombres)
+            .input("ApPaterno",sql.VarChar,ApPaterno)
+            .input("ApMaterno",sql.VarChar,ApMaterno)
             .input("DNI",sql.VarChar,DNI)
-            .input("Correo",sql.VarChar,Correo)
+            .input("Categoria",sql.VarChar,Categoria)
             .input("Celular",sql.VarChar,Celular)
+            .input("Email",sql.VarChar,Email)
             .input("Direccion",sql.VarChar,Direccion)
+            .input("EsTutor",sql.VarChar,EsTutor)
             .query(queries.addNewDocente);
-        console.log('addDocente executed',IDDocente)
-        res.json({IDDocente,Nombre,DNI,Correo,Celular,Direccion});
+        console.log('addDocente executed',CodDocente)
+        res.json({CodDocente});
     }catch(error){
         res.status(500);
         res.send(error.message);
@@ -48,9 +52,10 @@ export const addDocentes=async (req,res)=>{
         const Lista=req.body;
         let queriestemp='';
         for (let i = 0; i < Lista.length; i++) {
-            let IDDocente=Lista[i].IDDocente,Nombre=Lista[i].Nombre,DNI=Lista[i].DNI,Correo=Lista[i].Correo,
-            Celular=Lista[i].Celular,Direccion=Lista[i].Direccion;
-            queriestemp+="Insert into TDocente Values ('"+IDDocente+"','"+Nombre+"','"+DNI+"','"+Correo+"','"+Celular+"','"+Direccion+"')\n";
+            let CodDocente=Lista[i].CodDocente,Nombres=Lista[i].Nombres,ApPaterno=Lista[i].ApPaterno,ApMaterno=Lista[i].ApMaterno,
+            DNI=Lista[i].DNI,Categoria=Lista[i].Categoria,Celular=Lista[i].Celular,Email=Lista[i].Email,Direccion=Lista[i].Direccion,
+            EsTutor=Lista[i].EsTutor;
+            queriestemp+="Insert into TDocente Values ('"+CodDocente+"','"+Nombres+"','"+ApPaterno+"','"+ApMaterno+"','"+DNI+"','"+Categoria+"','"+Celular+"','"+Email+"','"+Direccion+"','"+EsTutor+"')\n";
         }
         console.log(queriestemp);
         const pool=await getConnection();
@@ -64,18 +69,16 @@ export const addDocentes=async (req,res)=>{
 export const updateDocenteById=async (req,res)=>{
     try{
         const {id}=req.params;
-        const {Nombre,DNI,Correo,Celular,Direccion}=req.body;
+        const {Nombre,DNI,Email,Celular,Direccion}=req.body;
         const pool=await getConnection();
         await pool.request()
-            .input("IDDocente",sql.VarChar,id)
-            .input("Nombre",sql.VarChar,Nombre)
-            .input("DNI",sql.VarChar,DNI)
-            .input("Correo",sql.VarChar,Correo)
+            .input("CodDocente",sql.VarChar,id)
+            .input("Email",sql.VarChar,Email)
             .input("Celular",sql.VarChar,Celular)
             .input("Direccion",sql.VarChar,Direccion)
             .query(queries.updateDocenteById);
         console.log('updateDocenteById executed',id)
-        res.json({id,Nombre,DNI,Correo,Celular,Direccion});
+        res.json({id,Email,Celular,Direccion});
     }catch(error){
         res.status(500);
         res.send(error.message);
@@ -86,7 +89,7 @@ export const deleteDocenteById=async (req,res)=>{
         const {id}=req.params;
         const pool=await getConnection();
         await pool.request()
-            .input("IDDocente",sql.VarChar,id)
+            .input("CodDocente",sql.VarChar,id)
             .query(queries.deleteDocenteById);
         res.json({id});
         console.log("Se elimino el docente",id);

@@ -7,8 +7,8 @@ export const queries={
     updateEstudianteById:"update TEstudiante set Email=@Email,Direccion=@Direccion,Celular=@Celular where CodEstudiante=@CodEstudiante",
     // Queries Docentes
     getAllDocentes:"Select * from TDocente",
-    getDocenteById:"Select * from TDocente where IDDocente=@IDDocente",
-    addNewDocente:"Insert into TDocente Values (@IDDocente,@Nombre,@DNI,@Correo,@Celular,@Direccion)",
-    deleteDocenteById:"delete from TDocente where IDDocente=@IDDocente",
-    updateDocenteById:"update TDocente set Nombre=@Nombre,DNI=@DNI,Correo=@Correo,Celular=@Celular,Direccion=@Direccion where IDDocente=@IDDocente"
+    getDocenteById:"Select * from TDocente where CodDocente=@CodDocente",
+    addNewDocente:"Insert into TDocente Values (@CodDocente,@Nombres,@ApPaterno,@ApMaterno,@DNI,@Categoria,@Celular,@Email,@Direccion,@EsTutor)",
+    deleteDocenteById:"delete from TDocente where CodDocente=@CodDocente",
+    updateDocenteById:"update TDocente set Email=@Email,Celular=@Celular,Direccion=@Direccion where CodDocente=@CodDocente"
 }
