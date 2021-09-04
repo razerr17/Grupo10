@@ -1,11 +1,28 @@
 import React from 'react'
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 import AdminBar from '../Administracion/AdminBar'
 import {Col,Row} from 'react-bootstrap'
 import '../styles/AdminDocentes.css'
+
 const AdminDocentesTutores = () => {
+    const baseUrl=`http://localhost:4000/tutores`;
+    const[data,setData]=useState([]);
+    const peticionGet=async()=>{
+        await axios.get(baseUrl)
+        .then(response=>{
+          setData(response.data);
+          
+        }).catch(error=>{
+          console.log(error);
+        })  
+      }
+    useEffect(()=>{
+      peticionGet();  
+    })
     return (
         <div>
-            <AdminBar/>
+            <AdminBar  nombrePage={"Docentes tutores"}/>
             <div className="contenido">
                 <div className="Principal2">
                     <div className="datTop">
@@ -26,90 +43,32 @@ const AdminDocentesTutores = () => {
                     <div className="TablaDT">
                     <div className="col tableScrollDT scrollDT"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead className="colTable">
                                             <tr>
-                                                <th>Nro</th>
-                                                <th>Curso</th>
-                                                <th>Estudiante</th>
-                                                <th>Detalles</th>
+                                                <th>CodDocente</th>
+                                                <th>DNI</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Categoria</th>
+                                                <th>Celular</th>
+                                                <th>Email</th>
+                                                <th>Direccion</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-
+                                            {data.map((docente,index)=>(
+                                                <tr key={index}>
+                                                    <td>{docente.CodDocente}</td>
+                                                    <td>{docente.DNI}</td>
+                                                    <td>{docente.Nombres}</td>
+                                                    <td>{docente.ApPaterno + " "+docente.ApMaterno}</td>
+                                                    <td>{docente.Categoria}</td>                        
+                                                    <td>{docente.Celular}</td>
+                                                    <td>{docente.Email}</td>
+                                                    <td>{docente.Direccion}</td>
+                                                </tr>
+                                            ))}                                        
                                         </tbody>
                                     </table>
                                 </div>

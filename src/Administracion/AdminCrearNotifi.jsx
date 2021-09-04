@@ -5,7 +5,7 @@ import {Col,Row} from 'react-bootstrap'
 const AdminCrearNotifi = () => {
     return (
         <div>
-            <AdminBar nombrePage={"notificacione12s"}/>
+            <AdminBar nombrePage={"Crear Notificaciones"}/>
             <div className="contenido">
                 <div className="Principal2">
                     <div className="cont"> 

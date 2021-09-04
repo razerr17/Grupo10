@@ -5,7 +5,7 @@ import {Col,Row} from 'react-bootstrap'
 const AdminMenu = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Ayudantes de tutoria"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <div className="datTop">

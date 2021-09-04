@@ -22,7 +22,7 @@ const AdminAsignarTutor = () => {
       })
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Asignar tutor"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <div className="cont">

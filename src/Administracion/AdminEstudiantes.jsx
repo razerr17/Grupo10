@@ -129,7 +129,7 @@ const AdminEstudiantes = () => {
       })
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Estudiantes"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <div className="cont">

@@ -5,7 +5,7 @@ import {Row,Col} from "react-bootstrap"
 const AdminHorarios = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Horarios de tutoria"}/>
             <div className="contenido">
                 <div className="Principal2">
                    <div className="horaTop">

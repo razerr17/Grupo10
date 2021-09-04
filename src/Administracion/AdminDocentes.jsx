@@ -12,37 +12,53 @@ const AdminDocentes = () => {
     const baseUrl=`http://localhost:4000/docentes`;
     const baseUrlExcel=`http://localhost:4000/docentesLista`;
     const[excel,setExcel]=useState([{
-        IDDocente:'',
-        Nombre:'',
+        CodDocente:'',
+        Nombres:'',
         DNI:'',
-        Correo:'',
-        Celular :'',
-        Direccion:''
+        ApPaterno:'',
+        ApMaterno :'',
+        Categoria:'',
+        Celular:'',
+        Email:'',
+        Direccion:'',
+        EsTutor:'',
     }]);
     const[modalInsertar,setModalInsertar]=useState(false);
-    const[idDocente,setIdDocente]=useState('')
+    const[codDocente,setCodDocente]=useState('')
     const[nombres,setNombres]=useState('')
     const[dni,setDni]=useState('')
-    const[correo,setCorreo]=useState('')
+    const[apPaterno,setApPaterno]=useState('')
+    const[apMaterno,setApMaterno]=useState('')
+    const[categoria,setCategoria]=useState('')
     const[celular,setCelular]=useState('')
+    const[email,setEmail]=useState('')
     const[direccion,setDireccion]=useState('')
+    const[esTutor,setEsTutor]=useState('')
     const[warningView,setWarningview]=useState(false);
     //*metodos para el api*
     const[data,setData]=useState([]);
     const limpiar=()=>{
-        setIdDocente('')
+        setCodDocente('')
         setNombres('')
         setDni('')
-        setCorreo('')
+        setApPaterno('')
+        setApMaterno('')
+        setCategoria('')
         setCelular('')
+        setEmail('')
         setDireccion('')
+        setEsTutor('')
         setExcel([{
-            IDDocente:'',
-            Nombre:'',
+            CodDocente:'',
+            Nombres:'',
             DNI:'',
-            Correo:'',
-            Celular :'',
-            Direccion:''
+            ApPaterno:'',
+            ApMaterno :'',
+            Categoria:'',
+            Celular:'',
+            Email:'',
+            Direccion:'',
+            EsTutor:'',
         }])
     }
     const peticionGet=async()=>{
@@ -52,8 +68,7 @@ const AdminDocentes = () => {
           
         }).catch(error=>{
           console.log(error);
-        })
-        
+        })  
       }
       const peticionPostExcel=async()=>{
         await axios.post(baseUrlExcel,excel)
@@ -66,7 +81,7 @@ const AdminDocentes = () => {
         })
       }
       const peticionPost=async()=>{
-        if(!idDocente.trim()||!nombres.trim()||!dni.trim()||!correo.trim()||!celular.trim()||!direccion.trim()){
+        if(!codDocente.trim()||!nombres.trim()||!dni.trim()||!apPaterno.trim()||!apMaterno.trim()||!categoria.trim()||!celular.trim()||!email.trim()||!direccion.trim()||!esTutor.trim()){
             setWarningview(true)
              return
          }     
@@ -75,12 +90,16 @@ const AdminDocentes = () => {
              return
         }
         await axios.post(baseUrl,{
-                IDDocente:idDocente,
-                Nombre:nombres,
-                DNI:dni,
-                Correo:correo,
-                Celular:celular,
-                Direccion:direccion
+            CodDocente:codDocente,
+            Nombres:nombres,
+            DNI:dni,
+            ApPaterno:apPaterno,
+            ApMaterno :apMaterno,
+            Categoria:categoria,
+            Celular:celular,
+            Email:email,
+            Direccion:direccion,
+            EsTutor:esTutor,
         })
         .then(response=>{
           setData(data.concat(response.data));
@@ -129,7 +148,7 @@ const AdminDocentes = () => {
       })
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Docentes"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <div className="cont">
@@ -139,11 +158,13 @@ const AdminDocentes = () => {
                                     <table className="table table-bordered bg-light ">
                                         <thead className="colTable">
                                             <tr>
-                                                <th>Id docente</th>
-                                                <th>Nombres</th>
+                                                <th>CodDocente</th>
                                                 <th>DNI</th>
-                                                <th>Correo</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Categoria</th>
                                                 <th>Celular</th>
+                                                <th>Email</th>
                                                 <th>Direccion</th>
                                                 
                                             </tr>
@@ -151,11 +172,13 @@ const AdminDocentes = () => {
                                         <tbody>
                                             {data.map((docente,index)=>(
                                                 <tr key={index}>
-                                                    <td>{docente.IDDocente}</td>
-                                                    <td>{docente.Nombre}</td>
+                                                    <td>{docente.CodDocente}</td>
                                                     <td>{docente.DNI}</td>
-                                                    <td>{docente.Correo}</td>                                                                                 
+                                                    <td>{docente.Nombres}</td>
+                                                    <td>{docente.ApPaterno+" "+docente.ApMaterno}</td>
+                                                    <td>{docente.Categoria}</td>                        
                                                     <td>{docente.Celular}</td>
+                                                    <td>{docente.Email}</td>
                                                     <td>{docente.Direccion}</td>
                                                 </tr>
                                             ))}                                        
@@ -175,7 +198,7 @@ const AdminDocentes = () => {
                     </div>
 
                    </div>
-                   <Modal isOpen={modalInsertar} size="lg">
+                   <Modal isOpen={modalInsertar} size="xl">
                     <ModalHeader>Insertar docente de base de datos</ModalHeader>
                     <ModalBody>
                     <div className="form-group">
@@ -183,11 +206,19 @@ const AdminDocentes = () => {
                             <Col>
                             <label>Codigo: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setIdDocente(e.target.value)}/>
+                            <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setCodDocente(e.target.value)}/>
                             <br/>
                             <label>Nombres: </label>
                             <br/> 
                             <input type="text" className="form-control" name="Nombres" onChange={ (e) => setNombres(e.target.value)}/>
+                            <br/>
+                            <label>Apellido Paterno: </label>
+                            <br/> 
+                            <input type="text" className="form-control" name="ApPaterno" onChange={ (e) => setApPaterno(e.target.value)}/>
+                            <br/>
+                            <label>Apellido Materno: </label>
+                            <br/> 
+                            <input type="text" className="form-control" name="ApMaterno" onChange={ (e) => setApMaterno(e.target.value)}/>
                             <br/>
                             <label>DNI: </label>
                             <br/>
@@ -195,17 +226,27 @@ const AdminDocentes = () => {
                             <br/>
                             </Col>
                             <Col>
-                            
-                            <label>Correo: </label>
+                            <label>Categoria: </label>
                             <br/> 
-                            <input type="email" className="form-control" name="correo" onChange={ (e) => setCorreo(e.target.value)}/>
+                            <select class="form-select"  id="categoria" name="categoria" onChange={ (e) => setCategoria(e.target.value)}>
+                                <option value="ASOCIADO">ASOCIADO</option>
+                                <option value="AUXILIAR">AUXILIAR</option>
+                                <option value="CONTRATADO">CONTRATADO</option>
+                            </select>
+                            <br/>
+                            <label>Email: </label>
+                            <br/> 
+                            <input type="email" className="form-control" name="correo" onChange={ (e) => setEmail(e.target.value)}/>
                             <br/>       
                             <label>Celular :</label>
                             <br />
                             <input type="text" className="form-control" name="telefono" onChange={(e)=>setCelular(e.target.value)} />
                             <br/>
-                            <label htmlFor="">Direccion</label>
+                            <label htmlFor="">Direccion:</label>
                             <input type="text" className="form-control" name="direccion" onChange={(e)=>setDireccion(e.target.value)}/>
+                            <br/>
+                            <label htmlFor="">Es Tutor:</label>
+                            <input type="text" className="form-control" name="esTutor" onChange={(e)=>setEsTutor(e.target.value)}/>
                             </Col>
                         </Row>
                                          

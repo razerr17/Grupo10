@@ -5,7 +5,7 @@ import '../styles/AdminEstudiantesRiesgo.css'
 const AdminEstudiantesRiesgo = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Estudiantes en riesgo"}/>
             <div className="contenido">
                 <div className="Principal2">
                   <div className="cont"> 

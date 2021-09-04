@@ -5,7 +5,7 @@ import '../styles/AdminHacerTutor.css'
 const AdminHacerTutor = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Hacer tutor"}/>
             <div className="contenido">
                 <div className="Principal2">
                     <div className="cont">
