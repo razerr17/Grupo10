@@ -5,7 +5,7 @@ import {Col,Row} from 'react-bootstrap'
 const AdminConsultarInfo = () => {
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Consultar Informes"}/>
             <div className="contenido">
                 <div className="Principal2">
                    <Row>

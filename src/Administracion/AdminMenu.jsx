@@ -1,9 +1,10 @@
 import React from 'react'
 import AdminBar from '../Administracion/AdminBar'
 const AdminMenu = () => {
+    
     return (
         <div>
-            <AdminBar/>
+            <AdminBar nombrePage={"Notificaciones"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <label className="lbltop"><b>Historial de reuniones :</b></label>

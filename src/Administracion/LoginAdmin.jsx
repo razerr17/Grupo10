@@ -2,11 +2,53 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
 import * as ImIcons from "react-icons/im"
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
+import axios from 'axios'
+import md5 from 'md5'
+import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
+import Cookies from 'universal-cookie/es6';
 import '../styles/LoginTutorados.css'
-const LoginAdmin = ()=>{
+const LoginAdmin = (props)=>{
+    const baseURL="https://localhost:44378/api/usuarios";
+    const cookies=new Cookies();
+    const[user,setUser]=useState('')
+    const[password,setPassword]=useState('')
     const [mostrar,setMostrar]=useState(false)
     const CambiarMostrar = () => setMostrar(!mostrar);
+    const[warningView,setWarningview]=useState(false);
+    const abrirCerrarModalWarning=()=>{
+        setWarningview(!warningView);
+      }
+    const Login=async()=>{
+        await axios.get(baseURL+`/${user}/${md5(password)}`)
+        .then(response=>{
+            return response.data;
+        }).then(response=>{
+            if(response.length>0){
+                var respuesta=response[0];
+                cookies.set('id',respuesta.id,{path:'/'});
+                cookies.set('apellido_paterno',respuesta.apellido_paterno,{path:'/'});
+                cookies.set('apellido_materno',respuesta.apellido_materno,{path:'/'});
+                cookies.set('nombre',respuesta.nombre,{path:'/'});
+                cookies.set('correo',respuesta.correo,{path:'/'});
+                cookies.set('username',respuesta.username,{path:'/'});
+                cookies.set('password',respuesta.password,{path:'/'});
+                
+                props.history.push('/Admin_Menu');
+            }
+            else{
+                abrirCerrarModalWarning();
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
+    useEffect(()=>{
+        if(cookies.get('id')){
+            props.history.push('/Admin_Menu');
+        }
+    })
     return (
         <div className="fondoLog1 ">
             <div className="regresar">
@@ -22,13 +64,18 @@ const LoginAdmin = ()=>{
                     <hr />
                     <div className="form">
                         <label><b>Ingrese Usuario:</b> </label>
-                        <input type="text" className="form-control" name="username" placeholder="Usuario"/>
+                        <input type="text"
+                         className="form-control" 
+                         onChange={ (e) => setUser(e.target.value)} 
+                         name="username" 
+                         placeholder="Usuario"/>
                         <br />
                         <label> <b>Ingrese Contraseña:</b>  </label>
                         <br />
                         <input
                         type={mostrar ? 'text' : 'password'}
                         className="form-control"
+                        onChange={ (e) => setPassword(e.target.value)} 
                         name="password"          
                         placeholder={mostrar ? 'ingrese aqui' : '****************'}
                         />
@@ -41,11 +88,19 @@ const LoginAdmin = ()=>{
                             </Col>
                         </Row>
                         <br />
-                        <Link to="/Admin_Menu" style={{ textDecoration: 'none' }}>
-                            <button className="ingresar" >Iniciar Sesión</button>
+                        <Link  style={{ textDecoration: 'none' }}>
+                            <button className="ingresar" onClick={()=>Login()} >Iniciar Sesión</button>
                         </Link>
                     </div>
                 </div>
+                <Modal  isOpen={warningView} centered>
+                    <ModalHeader>
+                        <ImIcons.ImWarning />   La contraseña o el usuario no son correctos
+                    </ModalHeader>
+                    <ModalFooter>
+                    <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
+                    </ModalFooter>
+                </Modal>
             </div>
         </div>
     )
