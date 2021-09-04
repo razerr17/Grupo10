@@ -33,7 +33,7 @@ const AdminBar=(props)=>{
                 <label className="nombre" for="check">
                     <h5>Bienvenido : {cookie.get('nombre')}</h5>
                 </label>
-                <label className="lblNombre">{nombrePage}</label>
+                <label className="lblNombre"><b>{nombrePage}</b></label>
                 <Link className="link" to="/LoginAdministracion" style={{ textDecoration: 'none' }} onClick={()=>cerrarSesion()} for="check">
                  <b>cerrar sesion</b>
                 </Link>
@@ -57,7 +57,7 @@ const AdminBar=(props)=>{
                 <Link to="/Admin_Estudiantes_Riesgo" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><BsIcons.BsFillPersonDashFill className="iconobar"/><span>Estudiantes en riesgo</span></Link>
                 <Link to="/Admin_Consultar_Informes" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><CgIcons.CgPlayListSearch className="iconobar"/><span>Consultar informes</span></Link>
                 <Link to="/Admin_Crear_Notificacion" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><MdIcons.MdAddAlert className="iconobar"/><span>Crear Notificacion </span></Link>
-                <Link to="/Admin_Hacer_Tutor" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><AiIcons.AiOutlineUserAdd className="iconobar"/><span>Hacer tutor </span></Link>
+                
                 <Link to="/Admin_Asignar_Tutor" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><AiIcons.AiOutlineUserSwitch className="iconobar"/><span>Asignar tutor</span></Link>
 
                 <div className="linkEstudiantes">
