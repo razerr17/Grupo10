@@ -24,6 +24,18 @@ export const getDocenteById=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const getTutores=async (req,res)=>{
+    try{
+        const { id }=req.params;
+        const pool=await getConnection();
+        const result=await pool.request().query(queries.getTutores);
+        console.log('getTutores executed',id);  
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
 export const addDocente=async (req,res)=>{
     try{
         const {CodDocente,Nombres,ApPaterno,ApMaterno,DNI,Categoria,Celular,Email,Direccion,EsTutor}=req.body;
