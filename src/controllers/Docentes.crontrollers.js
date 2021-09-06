@@ -24,6 +24,18 @@ export const getDocenteById=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const getTutores=async (req,res)=>{
+    try{
+        const { id }=req.params;
+        const pool=await getConnection();
+        const result=await pool.request().query(queries.getTutores);
+        console.log('getTutores executed',id);  
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
 export const addDocente=async (req,res)=>{
     try{
         const {CodDocente,Nombres,ApPaterno,ApMaterno,DNI,Categoria,Celular,Email,Direccion,EsTutor}=req.body;
@@ -69,16 +81,18 @@ export const addDocentes=async (req,res)=>{
 export const updateDocenteById=async (req,res)=>{
     try{
         const {id}=req.params;
-        const {Nombre,DNI,Email,Celular,Direccion}=req.body;
+        const {Categoria,Email,Celular,Direccion,EsTutor}=req.body;
         const pool=await getConnection();
         await pool.request()
             .input("CodDocente",sql.VarChar,id)
             .input("Email",sql.VarChar,Email)
+            .input("Categoria",sql.VarChar,Categoria)
             .input("Celular",sql.VarChar,Celular)
             .input("Direccion",sql.VarChar,Direccion)
+            .input("EsTutor",sql.VarChar,EsTutor)
             .query(queries.updateDocenteById);
         console.log('updateDocenteById executed',id)
-        res.json({id,Email,Celular,Direccion});
+        res.json({id,Email,Celular,Direccion,EsTutor});
     }catch(error){
         res.status(500);
         res.send(error.message);
