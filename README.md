@@ -20,12 +20,6 @@ agredecemos los aportes extraidos de vuestros trabajos
 * _[Informe](https://docs.google.com/document/d/1pgaCNmPrK4FzlS2riLuAyA2kxl1-kagwGfYvNBnqboM/edit)_
 
 
-### **RNF confidencialidad**
-* _[Confidencialidad](https://github.com/razerr17/Grupo-1-I.S-Segunda-Unidad/blob/main/Modelos/NFRConfidencialidad.png)_
-### **Estimacion Cocomo**
-* _[Cocomo](https://docs.google.com/document/d/1iu4GzGoD8HzfxKUe6fUxnTN9sFydXYX9FV1S2n1rQlI/edit)_
-### **Analisis de Riesgo**
-* _[Riesgo](https://docs.google.com/document/d/1sDjWP60GWTpfousy8ObzpAJhK-Yoa4mHtFFfxCeuIn4/edit#heading=h.osx4xe9kvx4)_
 
 ## Autores
 * **Melissa Briggitte Espejo Franco - 171258** - [melissaespejo](https://github.com/melissaespejo)
