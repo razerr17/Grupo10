@@ -112,3 +112,33 @@ export const deleteDocenteById=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const loginDocente=async (req,res)=>{
+    try{
+        const {Usuario,Contrasenia}=req.body;
+        const pool=await getConnection();
+        const result=await pool.request()
+            .input("Usuario",sql.VarChar,Usuario)
+            .input("Contrasenia",sql.VarChar,Contrasenia)
+            .query(queries.loginDocente);
+        console.log('LoginDocente executed',Usuario)
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
+export const loginCoordinador=async (req,res)=>{
+    try{
+        const {Usuario,Contrasenia}=req.body;
+        const pool=await getConnection();
+        const result=await pool.request()
+            .input("Usuario",sql.VarChar,Usuario)
+            .input("Contrasenia",sql.VarChar,Contrasenia)
+            .query(queries.loginCoordinador);
+        console.log('LoginCoordinador executed',Usuario)
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
