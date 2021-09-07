@@ -2,7 +2,7 @@ USE MASTER
 GO
 
 /* ********************************************************************
-					    CREACIÓN DE LA BASE DE DATOS
+					    CREACIï¿½N DE LA BASE DE DATOS
    ******************************************************************** */
 IF EXISTS (SELECT * 
 				FROM SYSDATABASES
@@ -227,8 +227,136 @@ CREATE TABLE THorario
 	-- Determinar las claves 
 	FOREIGN KEY (CodDocente) REFERENCES TDocente,)
 
+/* Modificaciones para login*/
+GO
+CREATE TABLE TCoordinador
+(
+	CodDocente tyCodDocente,
+	Periodo VARCHAR(50) NOT NULL,
+	-- Determinar las claves 
+	FOREIGN KEY (CodDocente) REFERENCES TDocente,)
+
+GO
+CREATE TABLE TLogin
+(
+	IdLogin int IDENTITY(1,1) PRIMARY KEY,
+	Usuario varchar(50) NOT NULL,
+	Contrasenia varbinary(max) NOT NULL
+)
 use BDSistema_Tutorias
 go
+--Trigger para la creacion automatica de usuarios para estudiantes
+	--Usuario Email de Estudiante
+	--Contrasenia Codigo del Estudiante
+go
+create trigger TRInsertLoginEstudiante on TEstudiante For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Contrasenia=(select CodEstudiante from inserted)
+	set @Usuario=(select Email from inserted)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginEstudiante on TEstudiante For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select Email from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+--Trigger para la creacion automatica de usuarios para docentes
+	--Usuario Email del Docente
+	--Contrasenia DNI del Docente
+go
+create trigger TRInsertLoginDocente on TDocente For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Contrasenia=(select DNI from inserted)
+	set @Usuario=(select Email from inserted)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginDocente on TDocente For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select Email from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+--Trigger para la creacion automatica de usuarios para coordinador
+	--Usuario Codigo del Docente
+	--Contrasenia DNI del Docente
+go
+create trigger TRInsertLoginCoordinador on TCoordinador For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Usuario=(select CodDocente from inserted)
+	set @Contrasenia=(select DNI from TDocente where CodDocente=@Usuario)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginCoordinador on TCoordinador For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select CodDocente from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+go
+--Procedimientos almacenados Logins
+create procedure spuVerificacionLoginEstudiante @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TEstudiante where Email=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+create procedure spuVerificacionLoginDocente @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TDocente where Email=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+--drop proc spuVerificacionLoginDocente
+create procedure spuVerificacionLoginCoordinador @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TDocente where CodDocente=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+--drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('171943','ERICK ANDREW','BUSTAMANTE','FLORES','171943@unsaac.edu.pe','P1','984556854','2020-I')
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-I')
@@ -269,7 +397,7 @@ INSERT INTO TEstudiante VALUES ('155183','JEREMYK RUFINO','VARGAS' ,'ARQQUE','15
 INSERT INTO TEstudiante VALUES ('140934','RONALDINHO','VEGA CENTENO', 'OLIVERA','140934@unsaac.edu.pe','P37','988562322','2020-I')
 INSERT INTO TEstudiante VALUES ('174441','ALEX CHRISTOPHER','VILLAFUERTE' ,'TURPO','170441@unsaac.edu.pe','P38','984555633','2020-I')
 INSERT INTO TEstudiante VALUES ('170441','RENO MAX','DEZA' ,'KACHA','170441@unsaac.edu.pe','P39','984522633','2020-I')
-INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÑOZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
+INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÃ‘OZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
 INSERT INTO TEstudiante VALUES ('93160','CESAR','CHARA' ,'TACURI','93160@unsaac.edu.pe','P41','914555633','2020-I')
 INSERT INTO TEstudiante VALUES ('161731','DAVID','SONCCO' ,'CACHURA','161731@unsaac.edu.pe','P42','984445633','2020-I')
 INSERT INTO TEstudiante VALUES ('171058','ROSMEL URIEL','DEZA' ,'CONDORI','171058@unsaac.edu.pe','P43','984658758','2020-I')
@@ -300,3 +428,5 @@ INSERT INTO TDocente VALUES ( 'D000019','DENNIS IVAN','CANDIA', 'OVIEDO','456987
 INSERT INTO TDocente VALUES ( 'D000020','KARELIA','MEDINA', 'MIRANDA','45698745','ASOCIADO','916122333','Karelia.Medina@unsaac.edu.pe','D20','No')
 INSERT INTO TDocente VALUES ( 'D000021','JAVIER DAVID','CHAVEZ', 'CENTENO','45698745','ASOCIADO','916122333','Javier.Chavez@unsaac.edu.pe','D21','No')
 go
+-- DATOS TABLA COORDINADOR
+INSERT INTO TCoordinador VALUES ('D000001','2020-I')

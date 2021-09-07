@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addEstudiante, addEstudiantes, deleteEstudianteById, getEstudianteById, getEstudiantes, updateEstudianteById} from "../controllers/Estudiantes.controllers";
+import { addEstudiante, addEstudiantes, deleteEstudianteById, getEstudianteById, getEstudiantes, loginEstudiante, updateEstudianteById} from "../controllers/Estudiantes.controllers";
 
 //importamos la funcion router para el enrutado
 const router=Router();
@@ -18,4 +18,6 @@ router.put('/estudiantes/:id',updateEstudianteById);
 //riesgo si se elimina estudiante se deben implementar funciones
 //en cascada para eliminar correctamente
 router.delete('/estudiantes/:id',deleteEstudianteById);
+//ruta para el login del estudiante
+router.post('/loginEstudiantes',loginEstudiante)
 export default router;
