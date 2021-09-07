@@ -427,6 +427,16 @@ INSERT INTO TDocente VALUES ( 'D000018','JULIO CESAR','CARBAJAL', 'LUNA','456987
 INSERT INTO TDocente VALUES ( 'D000019','DENNIS IVAN','CANDIA', 'OVIEDO','45698745','ASOCIADO','916122333','Dennis.Candia@unsaac.edu.pe','D19','No')
 INSERT INTO TDocente VALUES ( 'D000020','KARELIA','MEDINA', 'MIRANDA','45698745','ASOCIADO','916122333','Karelia.Medina@unsaac.edu.pe','D20','No')
 INSERT INTO TDocente VALUES ( 'D000021','JAVIER DAVID','CHAVEZ', 'CENTENO','45698745','ASOCIADO','916122333','Javier.Chavez@unsaac.edu.pe','D21','No')
+insert into TDocente values('D000022','BORIS','CHULLO','LLAVE','23222048','CONTRATADO','947554896','boris.chullo@unsaac.edu.pe','D22','Si')
+insert into TDocente values('D000023','CARLOS RAMON','QUISPE','ONOFRE','20755274','CONTRATADO','948335466','carlos.quispe@unsaac.edu.pe','D23','Si')
+insert into TDocente values('D000024','ESTHER','PACHECO','VASQUEZ','13354951','CONTRATADO','950677166','esther.pacheco@unsaac.edu.pe','D24','Si')
+insert into TDocente values('D000025','GLADYS EFRAINA','CUTIPA ','ARAPA','10888176','CONTRATADO','951457736','gladys.cutipa@unsaac.edu.pe','D25','Si')
+insert into TDocente values('D000026','HECTOR EDUARDO','UGARTE','ROJAS','92660191','CONTRATADO','952238306','hector.ugarte@unsaac.edu.pe','D26','Si')
+insert into TDocente values('D000027','JOSE LUIS','SONCCO ','ALVAREZ','93992751','CONTRATADO','979028106','jose.soncco@unsaac.edu.pe','D27','Si')
+insert into TDocente values('D000028','LISETH URPY','SEGUNDO','CARPIO','78825665','CONTRATADO','953799446','liseth.segundo@unsaac.edu.pe','D28','Si')
+insert into TDocente values('D000029','MARITZA','IRPANOCCA','CUSIMAYTA','94932874','CONTRATADO','956141146','maritza.irpanocca@unsaac.edu.pe','D29','Si')
+insert into TDocente values('D000030','ROGER MARIO','CUSIHUAMAN','PHOCCO','10733291','CONTRATADO','957702286','roger.cusihuaman@unsaac.edu.pe','D30','Si')
+insert into TDocente values('D000031','VANESA MARIBEL','CHOQUE','SOTO','40184639','CONTRATADO','988128936','vanesa.choque@unsaac.edu.pe','D31','No')
 go
 -- DATOS TABLA COORDINADOR
 INSERT INTO TCoordinador VALUES ('D000001','2020-I')
