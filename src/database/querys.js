@@ -17,5 +17,6 @@ export const queries={
     getFichaById:"Select * from TFichaTutoria where IdFichaTutoria=@IdFichaTutoria",
     addNewFicha:"Insert into TFichaTutoria Values (@IdFichaTutoria,@IdAsignacion,@CelularReferenciaTutorando,@PersonaReferenciaTutorando)",
     //deleteFichaById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
-    updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria"
+    updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria",
+    getFichasT:"execute spuEstudiantebyAsignacion"
 }

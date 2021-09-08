@@ -58,3 +58,14 @@ export const updateFichaById=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const getFichasTutoria=async (req,res)=>{
+    try{
+        const pool=await getConnection()
+        const result=await pool.request().query(queries.getFichasT);
+        console.log('getFichasTutoria executed');  
+        res.json(result.recordset)
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
