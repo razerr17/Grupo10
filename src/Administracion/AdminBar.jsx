@@ -1,13 +1,10 @@
 import React from 'react'
 import * as BsIcons from "react-icons/bs"
-
 import * as FaIcons from "react-icons/fa"
 import * as RiIcons from "react-icons/ri"
-
 import * as MdIcons from "react-icons/md"
 import * as CgIcons from "react-icons/cg"
 import * as GiIcons from "react-icons/gi"
-
 import * as AiIcons from "react-icons/ai"
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
@@ -16,13 +13,16 @@ const AdminBar=(props)=>{
     const {nombrePage}=props;
     const cookie=new Cookies()
     const cerrarSesion=()=>{
-        cookie.remove('id',{path:'/'});
-        cookie.remove('apellido_paterno',{path:'/'});
-        cookie.remove('apellido_materno',{path:'/'});
-        cookie.remove('nombre',{path:'/'});
-        cookie.remove('correo',{path:'/'});
-        cookie.remove('username',{path:'/'});
-        cookie.remove('password',{path:'/'});
+        cookie.remove('CodDocente',{path:'/'});
+        cookie.remove('Nombres',{path:'/'});
+        cookie.remove('ApPaterno',{path:'/'});
+        cookie.remove('ApMaterno',{path:'/'});
+        cookie.remove('DNI',{path:'/'});
+        cookie.remove('Categoria',{path:'/'});
+        cookie.remove('Celular',{path:'/'});
+        cookie.remove('Email',{path:'/'});
+        cookie.remove('Direccion',{path:'/'});
+        cookie.remove('Estutor',{path:'/'});
         
     }
     return(
@@ -31,7 +31,7 @@ const AdminBar=(props)=>{
             <div className="encabezado ">   
                 
                 <label className="nombre" for="check">
-                    <h5>Bienvenido : {cookie.get('nombre')}</h5>
+                    <h5>Bienvenido : {cookie.get('Nombres')}</h5>
                 </label>
                 <label className="lblNombre"><b>{nombrePage}</b></label>
                 <Link className="link" to="/LoginAdministracion" style={{ textDecoration: 'none' }} onClick={()=>cerrarSesion()} for="check">

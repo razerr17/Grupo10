@@ -5,6 +5,7 @@ import '../styles/LogMenu.css'
 const log_menu = () => {
     return (
         <div className="fondo">
+            
             <div>
                 <div className='bar'>
                       <h1 className="h1"> SISTEMA DE TUTORIAS</h1>
@@ -74,7 +75,7 @@ const log_menu = () => {
                             </div>
                     </Col>
                 </Row>
-               
+                
             </div>
            
         </div>

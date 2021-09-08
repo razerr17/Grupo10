@@ -30,6 +30,7 @@ import AdminAsignarTutor from './Administracion/AdminAsignarTutor';
 import AdminEstudiantes from './Administracion/AdminEstudiantes';
 import AdminDocentes from './Administracion/AdminDocentes';
 import AdminPerfil from './Administracion/AdminPerfil';
+import TutorSesionTutorias from './Tutor/TutorSesionTutorias';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
            <Route exact path="/Tutor_Informe_Quincenal" component={TutorInformeQuincenal}/>
            <Route exact path="/Tutor_Informe_Semestral" component={TutorInformeSemestral}/>
            <Route exact path="/Tutor_Registrar_Ficha_Tutoria" component={TutorRegistrarFichaTutoria}/>
+           <Route exact path="/Tutor_Sesion_Tutoria" component={TutorSesionTutorias}/>
            <Route exact path="/Tutor_Obtencion_Notas" component={TutorObtencionNotas}/>
            <Route exact path="/Tutor_Perfil" component={TutorPerfil}/>
            <Route exact path="/Admin_Menu" component={AdminMenu}/>
