@@ -1,119 +1,12 @@
 import React from 'react'
 import AdminBar from '../Administracion/AdminBar'
-import {Col,Row} from 'react-bootstrap'
-import '../styles/AdminDocentes.css'
 const AdminDocentesTutores = () => {
     return (
         <div>
             <AdminBar/>
             <div className="contenido">
                 <div className="Principal2">
-                    <div className="datTop">
-                            <Row  >
-                                <Col className="col-3">
-                                    <b>Semestre :</b>
-                                </Col>
-                                <Col className="col-8">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                </Col>
-                            </Row>
-                    </div>
-                    <div className="TablaDT">
-                    <div className="col tableScrollDT scrollDT"> 
-                                    <table className="table table-bordered bg-light ">
-                                        <thead>
-                                            <tr>
-                                                <th>Nro</th>
-                                                <th>Curso</th>
-                                                <th>Estudiante</th>
-                                                <th>Detalles</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                    </div>
+                    <h1>Docentes tutores</h1>
                 </div>
             </div>
         </div>

@@ -12,20 +12,16 @@ import * as AiIcons from "react-icons/ai"
 
 import { Link } from 'react-router-dom'
 import '../styles/TutoradosBar.css'
-const AdminBar=(props)=>{
-    const {nombrePage}=props;
-    const prueba=()=>{
-        console.log(nombrePage)
-    }
+const AdminBar = () => {
+
     return(
         <div className="all">
             
             <div className="encabezado ">   
-                
+               
                 <label className="nombre" for="check">
                     <h5>Bienvenido : usuario</h5>
                 </label>
-                <label className="lblNombre">{nombrePage}</label>
                 <Link className="link" to="/LogMenu" style={{ textDecoration: 'none' }} for="check">
                     <b>cerrar sesion</b>
                 </Link>
@@ -33,11 +29,8 @@ const AdminBar=(props)=>{
             <div className="sidebar">
                 <div className="cabecera">
                     <img className="carrera" src="../logo.png" alt="" />
-                    
                     <h6 className="label">Tutorias</h6>
-                    
                 </div>
-                <button onClick={prueba}>prueba</button>
                 <div className="perfilContenedor">
                     <img className="perfil" src="../imagenes/admin.png" alt="" />      
     
