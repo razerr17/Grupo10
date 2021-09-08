@@ -4,12 +4,12 @@ import { Row, Col } from 'react-bootstrap'
 import * as ImIcons from "react-icons/im"
 import {useState,useEffect} from 'react';
 import axios from 'axios'
-import md5 from 'md5'
+
 import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
 import Cookies from 'universal-cookie/es6';
 import '../styles/LoginTutorados.css'
 const LoginAdmin = (props)=>{
-    const baseURL="https://localhost:44378/api/usuarios";
+    const baseURL="http://localhost:4000/loginCoordinador";
     const cookies=new Cookies();
     const[user,setUser]=useState('')
     const[password,setPassword]=useState('')
@@ -20,20 +20,22 @@ const LoginAdmin = (props)=>{
         setWarningview(!warningView);
       }
     const Login=async()=>{
-        await axios.get(baseURL+`/${user}/${md5(password)}`)
+        await axios.post(baseURL,{Usuario:user,Contrasenia:password})
         .then(response=>{
             return response.data;
         }).then(response=>{
             if(response.length>0){
                 var respuesta=response[0];
-                cookies.set('id',respuesta.id,{path:'/'});
-                cookies.set('apellido_paterno',respuesta.apellido_paterno,{path:'/'});
-                cookies.set('apellido_materno',respuesta.apellido_materno,{path:'/'});
-                cookies.set('nombre',respuesta.nombre,{path:'/'});
-                cookies.set('correo',respuesta.correo,{path:'/'});
-                cookies.set('username',respuesta.username,{path:'/'});
-                cookies.set('password',respuesta.password,{path:'/'});
-                
+                cookies.set('CodDocente',respuesta.CodDocente,{path:'/'});
+                cookies.set('Nombres',respuesta.Nombres,{path:'/'});
+                cookies.set('ApPaterno',respuesta.ApPaterno,{path:'/'});
+                cookies.set('ApMaterno',respuesta.ApMaterno,{path:'/'});
+                cookies.set('DNI',respuesta.DNI,{path:'/'});
+                cookies.set('Categoria',respuesta.Categoria,{path:'/'});
+                cookies.set('Celular',respuesta.Celular,{path:'/'});
+                cookies.set('Email',respuesta.Email,{path:'/'});
+                cookies.set('Direccion',respuesta.Direccion,{path:'/'});
+                cookies.set('Estutor',respuesta.EsTutor,{path:'/'});
                 props.history.push('/Admin_Menu');
             }
             else{
@@ -44,8 +46,16 @@ const LoginAdmin = (props)=>{
             console.log(error)
         })
     }
+    const comprobar=()=>{
+        if(user===''||password===''){
+            abrirCerrarModalWarning();
+        }
+        else {
+            Login()
+        }
+    }
     useEffect(()=>{
-        if(cookies.get('id')){
+        if(cookies.get('CodDocente')){
             props.history.push('/Admin_Menu');
         }
     })
@@ -60,7 +70,7 @@ const LoginAdmin = (props)=>{
             <div className="Principal">  
                 <div className="containerLogin">
                     <h2 className="title">Administracion</h2>
-                    <img className="lo"src="../imagenes/Tutor.JPG" alt=""/>
+                    <img className="lo"src="../imagenes/Administracion.JPG" alt=""/>
                     <hr />
                     <div className="form">
                         <label><b>Ingrese Usuario:</b> </label>
@@ -89,7 +99,7 @@ const LoginAdmin = (props)=>{
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
-                            <button className="ingresar" onClick={()=>Login()} >Iniciar Sesión</button>
+                            <button className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
                         </Link>
                     </div>
                 </div>

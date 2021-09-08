@@ -1,0 +1,29 @@
+.STtop {
+  width: 96%;
+  height: 12%;
+  background: #e3e1e1;
+  padding: 0.5%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-left: 2%;
+  border-radius: 20px;
+}
+.ContainerSTbtn {
+  margin-top: 2%;
+}
+.STbot {
+  width: 96%;
+  height: 70%;
+  background: #e3e1e1;
+  margin-left: 2%;
+  margin-top: 1%;
+  border-radius: 20px;
+}
+.btnSTSave {
+  width: 200px;
+  background: #fd9727;
+  float: right;
+  height: 40px;
+  margin-right: 40px;
+  border-radius: 10px;
+}

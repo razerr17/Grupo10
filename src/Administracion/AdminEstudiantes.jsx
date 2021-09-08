@@ -6,28 +6,75 @@ import { Row,Col } from 'react-bootstrap';
 import axios from 'axios';
 import * as ImIcons from "react-icons/im"
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
+import MaterialTable from "material-table";
+
+const columnas = [
+    {
+      title:'Codigo',
+      field:'CodEstudiante',
+      width: "6%"
+    },
+    {
+      title:'Nombres',
+      field:'Nombres',
+      width: "10%"
+    },
+    {
+      title:'Ap_Paterno',
+      field:'ApPaterno',
+      width: "8%"
+    },
+    {
+      title:'Ap_Materno',
+      field:'ApMaterno',
+      width: "7%"
+    },
+    {
+      title:'Email',
+      field:'Email',
+      width: "12%"
+    },
+    {
+      title:'Direccion',
+      field:'Direccion',
+      width: "10%"
+    },
+    {
+        title:'Celular',
+        field:'Celular',
+        width: "7%"
+    },
+    {
+      title:'Semestre',
+      field:'SemestreIngreso',
+      width: "5%"
+    },
+  ]
+
 
 const AdminEstudiantes = () => {
 
     const baseUrl=`http://localhost:4000/estudiantes`;
     const baseUrlExcel=`http://localhost:4000/estudiantesLista`;
     const[modalInsertar,setModalInsertar]=useState(false);
-    const [idEstudiante, setIdEstudiante] = React.useState("");
+    const [codEstudiante, setCodEstudiante] = React.useState("");
     const [nombres, setNombres] = React.useState("");
     const [apPaterno, setApPaterno] = React.useState("");
     const [apMaterno, setApMaterno] = React.useState("");
-    const[email,setEmail]=React.useState("");
-    const [telefono, setTelefono] = React.useState("");
+    const [email,setEmail]=React.useState("");
+    const [celular, setCelular] = React.useState("");
     const [direccion, setDireccion] = React.useState("");
-    const[warningView,setWarningview]=useState(false);
-    const[excel,setExcel]=useState([{
-        IDEstudiante:'',
+    const [semestreIngreso, setSemestreIngreso]= React.useState("");
+    const [warningView,setWarningview]=useState(false);
+    const [excel,setExcel]=useState([{
+        CodEstudiante:'',
         Nombres:'',
         ApPaterno:'',
         ApMaterno:'',
         Email:'',
+        Direccion:'',
         Celular:'',
-        Direccion:''
+        SemestreIngreso:''
       }]
       )
       //*metodos para el api*/
@@ -53,16 +100,16 @@ const AdminEstudiantes = () => {
         })
       }
       const peticionPost=async()=>{
-        if(!idEstudiante.trim()||!nombres.trim()||!apPaterno.trim()||!apMaterno.trim()||!email.trim()||!telefono.trim()||!direccion.trim()){
+        if(!codEstudiante.trim()||!nombres.trim()||!apPaterno.trim()||!apMaterno.trim()||!email.trim()||!direccion.trim()||!celular.trim()|| !semestreIngreso.trim()){
             setWarningview(true)
              return
          }     
-        if(!(parseInt(telefono)<=999999999 &&parseInt(telefono)>=900000000)){
+        if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000)){
             setWarningview(true)
              return
         }
         // delete clienteSeleccionado.IdCliente;
-        await axios.post(baseUrl,{IDEstudiante:idEstudiante,Nombres:nombres,ApPaterno:apPaterno,ApMaterno:apMaterno,Email:email,Direccion:direccion,Celular:telefono})
+        await axios.post(baseUrl,{CodEstudiante:codEstudiante,Nombres:nombres,ApPaterno:apPaterno,ApMaterno:apMaterno,Email:email,Direccion:direccion,Celular:celular, SemestreIngreso:semestreIngreso})
         .then(response=>{
             
           setData(data.concat(response.data));
@@ -106,23 +153,24 @@ const AdminEstudiantes = () => {
         setWarningview(!warningView);
       }
     const limpiar=()=>{
-        setIdEstudiante('')
+        setCodEstudiante('')
         setNombres('')
         setApPaterno('')
         setApMaterno('')
         setEmail('')
-        setTelefono('')
         setDireccion('')
-        setExcel({
-            IDEstudiante:'',
+        setCelular('')
+        setSemestreIngreso('')
+        setExcel([{
+            CodEstudiante:'',
             Nombres:'',
             ApPaterno:'',
             ApMaterno:'',
             Email:'',
+            Direccion:'',
             Celular:'',
-            Direccion:''
-          }
-          )
+            SemestreIngreso:''
+          }])
     }
     useEffect(()=>{
         peticionGet();
@@ -136,31 +184,18 @@ const AdminEstudiantes = () => {
                        <h5>Lista de estudiantes:</h5>
                         <div className="TablaDT">
                             <div className="col tableScrollDT scrollDT"> 
-                                    <table className="table table-bordered bg-light ">
-                                        <thead className="colTable">
-                                            <tr>
-                                                <th>codigo</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Email</th>
-                                                <th>Direccion</th>
-                                                <th>Telefono</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {data.map((estudiante,index)=>(
-                                                <tr key={index}>
-                                                    <td>{estudiante.IDEstudiante}</td>
-                                                    <td>{estudiante.Nombres}</td>
-                                                    <td>{estudiante.ApPaterno},{estudiante.ApMaterno}</td>
-                                                    <td>{estudiante.Email}</td>
-                                                    <td>{estudiante.Direccion}</td>                                            
-                                                    <td>{estudiante.Celular}</td>
-                                                </tr>
-                                            ))}                                        
-                                        </tbody>
-                                    </table>
+                            <MaterialTable
+                             columns={columnas} 
+                             data={data} 
+                             title="Estudiantes"
+                             options={{
+                              headerStyle:{
+                                backgroundColor:'#ed9b40',
+                                color:'black'
+                             },
+                              tableLayout: "fixed"
+                            }}
+                        />
                                 </div>
                         </div>
                     <button onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
@@ -183,7 +218,7 @@ const AdminEstudiantes = () => {
                             <Col>
                             <label>Codigo: </label>
                         <br/> 
-                        <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setIdEstudiante(e.target.value)}/>
+                        <input type="text" className="form-control" name="CodEstudiante" onChange={ (e) => setCodEstudiante(e.target.value)}/>
                         <br/>
                         <label>Nombre: </label>
                         <br/> 
@@ -196,22 +231,26 @@ const AdminEstudiantes = () => {
                         <label>Apellido Materno: </label>
                         <br/> 
                         <input type="text" className="form-control" name="ApMaterno" onChange={ (e) => setApMaterno(e.target.value)}/>
-                        <br/>       
-                            
+                        <br/>
+                               
                             </Col>
                             <Col>
                             <label>Email: </label>
-                        <br/>
-                        <input type="email" className="form-control" name="Email" onChange={ (e) => setEmail(e.target.value)}/>
-                        <br/>            
-                            <label>Telefono/Celular: </label>
-                        <br/>
-                        <input type="text" className="form-control" name="Celular" onChange={ (e) => setTelefono(e.target.value)}/>
+                        <br/> 
+                        <input type="text" className="form-control" name="Email" onChange={ (e) => setEmail(e.target.value)}/>
                         <br/>
                         <label>Direccion: </label>
+                        <br/> 
+                        <input type="text" className="form-control" name="Direccion" onChange={ (e) => setDireccion(e.target.value)}/>
                         <br/>
-                        <input type="text" className="form-control" name="ireccion" onChange={ (e) => setDireccion(e.target.value)}/>
-                        <br/>             
+                        <label>Celular: </label>
+                        <br/> 
+                        <input type="text" className="form-control" name="Celular" onChange={ (e) => setCelular(e.target.value)}/>
+                        <br/>
+                        <label>Semestre de Ingreso: </label>
+                        <br/> 
+                        <input type="text" className="form-control" name="SemestreIngreso" onChange={ (e) => setSemestreIngreso(e.target.value)}/>
+                        <br/>           
                             </Col>
                         </Row>
                                          
