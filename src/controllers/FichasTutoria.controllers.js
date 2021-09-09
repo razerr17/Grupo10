@@ -60,12 +60,16 @@ export const updateFichaById=async (req,res)=>{
 };
 export const getFichasTutoria=async (req,res)=>{
     try{
-        const pool=await getConnection()
-        const result=await pool.request().query(queries.getFichasT);
-        console.log('getFichasTutoria executed');  
-        res.json(result.recordset)
+        const { CodDocente }=req.params;
+        const pool=await getConnection();
+        const result=await pool.request()
+                    .input("CodDocente",sql.VarChar,CodDocente)
+                    .query(queries.getFichasT);
+        console.log('getFichasByDocente executed',CodDocente);  
+        res.json(result.recordset);
     }catch(error){
         res.status(500);
         res.send(error.message);
     }
 };
+

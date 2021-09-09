@@ -19,7 +19,7 @@ export const queries={
     addNewFicha:"Insert into TFichaTutoria Values (@IdFichaTutoria,@IdAsignacion,@CelularReferenciaTutorando,@PersonaReferenciaTutorando)",
     //deleteFichaById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
     updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria",
-    getFichasT:"execute spuEstudiantebyAsignacion"
+    getFichasT:"execute spuEstudiantebyAsignacion @CodDocente",
     loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
     loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;"
 
