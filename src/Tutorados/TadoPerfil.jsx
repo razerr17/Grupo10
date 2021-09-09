@@ -1,12 +1,20 @@
-import React from 'react'
+import React ,{useEffect}from 'react'
 import TutoradoBar from './TutoradoBar'
 import '../styles/TadoPerfil.css'
-import { Col ,Row} from 'react-bootstrap'
 import * as BiIcons from "react-icons/bi"
-const TadoPerfil = () => {
+import Cookies from 'universal-cookie'
+import { Col ,Row} from 'react-bootstrap'
+const TadoPerfil = (props) => {
+    
+    const cookie =new Cookies();
+    useEffect(()=>{
+        if(!cookie.get('CodEstudiante')){
+            props.history.push('/LoginTutorados');
+        }
+    })
     return (
         <div >
-            <TutoradoBar/>
+            <TutoradoBar nombrePage={"Perfil"}/>
             <div className="contenido">
                     <div className="Principal2 ">
                         <img className="portada"src="./imagenes/FondoTadoPerfil.JPG" alt="" />
@@ -17,25 +25,29 @@ const TadoPerfil = () => {
                                 <Col className="column1 ">
                                     <div>
                                         <label htmlFor=""><b>Nombres :  </b></label>
-                                        <label className="lbldat">  MELISSA BRIGGITE</label>
+                                        <label className="lbldat">   {cookie.get('Nombres')}</label>
                                     </div>
                                     <div>
                                         <label htmlFor=""><b>Apellidos :  </b></label>
-                                        <label className="lbldat">  ESPEJO FRANCO</label>
+                                        <label className="lbldat">  {cookie.get('ApPaterno')+" "+cookie.get('ApMaterno')}</label>
                                     </div>
                                      <div>
                                         <label htmlFor=""><b>Email :  </b></label>
-                                        <label className="lbldat"> 171258@unsaac.edu.pe</label>
+                                        <label className="lbldat"> {cookie.get('Email')}</label>
                                     </div>
                                 </Col>
                                 <Col className="column1 ">
                                     <div>
                                         <label htmlFor=""><b>Direccion :  </b></label>
-                                        <label className="lbldat"> JR. MICAELA BASTIDAS 221 - SANTIAGO</label>
+                                        <label className="lbldat"> {cookie.get('Direccion')}</label>
                                     </div>
                                     <div>
                                         <label htmlFor=""><b>Celular :  </b></label>
-                                        <label className="lbldat">  987654321</label>
+                                        <label className="lbldat">  {cookie.get('Celular')}</label>
+                                    </div>
+                                    <div>
+                                        <label htmlFor=""><b>Semestre de ingreso:  </b></label>
+                                        <label className="lbldat">  {cookie.get('SemestreIngreso')}</label>
                                     </div>
 
                                 </Col>

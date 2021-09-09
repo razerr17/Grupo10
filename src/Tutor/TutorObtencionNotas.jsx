@@ -12,17 +12,17 @@ const TutorObtencionNotas = () => {
                    <div className="obtencionTop">
                         <h5>Datos estudiante</h5>
                         <br></br>
-                        <Row>
-                            <Col className="col-1">
-                                <h6>Codigo :</h6>
-                            </Col>
-                            <Col className="col-2">
-                                <input className="inputLarge" type="text" />
-                            </Col>
-                            <Col className="col-1">
-                                <button className="btnSe"><b>Buscar</b></button>
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col className="col-1">
+                                    <h6>Codigo :</h6>
+                                </Col>
+                                <Col className="col-2">
+                                    <input className="inputLarge" type="text" />
+                                </Col>
+                                <Col className="col-4">
+                                    <button className="btnSe"><b>Buscar</b></button>
+                                </Col>
+                            </Row>
                         <div>
                             <label htmlFor=""><b>Alumno : </b> juan carlos </label>
 

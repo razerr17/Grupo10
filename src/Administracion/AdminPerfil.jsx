@@ -11,7 +11,7 @@ const AdminPerfil = (props) => {
       }
     const cookie =new Cookies();
     useEffect(()=>{
-        if(!cookie.get('id')){
+        if(!cookie.get('CodDocente')){
             props.history.push('/LoginAdministracion');
         }
     })
@@ -28,25 +28,37 @@ const AdminPerfil = (props) => {
                                 <Col className="column1 ">
                                     <div>
                                         <label htmlFor=""><b>Nombres :  </b></label>
-                                        <label className="lbldat">  {cookie.get('nombre')}</label>
+                                        <label className="lbldat">  {cookie.get('Nombres')}</label>
                                     </div>
                                     <div>
                                         <label htmlFor=""><b>Apellidos :  </b></label>
-                                        <label className="lbldat"> {cookie.get('apellido_paterno')+" "+cookie.get('apellido_materno')}</label>
+                                        <label className="lbldat"> {cookie.get('ApPaterno')+" "+cookie.get('ApMaterno')}</label>
                                     </div>
                                      <div>
-                                        <label htmlFor=""><b>Email :  </b></label>
-                                        <label className="lbldat"> {cookie.get('correo')}</label>
+                                        <label htmlFor=""><b>DNI :  </b></label>
+                                        <label className="lbldat"> {cookie.get('DNI')}</label>
+                                    </div>
+                                    <div>
+                                        <label htmlFor=""><b>Categoria :  </b></label>
+                                        <label className="lbldat"> {cookie.get('Categoria')}</label>
                                     </div>
                                 </Col>
                                 <Col className="column1 ">
                                     <div>
-                                        <label htmlFor=""><b>Usuario :  </b></label>
-                                        <label className="lbldat"> {cookie.get('username')}</label>
+                                        <label htmlFor=""><b>Celular :  </b></label>
+                                        <label className="lbldat"> {cookie.get('Celular')}</label>
                                     </div>
                                     <div>
-                                        <label htmlFor=""><b>Contra :  </b></label>
-                                        <label className="lbldat"> {cookie.get('password')}</label>
+                                        <label htmlFor=""><b>Email :  </b></label>
+                                        <label className="lbldat"> {cookie.get('Email')}</label>
+                                    </div>
+                                    <div>
+                                        <label htmlFor=""><b>Direccion :  </b></label>
+                                        <label className="lbldat"> {cookie.get('Direccion')}</label>
+                                    </div>
+                                    <div>
+                                        <label htmlFor=""><b>Es tutor :  </b></label>
+                                        <label className="lbldat"> {cookie.get('Estutor')}</label>
                                     </div>
 
                                 </Col>

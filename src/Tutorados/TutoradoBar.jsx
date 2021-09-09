@@ -4,20 +4,33 @@ import * as BsIcons from "react-icons/bs"
 import * as GiIcons from "react-icons/gi"
 import * as IoIcons from "react-icons/io"
 import * as CgIcons from "react-icons/cg"
-
+import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import '../styles/TutoradosBar.css'
-const TutoradoBar = () => {
-
+const TutoradoBar = (props) => {
+    const {nombrePage}=props;
+    const cookie=new Cookies()
+    const cerrarSesion=()=>{
+        cookie.remove('CodEstudiante',{path:'/'});
+        cookie.remove('Nombres',{path:'/'});
+        cookie.remove('ApPaterno',{path:'/'});
+        cookie.remove('ApMaterno',{path:'/'});
+        cookie.remove('Celular',{path:'/'});
+        cookie.remove('Email',{path:'/'});
+        cookie.remove('Direccion',{path:'/'});
+        cookie.remove('SemestreIngreso',{path:'/'});
+        
+    }
     return(
         <div className="all">
              
             <div className="encabezado ">
                
                 <label className="nombre" for="check">
-                    <h5>Bienvenido : usuario</h5>
+                <h5>Bienvenido : {cookie.get('Nombres')}</h5>
                 </label>
-                <Link className="link" to="/LogMenu" style={{ textDecoration: 'none' }} for="check">
+                <label className="lblNombre"><b>{nombrePage}</b></label>
+                <Link className="link" to="/LoginTutorados" onClick={()=>cerrarSesion()}style={{ textDecoration: 'none' }} for="check">
                     <b>cerrar sesion</b>
                 </Link>
             </div>
