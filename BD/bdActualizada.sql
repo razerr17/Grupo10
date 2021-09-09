@@ -1,8 +1,8 @@
-USE MASTER
+ï»¿USE MASTER
 GO
 
 /* ********************************************************************
-					    CREACIÓN DE LA BASE DE DATOS
+					    CREACIï¿½N DE LA BASE DE DATOS
    ******************************************************************** */
 IF EXISTS (SELECT * 
 				FROM SYSDATABASES
@@ -19,13 +19,13 @@ USE BDSistema_Tutorias
 	EXEC SP_ADDTYPE tyCodEstudianteRA,	'VARCHAR(6)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodDocente,		'VARCHAR(7)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodCoordinadorTutoria,'VARCHAR(7)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyCodTaller,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyCodInforme,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdCaso,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdTipoCaso,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdInformeSemestral, 'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdAsignacion, 'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdFichaTutoria, 'VARCHAR(10)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyCodTaller,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyCodInforme,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdCaso,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdTipoCaso,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdInformeSemestral, 'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdAsignacion, 'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdFichaTutoria, 'VARCHAR(8)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodInformeQuincenal, 'VARCHAR(10)', 'NOT NULL'
 GO 
 
@@ -227,8 +227,174 @@ CREATE TABLE THorario
 	-- Determinar las claves 
 	FOREIGN KEY (CodDocente) REFERENCES TDocente,)
 
+/* Modificaciones para login*/
+GO
+CREATE TABLE TCoordinador
+(
+	CodDocente tyCodDocente,
+	Periodo VARCHAR(50) NOT NULL,
+	-- Determinar las claves 
+	FOREIGN KEY (CodDocente) REFERENCES TDocente,)
+
+GO
+CREATE TABLE TLogin
+(
+	IdLogin int IDENTITY(1,1) PRIMARY KEY,
+	Usuario varchar(50) NOT NULL,
+	Contrasenia varbinary(max) NOT NULL
+)
 use BDSistema_Tutorias
 go
+--Trigger para la creacion automatica de usuarios para estudiantes
+	--Usuario Email de Estudiante
+	--Contrasenia Codigo del Estudiante
+go
+create trigger TRInsertLoginEstudiante on TEstudiante For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Contrasenia=(select CodEstudiante from inserted)
+	set @Usuario=(select Email from inserted)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginEstudiante on TEstudiante For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select Email from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+--Trigger para la creacion automatica de usuarios para docentes
+	--Usuario Email del Docente
+	--Contrasenia DNI del Docente
+go
+create trigger TRInsertLoginDocente on TDocente For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Contrasenia=(select DNI from inserted)
+	set @Usuario=(select Email from inserted)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginDocente on TDocente For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select Email from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+--Trigger para la creacion automatica de usuarios para coordinador
+	--Usuario Codigo del Docente
+	--Contrasenia DNI del Docente
+go
+create trigger TRInsertLoginCoordinador on TCoordinador For Insert
+as
+begin
+	declare @Contrasenia varchar(50),@Usuario varchar(50)
+	set @Usuario=(select CodDocente from inserted)
+	set @Contrasenia=(select DNI from TDocente where CodDocente=@Usuario)
+	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+end
+go
+create trigger TRDeleteLoginCoordinador on TCoordinador For Delete
+as
+begin
+	declare @Usuario varchar(50)
+	set @Usuario=(select CodDocente from deleted)
+	delete from TLogin where Usuario=@Usuario
+end
+go
+--Procedimientos almacenados Logins
+create procedure spuVerificacionLoginEstudiante @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TEstudiante where Email=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+create procedure spuVerificacionLoginDocente @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TDocente where Email=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+--drop proc spuVerificacionLoginDocente
+create procedure spuVerificacionLoginCoordinador @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	if (select count(Usuario) from TLogin where Usuario=@UsuarioOut)>0
+		begin
+			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
+			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
+				begin
+					select * from TDocente where CodDocente=@UsuarioOut
+				end
+			else
+				PRINT('Error,contrasenia incorrecta')
+		end
+	else
+		PRINT('Error,usuario no encontrado')
+Go
+
+
+-- Generar Codigo
+create procedure spuCodigoFicha @IdFicha varchar(8) OUTPUT
+as begin
+declare @CantFichas int
+set @CantFichas=(Select count (*) from TFichaTutoria)
+if((Select count (*) from TFichaTutoria) =0)
+	Set @IdFicha = 'F0000001';
+else
+	begin 
+	set @IdFicha = 'F' + replicate('0',(7 - len(@CantFichas))) + convert(varchar,@CantFichas+1)
+	end
+end;
+
+--Generar Ficha
+create trigger tr_GenerarFichaTutoria
+on TAsignacion
+for INSERT
+as
+begin
+declare @IdAsignacion varchar(8);
+select @IdAsignacion = IdAsignacion
+from INSERTED;
+declare @IdFicha varchar(8);
+exec spuCodigoFicha @IdFicha OUTPUT
+print(@IdFicha)
+insert into TFichaTutoria(IdFichaTutoria, IdAsignacion, CelularReferenciaTutorando, PersonaReferenciaTutorando)
+values(@IdFicha, @IdAsignacion,'','');
+end;
+
+
+create procedure spuEstudiantebyAsignacion 
+as begin 
+select X.IdFichaTutoria,C.IdAsignacion,C.CodDocente,C.CodEstudiante,C.Nombres,C.ApPaterno,C.ApMaterno,C.Celular from (select A.IdAsignacion,A.CodDocente,A.CodEstudiante,B.Nombres,B.ApPaterno,B.ApMaterno,B.Celular from TAsignacion A inner join TEstudiante B on A.CodEstudiante = B.CodEstudiante) C inner join TFichaTutoria X
+on C.IdAsignacion = X.IdAsignacion
+end
+
+--drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('171943','ERICK ANDREW','BUSTAMANTE','FLORES','171943@unsaac.edu.pe','P1','984556854','2020-I')
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-I')
@@ -269,7 +435,7 @@ INSERT INTO TEstudiante VALUES ('155183','JEREMYK RUFINO','VARGAS' ,'ARQQUE','15
 INSERT INTO TEstudiante VALUES ('140934','RONALDINHO','VEGA CENTENO', 'OLIVERA','140934@unsaac.edu.pe','P37','988562322','2020-I')
 INSERT INTO TEstudiante VALUES ('174441','ALEX CHRISTOPHER','VILLAFUERTE' ,'TURPO','170441@unsaac.edu.pe','P38','984555633','2020-I')
 INSERT INTO TEstudiante VALUES ('170441','RENO MAX','DEZA' ,'KACHA','170441@unsaac.edu.pe','P39','984522633','2020-I')
-INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÑOZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
+INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÃ‘OZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
 INSERT INTO TEstudiante VALUES ('93160','CESAR','CHARA' ,'TACURI','93160@unsaac.edu.pe','P41','914555633','2020-I')
 INSERT INTO TEstudiante VALUES ('161731','DAVID','SONCCO' ,'CACHURA','161731@unsaac.edu.pe','P42','984445633','2020-I')
 INSERT INTO TEstudiante VALUES ('171058','ROSMEL URIEL','DEZA' ,'CONDORI','171058@unsaac.edu.pe','P43','984658758','2020-I')
@@ -299,4 +465,16 @@ INSERT INTO TDocente VALUES ( 'D000018','JULIO CESAR','CARBAJAL', 'LUNA','456987
 INSERT INTO TDocente VALUES ( 'D000019','DENNIS IVAN','CANDIA', 'OVIEDO','45698745','ASOCIADO','916122333','Dennis.Candia@unsaac.edu.pe','D19','No')
 INSERT INTO TDocente VALUES ( 'D000020','KARELIA','MEDINA', 'MIRANDA','45698745','ASOCIADO','916122333','Karelia.Medina@unsaac.edu.pe','D20','No')
 INSERT INTO TDocente VALUES ( 'D000021','JAVIER DAVID','CHAVEZ', 'CENTENO','45698745','ASOCIADO','916122333','Javier.Chavez@unsaac.edu.pe','D21','No')
+insert into TDocente values('D000022','BORIS','CHULLO','LLAVE','23222048','CONTRATADO','947554896','boris.chullo@unsaac.edu.pe','D22','Si')
+insert into TDocente values('D000023','CARLOS RAMON','QUISPE','ONOFRE','20755274','CONTRATADO','948335466','carlos.quispe@unsaac.edu.pe','D23','Si')
+insert into TDocente values('D000024','ESTHER','PACHECO','VASQUEZ','13354951','CONTRATADO','950677166','esther.pacheco@unsaac.edu.pe','D24','Si')
+insert into TDocente values('D000025','GLADYS EFRAINA','CUTIPA ','ARAPA','10888176','CONTRATADO','951457736','gladys.cutipa@unsaac.edu.pe','D25','Si')
+insert into TDocente values('D000026','HECTOR EDUARDO','UGARTE','ROJAS','92660191','CONTRATADO','952238306','hector.ugarte@unsaac.edu.pe','D26','Si')
+insert into TDocente values('D000027','JOSE LUIS','SONCCO ','ALVAREZ','93992751','CONTRATADO','979028106','jose.soncco@unsaac.edu.pe','D27','Si')
+insert into TDocente values('D000028','LISETH URPY','SEGUNDO','CARPIO','78825665','CONTRATADO','953799446','liseth.segundo@unsaac.edu.pe','D28','Si')
+insert into TDocente values('D000029','MARITZA','IRPANOCCA','CUSIMAYTA','94932874','CONTRATADO','956141146','maritza.irpanocca@unsaac.edu.pe','D29','Si')
+insert into TDocente values('D000030','ROGER MARIO','CUSIHUAMAN','PHOCCO','10733291','CONTRATADO','957702286','roger.cusihuaman@unsaac.edu.pe','D30','Si')
+insert into TDocente values('D000031','VANESA MARIBEL','CHOQUE','SOTO','40184639','CONTRATADO','988128936','vanesa.choque@unsaac.edu.pe','D31','No')
 go
+-- DATOS TABLA COORDINADOR
+INSERT INTO TCoordinador VALUES ('D000001','2020-I')

@@ -5,6 +5,7 @@ export const queries={
     addNewEstudiantes:"Insert into TEstudiante Values (@CodEstudiante,@Nombres,@ApPaterno,@ApMaterno,@Email,@Direccion,@Celular,@SemestreIngreso)",
     deleteEstudianteById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
     updateEstudianteById:"update TEstudiante set Email=@Email,Direccion=@Direccion,Celular=@Celular where CodEstudiante=@CodEstudiante",
+    loginEstudiante:"execute spuVerificacionLoginEstudiante @Usuario,@Contrasenia;",
     // Queries Docentes
     getAllDocentes:"Select * from TDocente",
     getDocenteById:"Select * from TDocente where CodDocente=@CodDocente",
@@ -19,4 +20,7 @@ export const queries={
     //deleteFichaById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
     updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria",
     getFichasT:"execute spuEstudiantebyAsignacion"
+    loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;"
+
 }
