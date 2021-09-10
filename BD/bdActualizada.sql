@@ -2,7 +2,7 @@ USE MASTER
 GO
 
 /* ********************************************************************
-					    CREACIÓN DE LA BASE DE DATOS
+					    CREACIÃ“N DE LA BASE DE DATOS
    ******************************************************************** */
 IF EXISTS (SELECT * 
 				FROM SYSDATABASES
@@ -229,6 +229,37 @@ CREATE TABLE THorario
 
 use BDSistema_Tutorias
 go
+
+/* *************************** Generar Codigo Sesion Tutoria *************************** */
+
+create procedure spuCodigoSesion @IdSesion varchar(8) OUTPUT
+as begin
+declare @CantSesion int
+set @CantSesion=(Select count (*) from TSesionTutoria)
+if((Select count (*) from TSesionTutoria) =0)
+	Set @IdSesion = 'S0001';
+else
+	begin 
+	set @IdSesion = 'S' + replicate('0',(4 - len(@CantSesion))) + convert(varchar,@CantSesion+1)
+	end
+end;
+/* *************************** INSERTAR SESIONES DE TUTORIA *************************** */
+create procedure spuInsertarSesion @IdFichaTutoria varchar(10),
+				   @Fecha date,
+				   @TipoTutoria varchar(15),
+				   @Descripcion varchar(50),
+				   @Referencia varchar(50),
+				   @Observaciones varchar(100)
+as 
+begin
+declare @IdSesion varchar(5)
+exec spuCodigoSesion @IdSesion OUTPUT
+print (@IdSesion)
+insert into TSesionTutoria values(@IdSesion,@IdFichaTutoria, @Fecha,@TipoTutoria, @Descripcion, @Referencia, @Observaciones)
+end;
+
+
+
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('171943','ERICK ANDREW','BUSTAMANTE','FLORES','171943@unsaac.edu.pe','P1','984556854','2020-I')
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-I')
@@ -269,7 +300,7 @@ INSERT INTO TEstudiante VALUES ('155183','JEREMYK RUFINO','VARGAS' ,'ARQQUE','15
 INSERT INTO TEstudiante VALUES ('140934','RONALDINHO','VEGA CENTENO', 'OLIVERA','140934@unsaac.edu.pe','P37','988562322','2020-I')
 INSERT INTO TEstudiante VALUES ('174441','ALEX CHRISTOPHER','VILLAFUERTE' ,'TURPO','170441@unsaac.edu.pe','P38','984555633','2020-I')
 INSERT INTO TEstudiante VALUES ('170441','RENO MAX','DEZA' ,'KACHA','170441@unsaac.edu.pe','P39','984522633','2020-I')
-INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÑOZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
+INSERT INTO TEstudiante VALUES ('161727','ENIT','MUÃ‘OZ' ,'PACHECO','161727@unsaac.edu.pe','P40','984555113','2020-I')
 INSERT INTO TEstudiante VALUES ('93160','CESAR','CHARA' ,'TACURI','93160@unsaac.edu.pe','P41','914555633','2020-I')
 INSERT INTO TEstudiante VALUES ('161731','DAVID','SONCCO' ,'CACHURA','161731@unsaac.edu.pe','P42','984445633','2020-I')
 INSERT INTO TEstudiante VALUES ('171058','ROSMEL URIEL','DEZA' ,'CONDORI','171058@unsaac.edu.pe','P43','984658758','2020-I')
