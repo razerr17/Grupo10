@@ -387,12 +387,41 @@ insert into TFichaTutoria(IdFichaTutoria, IdAsignacion, CelularReferenciaTutoran
 values(@IdFicha, @IdAsignacion,'','');
 end;
 
+-- Generar Codigo
+create procedure spuCodigoSesion @IdSesion varchar(8) OUTPUT
+as begin
+declare @CantSesion int
+set @CantSesion=(Select count (*) from TSesionTutoria)
+if((Select count (*) from TSesionTutoria) =0)
+	Set @IdSesion = 'S0001';
+else
+	begin 
+	set @IdSesion = 'S' + replicate('0',(4 - len(@CantSesion))) + convert(varchar,@CantSesion+1)
+	end
+end;
+ 
+-- Insertar Sesion
+create procedure spuInsertarSesion @IdFichaTutoria varchar(10),
+								   @Fecha date,
+								   @TipoTutoria varchar(15),
+								   @Descripcion varchar(50),
+								   @Referencia varchar(50),
+								   @Observaciones varchar(100)
+as 
+begin
+declare @IdSesion varchar(5)
+exec spuCodigoSesion @IdSesion OUTPUT
+print (@IdSesion)
+insert into TSesionTutoria values(@IdSesion,@IdFichaTutoria, @Fecha,@TipoTutoria, @Descripcion, @Referencia, @Observaciones)
+end;
 
 create procedure spuEstudiantebyAsignacion 
 as begin 
 select X.IdFichaTutoria,C.IdAsignacion,C.CodDocente,C.CodEstudiante,C.Nombres,C.ApPaterno,C.ApMaterno,C.Celular from (select A.IdAsignacion,A.CodDocente,A.CodEstudiante,B.Nombres,B.ApPaterno,B.ApMaterno,B.Celular from TAsignacion A inner join TEstudiante B on A.CodEstudiante = B.CodEstudiante) C inner join TFichaTutoria X
 on C.IdAsignacion = X.IdAsignacion
 end
+
+
 
 --drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
