@@ -10,5 +10,14 @@ export const queries={
     getDocenteById:"Select * from TDocente where CodDocente=@CodDocente",
     addNewDocente:"Insert into TDocente Values (@CodDocente,@Nombres,@ApPaterno,@ApMaterno,@DNI,@Categoria,@Celular,@Email,@Direccion,@EsTutor)",
     deleteDocenteById:"delete from TDocente where CodDocente=@CodDocente",
-    updateDocenteById:"update TDocente set Email=@Email,Celular=@Celular,Direccion=@Direccion where CodDocente=@CodDocente"
+    updateDocenteById:"update TDocente set Categoria=@Categoria, Email=@Email,Celular=@Celular,Direccion=@Direccion, EsTutor=@EsTutor where CodDocente=@CodDocente",
+    getTutores:"Select * from TDocente where esTutor='Si'",
+    
+    // Queries Asignar sesion de tutoria
+    getAllSesiones:"Select * from TSesionTutoria",
+    getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
+    addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Descripcion,@Referencia,@Observaciones", 
+    loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
+    //getFichasT:"execute spuEstudiantebyAsignacion @CodDocente",
 }
