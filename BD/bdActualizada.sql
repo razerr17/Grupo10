@@ -1,4 +1,4 @@
-USE MASTER
+﻿USE MASTER
 GO
 
 /* ********************************************************************
@@ -19,13 +19,13 @@ USE BDSistema_Tutorias
 	EXEC SP_ADDTYPE tyCodEstudianteRA,	'VARCHAR(6)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodDocente,		'VARCHAR(7)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodCoordinadorTutoria,'VARCHAR(7)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyCodTaller,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyCodInforme,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdCaso,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdTipoCaso,		'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdInformeSemestral, 'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdAsignacion, 'VARCHAR(10)', 'NOT NULL'
-	EXEC SP_ADDTYPE tyIdFichaTutoria, 'VARCHAR(10)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyCodTaller,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyCodInforme,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdCaso,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdTipoCaso,		'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdInformeSemestral, 'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdAsignacion, 'VARCHAR(8)', 'NOT NULL'
+	EXEC SP_ADDTYPE tyIdFichaTutoria, 'VARCHAR(8)', 'NOT NULL'
 	EXEC SP_ADDTYPE tyCodInformeQuincenal, 'VARCHAR(10)', 'NOT NULL'
 GO 
 
@@ -356,6 +356,73 @@ as
 	else
 		PRINT('Error,usuario no encontrado')
 Go
+
+
+-- Generar Codigo
+create procedure spuCodigoFicha @IdFicha varchar(8) OUTPUT
+as begin
+declare @CantFichas int
+set @CantFichas=(Select count (*) from TFichaTutoria)
+if((Select count (*) from TFichaTutoria) =0)
+	Set @IdFicha = 'F0000001';
+else
+	begin 
+	set @IdFicha = 'F' + replicate('0',(7 - len(@CantFichas))) + convert(varchar,@CantFichas+1)
+	end
+end;
+
+--Generar Ficha
+create trigger tr_GenerarFichaTutoria
+on TAsignacion
+for INSERT
+as
+begin
+declare @IdAsignacion varchar(8);
+select @IdAsignacion = IdAsignacion
+from INSERTED;
+declare @IdFicha varchar(8);
+exec spuCodigoFicha @IdFicha OUTPUT
+print(@IdFicha)
+insert into TFichaTutoria(IdFichaTutoria, IdAsignacion, CelularReferenciaTutorando, PersonaReferenciaTutorando)
+values(@IdFicha, @IdAsignacion,'','');
+end;
+
+-- Generar Codigo
+create procedure spuCodigoSesion @IdSesion varchar(8) OUTPUT
+as begin
+declare @CantSesion int
+set @CantSesion=(Select count (*) from TSesionTutoria)
+if((Select count (*) from TSesionTutoria) =0)
+	Set @IdSesion = 'S0001';
+else
+	begin 
+	set @IdSesion = 'S' + replicate('0',(4 - len(@CantSesion))) + convert(varchar,@CantSesion+1)
+	end
+end;
+ 
+-- Insertar Sesion
+create procedure spuInsertarSesion @IdFichaTutoria varchar(10),
+								   @Fecha date,
+								   @TipoTutoria varchar(15),
+								   @Descripcion varchar(50),
+								   @Referencia varchar(50),
+								   @Observaciones varchar(100)
+as 
+begin
+declare @IdSesion varchar(5)
+exec spuCodigoSesion @IdSesion OUTPUT
+print (@IdSesion)
+insert into TSesionTutoria values(@IdSesion,@IdFichaTutoria, @Fecha,@TipoTutoria, @Descripcion, @Referencia, @Observaciones)
+end;
+
+create procedure spuEstudiantebyAsignacion 
+as begin 
+select X.IdFichaTutoria,C.IdAsignacion,C.CodDocente,C.CodEstudiante,C.Nombres,C.ApPaterno,C.ApMaterno,C.Celular from (select A.IdAsignacion,A.CodDocente,A.CodEstudiante,B.Nombres,B.ApPaterno,B.ApMaterno,B.Celular from TAsignacion A inner join TEstudiante B on A.CodEstudiante = B.CodEstudiante) C inner join TFichaTutoria X
+on C.IdAsignacion = X.IdAsignacion
+end
+
+
+
 --drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('171943','ERICK ANDREW','BUSTAMANTE','FLORES','171943@unsaac.edu.pe','P1','984556854','2020-I')
