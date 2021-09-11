@@ -26,5 +26,7 @@ router.get('/tutores/:id',getTutorById);
 router.post('/loginDocente',loginDocente);
 //route login coordinador
 router.post('/loginCoordinador',loginCoordinador)
-
+router.post('/loginDocente',loginDocente);
+//route login coordinador
+router.post('/loginCoordinador',loginCoordinador)
 export default router;

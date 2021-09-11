@@ -16,11 +16,10 @@ export const queries={
     getTutores:"Select * from TDocente where esTutor='Si'",
     loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
     loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
-    
     getTutorById:"Select * from TDocente where (CodDocente=@CodDocente and esTutor='Si')",
     // Queries Asignaciones
     addNewAsignacion: "Insert into TAsignacion Values (@IdAsignacion,@CodDocente,@CodEstudiante,@Semestre)",
     getAsignaciones: "Select * from TAsignacion",
-    updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion"
-
+    updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion",
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;"
 }
