@@ -6,6 +6,7 @@ export const queries={
     deleteEstudianteById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
     updateEstudianteById:"update TEstudiante set Email=@Email,Direccion=@Direccion,Celular=@Celular where CodEstudiante=@CodEstudiante",
     loginEstudiante:"execute spuVerificacionLoginEstudiante @Usuario,@Contrasenia;",
+    getEstudianteBySemestreIngreso:"Select * from TEstudiante where SemestreIngreso=@SemestreIngreso",
     // Queries Docentes
     getAllDocentes:"Select * from TDocente",
     getDocenteById:"Select * from TDocente where CodDocente=@CodDocente",
@@ -14,5 +15,11 @@ export const queries={
     updateDocenteById:"update TDocente set Categoria=@Categoria, Email=@Email,Celular=@Celular,Direccion=@Direccion, EsTutor=@EsTutor where CodDocente=@CodDocente",
     getTutores:"Select * from TDocente where esTutor='Si'",
     loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
+    getTutorById:"Select * from TDocente where (CodDocente=@CodDocente and esTutor='Si')",
+    // Queries Asignaciones
+    addNewAsignacion: "Insert into TAsignacion Values (@IdAsignacion,@CodDocente,@CodEstudiante,@Semestre)",
+    getAsignaciones: "Select * from TAsignacion",
+    updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion",
     loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;"
 }

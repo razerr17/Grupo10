@@ -110,3 +110,18 @@ export const loginEstudiante=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const getEstudianteBySemestreIngreso=async (req,res)=>{
+    try{
+        console.log(req)
+        console.log(res)
+        const { semestre }=req.params;
+        const pool=await getConnection();
+        const result=await pool.request().input("SemestreIngreso",sql.VarChar,semestre)
+        .query(queries.getEstudianteBySemestreIngreso);
+        console.log('getEstudiantesBySEMESTREINGRESO executed',semestre);  
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
