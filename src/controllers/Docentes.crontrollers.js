@@ -36,6 +36,19 @@ export const getTutores=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const getTutorById=async (req,res)=>{ //new
+    try{
+        const { id }=req.params;
+        const pool=await getConnection();
+        const result=await pool.request().input("CodDocente",sql.VarChar,id)
+        .query(queries.getTutorById);
+        console.log('getTutoresById executed',id);  
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
 export const addDocente=async (req,res)=>{
     try{
         const {CodDocente,Nombres,ApPaterno,ApMaterno,DNI,Categoria,Celular,Email,Direccion,EsTutor}=req.body;
