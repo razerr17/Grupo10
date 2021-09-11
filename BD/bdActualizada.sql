@@ -231,6 +231,7 @@ CREATE TABLE THorario
 GO
 CREATE TABLE TCoordinador
 (
+	CodCoordinador VARCHAR(6) NOT NULL,
 	CodDocente tyCodDocente,
 	Periodo VARCHAR(50) NOT NULL,
 	-- Determinar las claves 
@@ -245,7 +246,7 @@ CREATE TABLE TLogin
 )
 use BDSistema_Tutorias
 go
---Trigger para la creacion automatica de usuarios para estudiantes
+--Trigger para la creacion automatica de usuarios para estudiantes---------------------
 	--Usuario Email de Estudiante
 	--Contrasenia Codigo del Estudiante
 go
@@ -265,17 +266,32 @@ begin
 	set @Usuario=(select Email from deleted)
 	delete from TLogin where Usuario=@Usuario
 end
---Trigger para la creacion automatica de usuarios para docentes
+--Trigger para la creacion automatica de usuarios para docentes---------------------
 	--Usuario Email del Docente
 	--Contrasenia DNI del Docente
 go
 create trigger TRInsertLoginDocente on TDocente For Insert
 as
 begin
-	declare @Contrasenia varchar(50),@Usuario varchar(50)
-	set @Contrasenia=(select DNI from inserted)
-	set @Usuario=(select Email from inserted)
-	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+	if (SELECT count(CodDocente) from inserted WHERE EsTutor='Si')>0
+	begin
+		declare @Contrasenia varchar(50),@Usuario varchar(50)
+		set @Contrasenia=(select DNI from inserted)
+		set @Usuario=(select Email from inserted)
+		insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+	end
+end
+go
+create trigger TRUpdateLoginDocente on TDocente For update
+as
+begin
+	if (SELECT count(CodDocente) from inserted WHERE EsTutor='Si')>0
+	begin
+		declare @Contrasenia varchar(50),@Usuario varchar(50)
+		set @Contrasenia=(select DNI from inserted)
+		set @Usuario=(select Email from inserted)
+		insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
+	end
 end
 go
 create trigger TRDeleteLoginDocente on TDocente For Delete
@@ -285,16 +301,17 @@ begin
 	set @Usuario=(select Email from deleted)
 	delete from TLogin where Usuario=@Usuario
 end
---Trigger para la creacion automatica de usuarios para coordinador
-	--Usuario Codigo del Docente
-	--Contrasenia DNI del Docente
+--Trigger para la creacion automatica de usuarios para coordinador---------------------
+	--Usuario Codigo del Coordinador
+	--Contrasenia DNI del Docente Coordinador
 go
 create trigger TRInsertLoginCoordinador on TCoordinador For Insert
 as
 begin
-	declare @Contrasenia varchar(50),@Usuario varchar(50)
-	set @Usuario=(select CodDocente from inserted)
-	set @Contrasenia=(select DNI from TDocente where CodDocente=@Usuario)
+	declare @Contrasenia varchar(50),@Usuario varchar(50),@CodDocente varchar(7)
+	set @Usuario=(select CodCoordinador from inserted)
+	set @CodDocente=(select CodDocente from inserted)
+	set @Contrasenia=(select DNI from TDocente where CodDocente=@CodDocente)
 	insert into TLogin VALUES(@Usuario,PWDENCRYPT(@Contrasenia))
 end
 go
@@ -302,7 +319,7 @@ create trigger TRDeleteLoginCoordinador on TCoordinador For Delete
 as
 begin
 	declare @Usuario varchar(50)
-	set @Usuario=(select CodDocente from deleted)
+	set @Usuario=(select CodCoordinador from deleted)
 	delete from TLogin where Usuario=@Usuario
 end
 go
@@ -348,7 +365,7 @@ as
 			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
 			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
 				begin
-					select * from TDocente where CodDocente=@UsuarioOut
+					select * from TDocente where CodDocente=(select CodDocente from TCoordinador where CodCoordinador=@UsuarioOut)
 				end
 			else
 				PRINT('Error,contrasenia incorrecta')
@@ -356,8 +373,6 @@ as
 	else
 		PRINT('Error,usuario no encontrado')
 Go
-
-
 -- Generar Codigo
 create procedure spuCodigoFicha @IdFicha varchar(8) OUTPUT
 as begin
@@ -370,7 +385,7 @@ else
 	set @IdFicha = 'F' + replicate('0',(7 - len(@CantFichas))) + convert(varchar,@CantFichas+1)
 	end
 end;
-
+go
 --Generar Ficha
 create trigger tr_GenerarFichaTutoria
 on TAsignacion
@@ -386,7 +401,7 @@ print(@IdFicha)
 insert into TFichaTutoria(IdFichaTutoria, IdAsignacion, CelularReferenciaTutorando, PersonaReferenciaTutorando)
 values(@IdFicha, @IdAsignacion,'','');
 end;
-
+go
 -- Generar Codigo
 create procedure spuCodigoSesion @IdSesion varchar(8) OUTPUT
 as begin
@@ -399,7 +414,7 @@ else
 	set @IdSesion = 'S' + replicate('0',(4 - len(@CantSesion))) + convert(varchar,@CantSesion+1)
 	end
 end;
- 
+go
 -- Insertar Sesion
 create procedure spuInsertarSesion @IdFichaTutoria varchar(10),
 								   @Fecha date,
@@ -414,15 +429,13 @@ exec spuCodigoSesion @IdSesion OUTPUT
 print (@IdSesion)
 insert into TSesionTutoria values(@IdSesion,@IdFichaTutoria, @Fecha,@TipoTutoria, @Descripcion, @Referencia, @Observaciones)
 end;
-
+go
 create procedure spuEstudiantebyAsignacion 
 as begin 
 select X.IdFichaTutoria,C.IdAsignacion,C.CodDocente,C.CodEstudiante,C.Nombres,C.ApPaterno,C.ApMaterno,C.Celular from (select A.IdAsignacion,A.CodDocente,A.CodEstudiante,B.Nombres,B.ApPaterno,B.ApMaterno,B.Celular from TAsignacion A inner join TEstudiante B on A.CodEstudiante = B.CodEstudiante) C inner join TFichaTutoria X
 on C.IdAsignacion = X.IdAsignacion
 end
-
-
-
+go
 --drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('171943','ERICK ANDREW','BUSTAMANTE','FLORES','171943@unsaac.edu.pe','P1','984556854','2020-I')
@@ -506,4 +519,4 @@ insert into TDocente values('D000030','ROGER MARIO','CUSIHUAMAN','PHOCCO','10733
 insert into TDocente values('D000031','VANESA MARIBEL','CHOQUE','SOTO','40184639','CONTRATADO','988128936','vanesa.choque@unsaac.edu.pe','D31','No')
 go
 -- DATOS TABLA COORDINADOR
-INSERT INTO TCoordinador VALUES ('D000001','2020-I')
+INSERT INTO TCoordinador VALUES ('C00001','D000001','2020-I')

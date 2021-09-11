@@ -19,13 +19,9 @@ router.put('/docentes/:id',updateDocenteById);
 router.delete('/docentes/:id',deleteDocenteById);
 //funcion para recuperar a los docentes tutores
 router.get('/tutores',getTutores);
-//route login docente
 //funcion para recuperar a los docentes tutores por Id
 router.get('/tutores/:id',getTutorById);
-//
-router.post('/loginDocente',loginDocente);
-//route login coordinador
-router.post('/loginCoordinador',loginCoordinador)
+//route login docente
 router.post('/loginDocente',loginDocente);
 //route login coordinador
 router.post('/loginCoordinador',loginCoordinador)
