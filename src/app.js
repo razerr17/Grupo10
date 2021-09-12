@@ -3,6 +3,7 @@ import config from './config'
 import estudiantesRoutes from './routes/Estudiantes.routes'
 import docentesRoutes from './routes/Docentes.routes'
 import sesionesRoutes from './routes/SesionTutoria.routes'
+import asignacionesRoutes from './routes/Asignaciones.routes'
 const cors=require('cors');
 //usamos el framework express para la creacion del servidor
 const app=express();
