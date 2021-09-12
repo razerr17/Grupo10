@@ -2,8 +2,7 @@ import express from 'express'
 import config from './config'
 import estudiantesRoutes from './routes/Estudiantes.routes'
 import docentesRoutes from './routes/Docentes.routes'
-import asignacionesRoutes from './routes/Asignaciones.routes'
-
+import sesionesRoutes from './routes/SesionTutoria.routes'
 const cors=require('cors');
 //usamos el framework express para la creacion del servidor
 const app=express();
@@ -22,5 +21,6 @@ app.use(express.urlencoded({extended:false}));//para poder recibir datos de form
 app.use(estudiantesRoutes);
 app.use(docentesRoutes);
 app.use(asignacionesRoutes);
+app.use(sesionesRoutes);
 
 export default app;
