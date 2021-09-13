@@ -21,6 +21,20 @@ export const queries={
     updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria",
     getFichasT:"execute spuEstudiantebyAsignacion @CodDocente",
     loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
-    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;"
-
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
+    // Queries Tipo Caso
+    getAllTipoCasos:"Select * from TTipoCaso",
+    getTipoCasosById:"Select * from TTipoCaso where IdTipoCaso=@IdTipoCaso",
+    addNewTipoCaso:"Insert into TTipoCaso Values (@IdTipoCaso,@TipoCaso)",
+    deleteTipoCasoById:"delete from TTipoCaso where IdTipoCaso=@IdTipoCaso",
+    updateTipoCasoById:"update TTipoCaso set TipoCaso=@TipoCaso where IdTipoCaso=@IdTipoCaso",
+    // Queries Caso
+    getAllCasos:"Select * from TCasoEspecial",
+    getCasoById:"Select * from TCasoEspecial where IdInformeSemestral=@IdInformeSemestral and IdCaso=@IdCaso",
+    addNewCaso:"Insert into TCasoEspecial Values (@IdCaso,@IdInformeSemestral,@CodEstudiante,@IdTipoCaso)",
+    deleteCasoById:"delete from TCasoEspecial where IdInformeSemestral=@IdInformeSemestral and IdCaso=@IdCaso",
+    // Queries Informe Semestral
+    getAllInformesSemestrales:"Select * from TInformeSemestral",
+    addNewInforme:"Insert into TInforme Values (@CodInforme,@Semestre,@Fecha)",
+    addNewInformeSemestral:"Insert into TInformeSemestral Values (@CodInforme,@IdInformeSemestral,@CodDocente,@NroTutorandos_TuroriasRealizadas_InicioSemestre,@NroTutorandos_TuroriasRealizadas_MedioSemestre,@NroTutorandos_TuroriasRealizadas_FinalSemestre)"
 }

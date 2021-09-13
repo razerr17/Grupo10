@@ -2,7 +2,10 @@ import express from 'express'
 import config from './config'
 import estudiantesRoutes from './routes/Estudiantes.routes'
 import docentesRoutes from './routes/Docentes.routes'
+import tipoCasoRoutes from './routes/TiposCasos.routes'
 import fichasRoutes from './routes/FichasTutoria.routes'
+import casosRoutes from './routes/Casos.routes'
+import informeSemestralRoutes from './routes/InformeSemestral.routes'
 
 const cors=require('cors');
 //usamos el framework express para la creacion del servidor
@@ -21,6 +24,9 @@ app.use(express.urlencoded({extended:false}));//para poder recibir datos de form
 //usamos todas las rutas de la api para estudiantes,docente
 app.use(estudiantesRoutes);
 app.use(docentesRoutes);
+app.use(tipoCasoRoutes);
 app.use(fichasRoutes);
+app.use(informeSemestralRoutes);
+app.use(casosRoutes);
 
 export default app;
