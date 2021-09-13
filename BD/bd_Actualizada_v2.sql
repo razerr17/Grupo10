@@ -434,31 +434,31 @@ as begin
 select X.IdFichaTutoria,C.IdAsignacion,C.CodDocente,C.CodEstudiante,C.Nombres,C.ApPaterno,C.ApMaterno,C.Celular,X.CelularReferenciaTutorando, X.PersonaReferenciaTutorando from (select A.IdAsignacion,A.CodDocente,A.CodEstudiante,B.Nombres,B.ApPaterno,B.ApMaterno,B.Celular from TAsignacion A inner join TEstudiante B on A.CodEstudiante = B.CodEstudiante) C inner join TFichaTutoria X
 on C.IdAsignacion = X.IdAsignacion where C.CodDocente =  @CodDocente
 end
-
-
+go
 -- Generar Asignacion
+--drop procedure spuCodigoAsignacion
 create procedure spuCodigoAsignacion @IdAsignacion varchar(8) OUTPUT
 as begin
 declare @CantAsignaciones int
 set @CantAsignaciones=(Select count (*) from TAsignacion)
-if((Select count (*) from TAsigancion) =0)
+if((Select count (*) from TAsignacion) =0)
 	Set @IdAsignacion = 'A0000001';
 else
 	begin 
 	set @IdAsignacion = 'A' + replicate('0',(7 - len(@CantAsignaciones))) + convert(varchar,@CantAsignaciones+1)
 	end
 end;
-
+go
 create procedure spuInsertarAsignaciones  @CodDocente varchar(7),
-								         @CodEstudiante varchar(6),
+								         @CodEstudiante varchar(6)
 as 
 begin
 declare @IdAsignacion varchar(7)
-exec spuCodigoSesion @IdAsignacion OUTPUT
+exec spuCodigoAsignacion @IdAsignacion OUTPUT
 print (@IdAsignacion)
 insert into TAsignacion values(@IdAsignacion,@CodDocente, @CodEstudiante)
 end;
-
+go
 
 --drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
