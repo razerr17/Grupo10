@@ -4,6 +4,7 @@ import estudiantesRoutes from './routes/Estudiantes.routes'
 import docentesRoutes from './routes/Docentes.routes'
 import sesionesRoutes from './routes/SesionTutoria.routes'
 import asignacionesRoutes from './routes/Asignaciones.routes'
+import others from './routes/Others.routes'
 const cors=require('cors');
 //usamos el framework express para la creacion del servidor
 const app=express();
@@ -23,5 +24,6 @@ app.use(estudiantesRoutes);
 app.use(docentesRoutes);
 app.use(asignacionesRoutes);
 app.use(sesionesRoutes);
+app.use(others);
 
 export default app;
