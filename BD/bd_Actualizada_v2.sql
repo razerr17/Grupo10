@@ -441,7 +441,7 @@ create procedure spuCodigoAsignacion @IdAsignacion varchar(8) OUTPUT
 as begin
 declare @CantAsignaciones int
 set @CantAsignaciones=(Select count (*) from TAsignacion)
-if((Select count (*) from TAsignacion) =0)
+if((Select count (*) from TAsigancion) =0)
 	Set @IdAsignacion = 'A0000001';
 else
 	begin 
@@ -449,11 +449,13 @@ else
 	end
 end;
 go
+
+-- crear asignaciones
 create procedure spuInsertarAsignaciones  @CodDocente varchar(7),
-								         @CodEstudiante varchar(6)
+					  @CodEstudiante varchar(6)
 as 
 begin
-declare @IdAsignacion varchar(7)
+declare @IdAsignacion varchar(8)
 exec spuCodigoAsignacion @IdAsignacion OUTPUT
 print (@IdAsignacion)
 insert into TAsignacion values(@IdAsignacion,@CodDocente, @CodEstudiante)
