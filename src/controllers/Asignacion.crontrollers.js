@@ -45,3 +45,20 @@ export const updateAsignacionById=async (req,res)=>{
         res.send(error.message);
     }
 };
+export const addListAsignacion=async (req,res)=>{
+    try{  
+        const Lista=req.body;
+        let queriestemp='';
+        for (let i = 0; i < Lista.length; i++) {
+            let CodDocente=Lista[i].CodDocente,CodEstudiante=Lista[i].CodEstudiante;
+            queriestemp+="execute spuInsertarAsignaciones '"+CodDocente+"','"+CodEstudiante+"'\n";
+        }
+        console.log(queriestemp);
+        const pool=await getConnection();
+        const result=await pool.request().query(queriestemp);
+        console.log('addListAsignacion executed')
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);}
+};
