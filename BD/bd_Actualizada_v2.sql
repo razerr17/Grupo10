@@ -376,12 +376,12 @@ Go
 create procedure spuCodigoFicha @IdFicha varchar(8) OUTPUT
 as begin
 declare @CantFichas int
-set @CantFichas=(Select count (*) from TFichaTutoria)
+set @CantFichas=(Select count (*) from TFichaTutoria)+1
 if((Select count (*) from TFichaTutoria) =0)
 	Set @IdFicha = 'F0000001';
 else
 	begin 
-	set @IdFicha = 'F' + replicate('0',(7 - len(@CantFichas))) + convert(varchar,@CantFichas+1)
+	set @IdFicha = 'F' + replicate('0',(7 - len(@CantFichas))) + convert(varchar,@CantFichas)
 	end
 end;
 go
@@ -440,15 +440,16 @@ go
 create procedure spuCodigoAsignacion @IdAsignacion varchar(8) OUTPUT
 as begin
 declare @CantAsignaciones int
-set @CantAsignaciones=(Select count (*) from TAsignacion)
-if((Select count (*) from TAsigancion) =0)
+set @CantAsignaciones=(Select count (*) from TAsignacion)+1
+if((Select count (*) from TAsignacion) =0)
 	Set @IdAsignacion = 'A0000001';
 else
 	begin 
-	set @IdAsignacion = 'A' + replicate('0',(7 - len(@CantAsignaciones))) + convert(varchar,@CantAsignaciones+1)
+	print(@CantAsignaciones)
+	set @IdAsignacion = 'A' + replicate('0',(7 - len(@CantAsignaciones))) + convert(varchar,@CantAsignaciones)
 	end
 end;
-go
+
 
 -- crear asignaciones
 create procedure spuInsertarAsignaciones  @CodDocente varchar(7),
