@@ -18,12 +18,13 @@ export const queries={
     loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
     getTutorById:"Select * from TDocente where (CodDocente=@CodDocente and esTutor='Si')",
     // Queries Asignaciones
-    addNewAsignacion: "Insert into TAsignacion Values (@IdAsignacion,@CodDocente,@CodEstudiante,@Semestre)",
+    addNewAsignacion: "execute spuInsertarAsignaciones @CodDocente ,@CodEstudiante",
     getAsignaciones: "Select * from TAsignacion",
     updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion",
     // Queries Asignar sesion de tutoria
     getAllSesiones:"Select * from TSesionTutoria",
     getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
     addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Descripcion,@Referencia,@Observaciones", 
-    
+    // Queries Others
+    getListSemestres: "select distinct SemestreIngreso from TEstudiante"
 }

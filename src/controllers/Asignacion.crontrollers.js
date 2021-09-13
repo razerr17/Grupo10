@@ -15,16 +15,14 @@ export const getAsignaciones=async (req,res)=>{
 };
 export const addAsignacion=async (req,res)=>{
     try{
-        const {IdAsignacion,CodDocente,CodEstudiante,Semestre}=req.body;
+        const {CodDocente,CodEstudiante}=req.body;
         const pool=await getConnection();
         await pool.request()
-            .input("IdAsignacion",sql.VarChar,IdAsignacion)
             .input("CodDocente",sql.VarChar,CodDocente)
             .input("CodEstudiante",sql.VarChar,CodEstudiante)
-            .input("Semestre",sql.VarChar,Semestre)
             .query(queries.addNewAsignacion);
-        console.log('addAsignacion executed',IdAsignacion)
-        res.json({IdAsignacion});
+        console.log('addAsignacion executed',CodDocente,CodEstudiante)
+        res.json({CodDocente,CodEstudiante});
     }catch(error){
         res.status(500);
         res.send(error.message);
