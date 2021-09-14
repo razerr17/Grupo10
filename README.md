@@ -22,7 +22,12 @@ agredecemos los aportes extraidos de vuestros trabajos
 
 
 ## Autores
-* **Melissa Briggitte Espejo Franco - 171258** - [melissaespejo](https://github.com/melissaespejo)
 * **Juan Carlos Condori Lopez - 170429** - [juancarlos170429](https://github.com/juancarlos170429)
+* **Angie Escobedo Mescco - 174442** - [AngieEM](https://github.com/AnnieLoli)
+* **Melissa Briggitte Espejo Franco - 171258** - [melissaespejo](https://github.com/melissaespejo)
+* **Gonzalo Gutierrez Daza** 
+* **Alexander Javier Huaman Guevara - 150394** - [alexanderhg222](https://github.com/alexanderhg222)
+* **Mileydy Ninantay Diaz - 171915** - [mile1107](https://github.com/mile1107)
 * **Edgar Daniel Ramos Alvarez - 171570** - [razerr17](https://github.com/razerr17)
+* **Claudia Luz Rojas Soto - 171805** - [Claudiars20](https://github.com/Claudiars20)
 ---
