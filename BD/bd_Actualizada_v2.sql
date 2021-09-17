@@ -51,7 +51,7 @@ CREATE TABLE TDocente
 	-- Determinar las claves 
 	PRIMARY KEY (CodDocente)
 );
-GO
+GO--drop table TDocente --INSERT INTO TDocente VALUES ( 'D000001','JOSE MAURO','PILLCO', 'QUISPE','45698745','ASOCIADO','916122333','Jose.Pillco@unsaac.edu.pe','D1','No')
 
 /* ********* TABLA ESTUDIANTE ********* */
 IF EXISTS (SELECT * 
@@ -242,6 +242,15 @@ CREATE TABLE TLogin
 	IdLogin int IDENTITY(1,1) PRIMARY KEY,
 	Usuario varchar(50) NOT NULL,
 	Contrasenia varbinary(max) NOT NULL
+)
+use BDSistema_Tutorias
+go
+/* *************************** Fotos Perfil *************************** */
+CREATE TABLE TFotosPerfil
+(
+	IdFotoPerfil int IDENTITY(1,1) PRIMARY KEY,
+	Correo varchar(50) NOT NULL,
+	Foto varchar(90) NULL default './imagenes/FondoTadoPerfil.JPG'
 )
 use BDSistema_Tutorias
 go
@@ -449,8 +458,7 @@ else
 	set @IdAsignacion = 'A' + replicate('0',(7 - len(@CantAsignaciones))) + convert(varchar,@CantAsignaciones)
 	end
 end;
-
-
+go
 -- crear asignaciones
 create procedure spuInsertarAsignaciones  @CodDocente varchar(7),
 					  @CodEstudiante varchar(6)
@@ -462,7 +470,33 @@ print (@IdAsignacion)
 insert into TAsignacion values(@IdAsignacion,@CodDocente, @CodEstudiante)
 end;
 go
-
+-- fotos de perfil 
+create trigger TRInsertFotoEstudiante on TEstudiante For Insert
+as
+begin
+	declare @Correo varchar(50)
+	set @Correo=(select Email from inserted)
+	insert into TFotosPerfil(Correo)VALUES(@Correo)
+end
+go
+create trigger TRInsertFotoDocente on TDocente For Insert
+as
+begin
+	declare @Correo varchar(50)
+	set @Correo=(select Email from inserted)
+	insert into TFotosPerfil(Correo)VALUES(@Correo)
+end
+go
+--drop trigger TRInsertFotoEstudiante
+create procedure spuUpdateFotoPerfil @Correo varchar(50),
+					  @Foto varchar(90)
+as 
+begin
+	update TFotosPerfil
+		set Foto=@Foto
+		where Correo=@Correo
+end;
+go
 --drop proc spuVerificacionLoginCoordinador
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-II')

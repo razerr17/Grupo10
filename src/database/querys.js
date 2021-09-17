@@ -26,5 +26,8 @@ export const queries={
     getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
     addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Descripcion,@Referencia,@Observaciones", 
     // Queries Others
-    getListSemestres: "select distinct SemestreIngreso from TEstudiante"
+    getListSemestres: "select distinct SemestreIngreso from TEstudiante",
+    //Queries Foto Perfil
+    getFotoPerfil:"select Foto from TFotosPerfil where Correo=@Correo",
+    UpdateFotoPerfil:"execute spuUpdateFotoPerfil @Correo,@Foto"
 }
