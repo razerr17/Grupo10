@@ -80,7 +80,7 @@ const TutorRegistrarFichaTutoria = (props) => {
   useEffect(() => {
     peticionGet();
     if (!cookie.get("CodDocente")) {
-      props.history.push("/LoginAdministracion");
+      props.history.push("/LoginTutor");
     }
   });
   const Actualizar = (id) => {
