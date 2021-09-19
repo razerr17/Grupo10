@@ -17,10 +17,24 @@ export const queries={
     loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
     loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
     getTutorById:"Select * from TDocente where (CodDocente=@CodDocente and esTutor='Si')",
+    // Queries Fichas de tutoria
+    getAllFichas:"Select * from TFichaTutoria",
+    getFichaById:"Select * from TFichaTutoria where IdFichaTutoria=@IdFichaTutoria",
+    addNewFicha:"Insert into TFichaTutoria Values (@IdFichaTutoria,@IdAsignacion,@CelularReferenciaTutorando,@PersonaReferenciaTutorando)",
+    //deleteFichaById:"delete from TEstudiante where CodEstudiante=@CodEstudiante",
+    updateFichaById:"update TFichaTutoria set CelularReferenciaTutorando=@CelularReferenciaTutorando,PersonaReferenciaTutorando=@PersonaReferenciaTutorando where IdFichaTutoria=@IdFichaTutoria",
+    getFichasT:"execute spuEstudiantebyAsignacion @CodDocente",
     // Queries Asignaciones
     addNewAsignacion: "execute spuInsertarAsignaciones @CodDocente ,@CodEstudiante",
     getAsignaciones: "Select * from TAsignacion",
     updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion",
+    // Queries Asignar sesion de tutoria
+    getAllSesiones:"Select * from TSesionTutoria",
+    getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
+    addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Semestre,@Descripcion,@Observaciones", 
+    loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
+    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
+    getSesionByFicha:"Select * from TSesionTutoria where IdFichaTutoria=@IdFichaTutoria",
     // Queries Asignar sesion de tutoria
     getAllSesiones:"Select * from TSesionTutoria",
     getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",

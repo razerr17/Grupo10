@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getSesiones,getSesionById, addSesionTutoria} from "../controllers/SesionTutoria.controllers";
+import { getSesiones,getSesionById, addSesionTutoria, getSesionesbyFicha} from "../controllers/SesionTutoria.controllers";
 
 //importamos la funcion router para el enrutado
 const router=Router();
@@ -8,6 +8,8 @@ const router=Router();
 router.get('/sesiones',getSesiones);
 //funcion para obtener una sesion por id
 router.get('/sesiones/:id',getSesionById);
+//funcion para obtener una sesion por id
+router.get('/sesiones/ficha/:id',getSesionesbyFicha);
 //funcion para agregar una ficha nueva
 router.post('/sesiones',addSesionTutoria);
 //funcion para obtener todas las fichas de tutoria

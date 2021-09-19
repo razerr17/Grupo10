@@ -252,6 +252,31 @@ CREATE TABLE TFotosPerfil
 	Correo varchar(50) NOT NULL,
 	Foto varchar(90) NULL default './imagenes/FondoTadoPerfil.JPG'
 )
+go
+CREATE TABLE TConfidencialidad
+(
+	IdConfidencialidad int IDENTITY(1,1) PRIMARY KEY,
+	Descripcion varchar(500) not null,
+	CodEstudiante tyCodEstudiante,
+	CodDocente tyCodDocente,
+	IdSesion VARCHAR(5) NOT NULL,
+	FOREIGN KEY(CodEstudiante) REFERENCES TEstudiante,
+	FOREIGN KEY (CodDocente) REFERENCES TDocente,
+	FOREIGN KEY (IdSesion) REFERENCES TSesionTutoria
+)
+go
+CREATE TABLE TNotificacion
+(
+	IdNotificacion int IDENTITY(1,1) PRIMARY KEY,
+	Direccion varchar(2) check (Direccion like 'ET' or Direccion like 'TE' or Direccion like 'CE' or Direccion like 'EC' or Direccion like 'TC' or Direccion like 'CT'),
+	CodEstudiante varchar(6),
+	CodDocente varchar(6),
+	CodCoordinador varchar(6),
+	Estado varchar(2) check (Estado like 'ACEPTADO' or Estado like 'RECHAZADO' or Estado like 'NO VISTO'),
+	Cantidad int default 0,
+	Tipo varchar(2)
+)--drop table TNotificacion--drop table TConfidencialidad
+go
 use BDSistema_Tutorias
 go
 --Trigger para la creacion automatica de usuarios para estudiantes---------------------
