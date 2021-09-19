@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios'
 import * as BsIcons from "react-icons/bs"
 import * as FaIcons from "react-icons/fa"
 import * as RiIcons from "react-icons/ri"
@@ -10,10 +11,24 @@ import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import '../styles/TutoradosBar.css'
 const AdminBar=(props)=>{
+    const baseUrl=`http://localhost:4000/FotoPerfil`;
+    const[direccionUrl,setDireccionUrl]=useState([{
+        Foto:"./imagenes/FondoTadoPerfil.JPG"
+    
+    }])
+    const peticionGet=async()=>{
+        await axios.get(baseUrl+`/${cookie.get('Email')}`)
+      .then(response=>{
+        setDireccionUrl(response.data);
+        
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
     const {nombrePage}=props;
     const cookie=new Cookies()
     const cerrarSesion=()=>{
-        cookie.remove('CodDocente',{path:'/'});
+        cookie.remove('CodAdmin',{path:'/'});
         cookie.remove('Nombres',{path:'/'});
         cookie.remove('ApPaterno',{path:'/'});
         cookie.remove('ApMaterno',{path:'/'});
@@ -25,6 +40,9 @@ const AdminBar=(props)=>{
         cookie.remove('Estutor',{path:'/'});
         
     }
+    useEffect(()=>{
+        peticionGet();
+      })
     return(
         <div className="all">
             
@@ -34,8 +52,8 @@ const AdminBar=(props)=>{
                     <h5>Bienvenido : {cookie.get('Nombres')}</h5>
                 </label>
                 <label className="lblNombre"><b>{nombrePage}</b></label>
-                <Link className="link" to="/LoginAdministracion" style={{ textDecoration: 'none' }} onClick={()=>cerrarSesion()} for="check">
-                 <b>cerrar sesion</b>
+                <Link className="link " to="/LoginAdministracion" style={{ textDecoration: 'none' }} onClick={()=>cerrarSesion()} for="check">
+                 <b className="text-wrap">cerrar sesion</b>
                 </Link>
             </div>
             <div className="sidebar" style={{backgroundColor:'#000a25'}}>
@@ -47,7 +65,7 @@ const AdminBar=(props)=>{
                 </div>
              
                 <div className="perfilContenedor">
-                    <img className="perfil" src="../imagenes/admin.png" alt="" />      
+                    <img className="perfil" src={direccionUrl[0].Foto} alt="" />      
     
                 </div>
                 <Link to="/Admin_Menu"  style={{ textDecoration: 'none',color:'white' }} title="Inicio"><  RiIcons.RiNotification3Fill style={{color:'orange'}}className="iconobar"/><span>Notificaciones</span></Link>

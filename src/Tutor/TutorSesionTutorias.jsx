@@ -106,7 +106,7 @@ const TutorSesionTutorias = (props) => {
   useEffect(() => {
     //peticionSesiones();
     if (!cookie.get("CodDocente")) {
-      //props.history.push("/LoginAdministracion");
+      props.history.push("/LoginAdministracion");
     }
   });
   const abrirCerrarModalInsertar = () => {
@@ -161,12 +161,8 @@ const TutorSesionTutorias = (props) => {
           </div>
           <div className="ContainerSTbtn">
             <button
-<<<<<<< Updated upstream
             style={{backgroundColor:'#000a25',color:'white'}}
-              onClick={() => abrirCerrarModalInsertar()}
-=======
               onClick={() => {peticionSemestre();abrirCerrarModalInsertar()}}
->>>>>>> Stashed changes
               className="btnSTSave"
             >
               <b>Nueva Sesion</b>

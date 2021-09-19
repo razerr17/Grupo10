@@ -80,7 +80,7 @@ const TutorRegistrarFichaTutoria = (props) => {
   useEffect(() => {
     peticionGet();
     if (!cookie.get("CodDocente")) {
-      //props.history.push("/LoginTutor");
+      props.history.push("/LoginTutor");
     }
   });
   const Actualizar = (id) => {
@@ -224,11 +224,10 @@ const TutorRegistrarFichaTutoria = (props) => {
               </Row>
             </ModalBody>
             <ModalFooter>
-              <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" onClick={() => peticionPut()}>
+              <button className="btnColoG" onClick={() => peticionPut()}>
                 Guardar
               </button>
               <button
-              style={{backgroundColor:'#000a25',color:'white'}}
                 className="btnColoC "
                 onClick={() => abrirCerrarModalActualizar()}
               >

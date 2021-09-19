@@ -1,25 +1,66 @@
-import React ,{ useState}from 'react'
+import React ,{ useState,useEffect}from 'react'
 import axios from 'axios'
 import AdminBar from '../Administracion/AdminBar'
 import * as ImIcons from "react-icons/im"
+import * as FaIcons from "react-icons/fa"
 import '../styles/AdminAsignarTutor.css'
 import {Row,Col} from 'react-bootstrap'
-import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
+import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'  
 const AdminAsignarTutor = () => {
     const baseUrlEstudiantes=`http://localhost:4000/estudiantes`;
     const baseUrlTutores=`http://localhost:4000/tutores`;
+    const baseUrlAsignaciones=`http://localhost:4000/asignaciones`;
+    const baseUrlAsignacionesList=`http://localhost:4000/Listasignaciones`;
     const [estudiantesList,setEstudiantesList]=useState([])
+    const[data,setData]=useState([]);
+    const[codEstudiante,setCodEstudiante]=useState('codigo estudiante')
+    const[codDocente,setCodDocente]=useState('codigo docente')
+    const[estudiantes,setEstudiantes]=useState([])
     const [tutoresList,setTutoresList]=useState([])
-    const [semestre, setSemestre] = React.useState('elija el semestre')
+    const [semestre, setSemestre] =useState('elija el semestre')
     const listaSemestres=["2017-I","2017-II","2018-I","2018-II","2019-I","2019-II","2020-I","2020-II"]
     const [warningView,setWarningview]=useState(false);
+    const[modalInsertar,setModalInsertar]=useState(false);
+    //const[aleatorio,setAleatorio]=useState([]);
+    const abrirCerrarModalInsertar=()=>{
+        
+        setModalInsertar(!modalInsertar);
+      }
     const abrirCerrarModalWarning=()=>{
         setWarningview(!warningView);
       }
-    const peticionGet=async()=>{
-        await axios.get(baseUrlEstudiantes)
+    
+
+    const peticionGetAsignaciones=async()=>{
+      await axios.get(baseUrlAsignaciones)
+      .then(response=>{
+        setData(response.data);
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
+    const peticionPostAsignarAlea=async(lista)=>{
+      await axios.post(baseUrlAsignacionesList,lista)
+        .then(response=>{
+          setData(data.concat(response.data));
+        }).catch(error=>{
+          console.log(error);
+        })
+    }
+    const peticionPostAsignar=async()=>{
+      await axios.post(baseUrlAsignaciones,{CodDocente:codDocente,CodEstudiante:codEstudiante})
+        .then(response=>{
+          setData(data.concat(response.data));
+          abrirCerrarModalInsertar();
+        }).catch(error=>{
+          console.log(error);
+        })
+    }
+    const peticionGetEstudiantesSemestre=async(sem)=>{
+        await axios.get(baseUrlEstudiantes+`/semestre/${sem}`)
         .then(response=>{
           setEstudiantesList(response.data);
+          console.log(estudiantesList)
         }).catch(error=>{
           console.log(error);
         })
@@ -35,13 +76,30 @@ const AdminAsignarTutor = () => {
         })
         
       } 
-    const HallarAlumnosxCurso=()=>{
-        peticionGet();
-        peticionGetTutores();
+      const peticionGetEstudiantes=async()=>{
+        await axios.get(baseUrlEstudiantes)
+        .then(response=>{
+          setEstudiantes(response.data);
+          
+        }).catch(error=>{
+          console.log(error);
+        })
+        
+      } 
+      
+    const HallarAlumnosxCurso=(sem)=>{
+         peticionGetEstudiantesSemestre(sem);
+         peticionGetTutores();
+        console.log(semestre)
+        console.log(sem)
+        let elemento = document.getElementById("drop");
+        elemento.blur();
     }
     const prueba=()=>{
+        const Lista=[]
         console.log(estudiantesList)
         console.log(tutoresList)
+        setSemestre('elija el semestre')
         var Est=estudiantesList.length 
         var Tut=tutoresList.length
         console.log(Est)
@@ -49,14 +107,22 @@ const AdminAsignarTutor = () => {
         var pos=0;
         for(var i=0;i<Est;i++){
             if(pos<Tut){
-                console.log(estudiantesList[i].Nombres+" su tutores sera :"+tutoresList[pos].Nombres)
+                //setAleatorio([...aleatorio,{CodDocente:tutoresList[pos].Nombres,CodEstudiante:estudiantesList[i].Nombres}])
+                //peticionPostAsignarAlea(estudiantesList[i].CodEstudiante,tutoresList[pos].CodDocente);
+                Lista.push({CodDocente:tutoresList[pos].CodDocente,CodEstudiante:estudiantesList[i].CodEstudiante})
+                console.log(estudiantesList[i].Nombres+" su tutores sera :"+tutoresList[pos].Nombres);
                 pos++;
             }
             else{
-                console.log(estudiantesList[i].Nombres+" su tutores sera :"+tutoresList[0].Nombres)
+                //setAleatorio([...aleatorio,{CodDocente:tutoresList[0].Nombres,CodEstudiante:estudiantesList[i].Nombres}])
+                //peticionPostAsignarAlea(estudiantesList[i].CodEstudiante,tutoresList[0].CodDocente);
+                Lista.push({CodDocente:tutoresList[0].CodDocente,CodEstudiante:estudiantesList[i].CodEstudiante})
+                console.log(estudiantesList[i].Nombres+" su tutores sera :"+tutoresList[0].Nombres);
                 pos=1;                
             }
         }
+        console.log(Lista);
+        peticionPostAsignarAlea(Lista);
     }
     const comprobar=()=>{
         if(semestre==="elija el semestre")
@@ -67,6 +133,21 @@ const AdminAsignarTutor = () => {
             prueba();
         }
     }
+    const Insertarprueba=()=>{
+      
+      if(codEstudiante==='codigo estudiante'||codDocente==='codigo docente'){
+        abrirCerrarModalWarning()
+      }
+      else{
+        peticionPostAsignar();
+    }
+    }
+    const editar=()=>{
+      alert('on pressed')
+    }
+    useEffect(()=>{
+      peticionGetAsignaciones();    
+    })
     return (
         <div>
             <AdminBar nombrePage={"Asignar tutor"}/>
@@ -77,12 +158,12 @@ const AdminAsignarTutor = () => {
                         <Row>
                             <Col className="col-4">
                                
-                                <select value={semestre} onChange={(e) => {setSemestre(e.target.value); HallarAlumnosxCurso();}}className="form-select form-select-sm">
+                                <select id="drop"value={semestre} onChange={(e) => {setSemestre(e.target.value); HallarAlumnosxCurso(e.target.value);}}className="form-select form-select-sm">
                                     <option value="elija el semestre">elija el semestre</option>
                                     {
                                         listaSemestres.map((item, index) => (
                                             <option key={index} value={item}>{item}</option>
-                                        
+                                            
                                         ))
                                     }
                                 </select>
@@ -90,36 +171,98 @@ const AdminAsignarTutor = () => {
                         </Row>
                         <div className="TablaAsignarTutor">
                             <div className="col tableScrollAsignarTutor scrollAsignarTutor"> 
-                                    <table className="table table-bordered bg-light ">
-                                        <thead className="colTable"style={{backgroundColor:'#85b7e9'}}>
-                                            <tr >
-                                                <th>Nro</th>
-                                                <th>Codigos</th>
-                                                <th>Nombres y apellidos</th>
-                                                
-                                                
+                            <table className="table table-bordered bg-light ">
+                                        <thead className="colTable">
+                                            <tr>
+                                                <th>codigo Asignacion</th>
+                                                <th>Codigo tutor</th>
+                                                <th>Codigo Estudiante</th>
+                                                <th>EDITAR</th>
+                                              
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                            {data.map((estudiante,index)=>(
+                                                <tr key={index}>
+                                                    <td>{estudiante.IdAsignacion}</td>
+                                                    <td>{estudiante.CodDocente}</td>
+                                                    <td>{estudiante.CodEstudiante}</td>
+                                                    <td >
+                                                      < FaIcons.FaEdit className="editar" onClick={editar}/>
+                                                    </td>
+                                                </tr>
+                                            ))}                                        
                                         </tbody>
-                                    </table>
+                                        </table>
                                 </div>
                         </div>
-                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnSaveAT" onClick={comprobar}>Repartir de forma aleatoria </button>
-
+                    <button className="btnSaveAT" onClick={comprobar}>Repartir de forma aleatoria </button>
+                    <button className="btnNuevoAT"  onClick={()=>{peticionGetEstudiantes();peticionGetTutores();abrirCerrarModalInsertar()}}>Asignar manual Mente </button>
                     </div>
                 </div>
                 <Modal isOpen={warningView} centered>
 
                     <ModalHeader>
-                        <ImIcons.ImWarning />              Debe de elegir un semestre para poder usar esta opcion 
+                        <ImIcons.ImWarning />              Debe de elegir una opcion para poder usar esta opcion 
                     </ModalHeader>
                  
                     <ModalFooter>
                     <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
                     </ModalFooter>
                 </Modal>
+                <Modal
+            isOpen={modalInsertar}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            >
+               
+                <ModalHeader>Asignar</ModalHeader>
+                
+                <ModalBody>
+                  <Col>
+                    <Row>
+                        <Col className="col-4">
+                          <h6>Codigo Estudiante :</h6>
+                        </Col>
+                        <Col className="col-8">
+                          <select value={codEstudiante} onChange={(e) => {setCodEstudiante(e.target.value)}}className="form-select form-select-sm">
+                            <option value="codigo estudiante">codigo estudiante</option>
+                                  {
+                                        estudiantes.map((item, index) => (
+                                            <option key={index} value={item.CodEstudiante}>{item.CodEstudiante}----{item.Nombres} {item.ApPaterno},{item.ApMaterno} </option>
+                                            
+                                        ))
+                                    }
+                                </select>
+                          </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col className="col-4">
+                              <h6>Codigo Docente :</h6>
+                            </Col>
+                            <Col className="col-8">
+                              
+                              <select value={codDocente} onChange={(e) => {setCodDocente(e.target.value)}}className="form-select form-select-sm">
+                                      <option value="codigo docente">codigo docente</option>
+                                      {
+                                          tutoresList.map((item, index) => (
+                                              <option key={index} value={item.CodDocente}>{item.CodDocente}----{item.Nombres} {item.ApPaterno},{item.ApMaterno} </option>
+                                              
+                                          ))
+                                      }
+                                  </select>
+                          </Col>            
+                    </Row>
+                  </Col>
+
+                </ModalBody>
+                <ModalFooter>
+                        <button className="btnColoG" onClick={Insertarprueba}>Insertar</button>{""}
+                        <button className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
+                </ModalFooter>
+              </Modal>
             </div>
         </div>
     )

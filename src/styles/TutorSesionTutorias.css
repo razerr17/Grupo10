@@ -31,14 +31,15 @@
 .sesion {
   height: 150px;
   padding: 1%;
-  background: #e3e1e1;
+  margin-bottom: 2%;
+  background: #efefef;
 }
 .STbot {
-  margin-top: 3%;
   width: 96%;
   height: 70%;
   background: #e3e1e1;
   margin-left: 2%;
+  margin-top: 1%;
   padding: 1%;
 
   border-radius: 20px;
@@ -50,5 +51,4 @@
   height: 40px;
   margin-right: 40px;
   border-radius: 10px;
-  margin-bottom: 40px;
 }

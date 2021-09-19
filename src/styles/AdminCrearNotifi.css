@@ -1,8 +1,8 @@
 .frmNot {
   width: 900px;
-  height: 520px;
+  height: 480px;
   position: relative;
-  left: 14%;
+  left: 10%;
   background: #d9d9d9;
   border-radius: 20px;
   margin-top: 3%;
@@ -13,6 +13,6 @@
   border-radius: 10px;
   position: relative;
   left: 75%;
-  top: 6%;
+
   width: 200px;
 }
