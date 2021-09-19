@@ -70,7 +70,7 @@ const TutorSesionTutorias = (props) => {
       setSemestre(elemento.Periodo);
     });
   };
-  const baseUrlSesiones = `http://localhost:4000/sesiones/`;
+  const baseUrlSesiones = `http://localhost:4000/sesiones`;
   const peticionPost = async () => {
     await axios
       .post(baseUrlSesiones, {
@@ -82,7 +82,7 @@ const TutorSesionTutorias = (props) => {
         Observaciones: observaciones,
       })
       .then((response) => {
-        setData(data.concat(response.data));
+        setSesiones(sesiones.concat(response.data));
         limpiar();
         abrirCerrarModalInsertar();
       })
@@ -97,15 +97,13 @@ const TutorSesionTutorias = (props) => {
       .then((response) => {
         console.log(id);
         console.log(`http://localhost:4000/sesiones/ficha/${id}`);
-        setSesiones(response.data);
+        setSesiones(sesiones.concat(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
   };
   useEffect(() => {
-    peticionGet();
-    peticionSemestre();
     //peticionSesiones();
     if (!cookie.get("CodDocente")) {
       //props.history.push("/LoginAdministracion");
@@ -131,6 +129,7 @@ const TutorSesionTutorias = (props) => {
                 <select
                   class="form-select form-select-sm"
                   aria-label=".form-select-sm example"
+                  onClick = {(e) => peticionGet()}
                   onChange={(e) => {
                     setIdFichaTutoria(e.target.value);
                     peticionSesiones(e.target.value);
@@ -162,8 +161,12 @@ const TutorSesionTutorias = (props) => {
           </div>
           <div className="ContainerSTbtn">
             <button
+<<<<<<< Updated upstream
             style={{backgroundColor:'#000a25',color:'white'}}
               onClick={() => abrirCerrarModalInsertar()}
+=======
+              onClick={() => {peticionSemestre();abrirCerrarModalInsertar()}}
+>>>>>>> Stashed changes
               className="btnSTSave"
             >
               <b>Nueva Sesion</b>
@@ -324,7 +327,7 @@ const TutorSesionTutorias = (props) => {
           style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoG"
             onClick={() => {
-              peticionPost();;
+              peticionPost();
               peticionSesiones(idFichaTutoria);
             }}
           >
