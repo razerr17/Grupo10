@@ -107,8 +107,8 @@ const AdminPerfil = (props) => {
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                    <button className="btnColoG" >Insertar</button>{""}
-                    <button className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
+                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" >Insertar</button>{""}
+                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
                     </ModalFooter>
                 </Modal>
             </div>

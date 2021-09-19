@@ -198,7 +198,7 @@ const AdminEstudiantes = () => {
                         />
                                 </div>
                         </div>
-                    <button onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
+                    <button style={{backgroundColor:'#000a25',color:'white'}} onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
                     
                     <div class="input-group">
                        <input type="file"  className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"
@@ -258,8 +258,8 @@ const AdminEstudiantes = () => {
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                    <button className="btnColoG" onClick={()=>peticionPost()} >Insertar</button>{""}
-                    <button className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
+                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" onClick={()=>peticionPost()} >Insertar</button>{""}
+                    <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
                     </ModalFooter>
                 </Modal>
                 

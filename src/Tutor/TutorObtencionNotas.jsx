@@ -20,7 +20,7 @@ const TutorObtencionNotas = () => {
                 <input className="inputLarge" type="text" />
               </Col>
               <Col className="col-4">
-                <button className="btnSe">
+                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnSe">
                   <b>Buscar</b>
                 </button>
               </Col>
@@ -101,13 +101,13 @@ const TutorObtencionNotas = () => {
                 </div>
               </li>
             </ul>
-            <button className="btnAgre">
+            <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAgre">
               <div className="iconoAdd">
                 <b>+</b>
               </div>
             </button>
           </div>
-          <button className="btnGua">
+          <button style={{backgroundColor:'#000a25',color:'white'}} className="btnGua">
             <b>Guardar</b>
           </button>
         </div>

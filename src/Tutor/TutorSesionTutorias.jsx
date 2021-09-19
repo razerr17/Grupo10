@@ -108,7 +108,7 @@ const TutorSesionTutorias = (props) => {
     peticionSemestre();
     //peticionSesiones();
     if (!cookie.get("CodDocente")) {
-      props.history.push("/LoginAdministracion");
+      //props.history.push("/LoginAdministracion");
     }
   });
   const abrirCerrarModalInsertar = () => {
@@ -162,6 +162,7 @@ const TutorSesionTutorias = (props) => {
           </div>
           <div className="ContainerSTbtn">
             <button
+            style={{backgroundColor:'#000a25',color:'white'}}
               onClick={() => abrirCerrarModalInsertar()}
               className="btnSTSave"
             >
@@ -320,6 +321,7 @@ const TutorSesionTutorias = (props) => {
         </ModalBody>
         <ModalFooter>
           <button
+          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoG"
             onClick={() => {
               peticionPost();;
@@ -328,8 +330,10 @@ const TutorSesionTutorias = (props) => {
           >
             Insertar
           </button>
+          style={{backgroundColor:'#000a25',color:'white'}}
           {""}
           <button
+          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoC "
             onClick={() => abrirCerrarModalInsertar()}
           >

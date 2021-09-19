@@ -12,7 +12,7 @@ const AdminMenu = () => {
                     <div className="partTopMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -105,7 +105,7 @@ const AdminMenu = () => {
                     <div className="partBotMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

@@ -325,6 +325,7 @@ const AdminDocentes = () => {
               </div>
             </div>
             <button
+             style={{backgroundColor:'#000a25',color:'white'}}
               onClick={() => abrirCerrarModalInsertar()}
               className="btnAddEst"
             >
@@ -345,6 +346,7 @@ const AdminDocentes = () => {
                 }}
               />
               <button
+               style={{backgroundColor:'#000a25',color:'white'}}
                 className="btnImportar"
                 type="button"
                 id="inputGroupFileAddon04"
@@ -458,11 +460,12 @@ const AdminDocentes = () => {
               </div>
             </ModalBody>
             <ModalFooter>
-              <button className="btnColoG" onClick={() => peticionPost()}>
+              <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" onClick={() => peticionPost()}>
                 Insertar
               </button>
               {""}
               <button
+               style={{backgroundColor:'#000a25',color:'white'}}
                 className="btnColoC "
                 onClick={() => abrirCerrarModalInsertar()}
               >
@@ -550,11 +553,12 @@ const AdminDocentes = () => {
               </div>
             </ModalBody>
             <ModalFooter>
-              <button className="btnColoG" onClick={() => peticionPut()}>
+              <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" onClick={() => peticionPut()}>
                 Guardar
               </button>
               {""}
               <button
+               style={{backgroundColor:'#000a25',color:'white'}}
                 className="btnColoC "
                 onClick={() => abrirCerrarModalActualizar()}
               >

@@ -91,8 +91,8 @@ const AdminAsignarTutor = () => {
                         <div className="TablaAsignarTutor">
                             <div className="col tableScrollAsignarTutor scrollAsignarTutor"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead className="colTable">
-                                            <tr>
+                                        <thead className="colTable"style={{backgroundColor:'#85b7e9'}}>
+                                            <tr >
                                                 <th>Nro</th>
                                                 <th>Codigos</th>
                                                 <th>Nombres y apellidos</th>
@@ -106,7 +106,7 @@ const AdminAsignarTutor = () => {
                                     </table>
                                 </div>
                         </div>
-                    <button className="btnSaveAT" onClick={comprobar}>Repartir de forma aleatoria </button>
+                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnSaveAT" onClick={comprobar}>Repartir de forma aleatoria </button>
 
                     </div>
                 </div>

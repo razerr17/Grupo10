@@ -28,7 +28,7 @@ const AdminBar=(props)=>{
     return(
         <div className="all">
             
-            <div className="encabezado ">   
+            <div className="encabezado " style={{backgroundColor:'#fde052'}}>   
                 
                 <label className="nombre" for="check">
                     <h5>Bienvenido : {cookie.get('Nombres')}</h5>
@@ -38,7 +38,7 @@ const AdminBar=(props)=>{
                  <b>cerrar sesion</b>
                 </Link>
             </div>
-            <div className="sidebar">
+            <div className="sidebar" style={{backgroundColor:'#000a25'}}>
                 <div className="cabecera">
                     <img className="carrera" src="../logo.png" alt="" />
                     
@@ -50,25 +50,25 @@ const AdminBar=(props)=>{
                     <img className="perfil" src="../imagenes/admin.png" alt="" />      
     
                 </div>
-                <Link to="/Admin_Menu"  style={{ textDecoration: 'none' }} title="Inicio"><  RiIcons.RiNotification3Fill className="iconobar"/><span>Notificaciones</span></Link>
-                <Link to="/Admin_Horarios"  style={{ textDecoration: 'none' }} title="Horarios"><BsIcons.BsTable className="iconobar"/><span>Horarios de tutoria</span></Link>
-                <Link to="/Admin_Docentes_Tutores" style={{ textDecoration: 'none' }} title="Tutor Asignado"><GiIcons.GiTeacher className="iconobar"/><span>Docentes tutores</span></Link>
-                <Link to="/Admin_Ayudantes" style={{ textDecoration: 'none' }} title="Tutor Asignado"><FaIcons.FaChalkboardTeacher className="iconobar"/><span>Ayudantes de tutoria</span></Link>
-                <Link to="/Admin_Estudiantes_Riesgo" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><BsIcons.BsFillPersonDashFill className="iconobar"/><span>Estudiantes en riesgo</span></Link>
-                <Link to="/Admin_Consultar_Informes" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><CgIcons.CgPlayListSearch className="iconobar"/><span>Consultar informes</span></Link>
-                <Link to="/Admin_Crear_Notificacion" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><MdIcons.MdAddAlert className="iconobar"/><span>Crear Notificacion </span></Link>
+                <Link to="/Admin_Menu"  style={{ textDecoration: 'none',color:'white' }} title="Inicio"><  RiIcons.RiNotification3Fill style={{color:'orange'}}className="iconobar"/><span>Notificaciones</span></Link>
+                <Link to="/Admin_Horarios"  style={{ textDecoration: 'none' ,color:'white'}} title="Horarios"><BsIcons.BsTable style={{color:'orange'}}className="iconobar"/><span>Horarios de tutoria</span></Link>
+                <Link to="/Admin_Docentes_Tutores" style={{ textDecoration: 'none',color:'white' }} title="Tutor Asignado"><GiIcons.GiTeacher style={{color:'orange'}}className="iconobar"/><span>Docentes tutores</span></Link>
+                <Link to="/Admin_Ayudantes" style={{ textDecoration: 'none',color:'white' }} title="Tutor Asignado"><FaIcons.FaChalkboardTeacher style={{color:'orange'}}className="iconobar"/><span>Ayudantes de tutoria</span></Link>
+                <Link to="/Admin_Estudiantes_Riesgo" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><BsIcons.BsFillPersonDashFill style={{color:'orange'}}className="iconobar"/><span>Estudiantes en riesgo</span></Link>
+                <Link to="/Admin_Consultar_Informes" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><CgIcons.CgPlayListSearch style={{color:'orange'}}className="iconobar"/><span>Consultar informes</span></Link>
+                <Link to="/Admin_Crear_Notificacion" style={{ textDecoration: 'none' ,color:'white'}} title="Estudiantes Asignado"><MdIcons.MdAddAlert style={{color:'orange'}}className="iconobar"/><span>Crear Notificacion </span></Link>
                 
-                <Link to="/Admin_Asignar_Tutor" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><AiIcons.AiOutlineUserSwitch className="iconobar"/><span>Asignar tutor</span></Link>
+                <Link to="/Admin_Asignar_Tutor" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><AiIcons.AiOutlineUserSwitch style={{color:'orange'}} className="iconobar"/><span>Asignar tutor</span></Link>
 
                 <div className="linkEstudiantes">
-                      <Link to="/Admin_Estudiantes" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><FaIcons.FaUserFriends className="iconobar"/><span>Estudiantes</span></Link>
+                      <Link to="/Admin_Estudiantes" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><FaIcons.FaUserFriends  style={{color:'orange'}}className="iconobar"/><span>Estudiantes</span></Link>
                 </div>
                 <div className="linkDocentes">
-                      <Link to="/Admin_Docentes" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><FaIcons.FaUserTie className="iconobar"/><span>Docentes</span></Link>
+                      <Link to="/Admin_Docentes" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><FaIcons.FaUserTie  style={{color:'orange'}}className="iconobar"/><span>Docentes</span></Link>
                 </div>
                 <div className="linkPerfil">
-                      <Link to="/Admin_Perfil" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><BsIcons.BsPersonSquare className="iconobar"/><span>Perfil</span></Link>
-                </div>
+                      <Link to="/Admin_Perfil" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><BsIcons.BsPersonSquare  style={{color:'orange'}}className="iconobar"/><span>Perfil</span></Link>
+                </div> 
             </div>    
                   
         </div>

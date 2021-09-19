@@ -66,10 +66,10 @@ const LoginTutor = (props)=>{
                     </Link>
                 </div>
             <br />
-            <div className="Principal">  
+            <div className="Principal"   style={{backgroundColor:'white'}}>  
                 <div className="containerLogin">
                     <h2 className="title">Tutor</h2>
-                    <img className="lo"src="../imagenes/Tutor.JPG" alt=""/>
+                    <img className="lo"src="../imagenes/tutor2.jpg" style={{width:'300px'}}     alt=""/>
                     <hr />
                     <div className="form">
                         <label><b>Ingrese Usuario:</b> </label>
@@ -98,7 +98,7 @@ const LoginTutor = (props)=>{
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
-                            <button className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
+                            <button className="ingresar"  style={{backgroundColor:'#ffc107'}} onClick={comprobar} >Iniciar Sesión</button>
                         </Link>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ const LoginTutor = (props)=>{
                         <ImIcons.ImWarning />   La contraseña o el usuario no son correctos
                     </ModalHeader>
                     <ModalFooter>
-                    <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
+                    <ImIcons.ImCross  onClick={()=>abrirCerrarModalWarning()}/>
                     </ModalFooter>
                 </Modal>
             </div>

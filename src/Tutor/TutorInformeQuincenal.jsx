@@ -98,8 +98,8 @@ const TutorInformeQuincenal = () => {
                         </Col>
                         <div className="col scroll scrollBar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
-                                            <tr>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                            <tr >
                                                 <th>Nro</th>
                                                 <th>Curso</th>
                                                 <th>Estudiante</th>
@@ -195,7 +195,7 @@ const TutorInformeQuincenal = () => {
                     <div class="mt-3">
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
                                 </div>
-                                <button className="btnEnviarQuince"><b>Enviar</b></button>
+                                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnEnviarQuince"><b>Enviar</b></button>
                     </div>
                     
                     

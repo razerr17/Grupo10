@@ -23,7 +23,7 @@ const AdminEstudiantesRiesgo = () => {
                         <Col className="col-9">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                            <button className="btnBuscar" type="button" id="button-addon2"><b>Buscar</b></button>
+                            <button style={{backgroundColor:'#000a25',color:'white'}} className="btnBuscar" type="button" id="button-addon2"><b>Buscar</b></button>
                         </div>
                         </Col>
    
@@ -31,7 +31,7 @@ const AdminEstudiantesRiesgo = () => {
                     <div className="TablaEstRies">
                     <div className="col tableScrollEstRies scrollEstRies"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

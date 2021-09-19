@@ -11,7 +11,7 @@ const TutorEstudiantesAyudantes = () => {
                         <label className="lblBuscar"> <b>Buscar estudiante ayudante :</b></label>
                         <div className="input-group mb-3">
                             <input type="text" className="form-control" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" aria-describedby="button-addon2"/>
-                            <button className="btnBuscarNombre" type="button" id="button-addon2">
+                            <button className="btnBuscarNombre" type="button" id="button-addon2" style={{backgroundColor:'#000a25',color:'white'}}>
                                 <b>Buscar</b>
                                 <AiIcons.AiOutlineFileSearch className="IconoBuscar"/>
                             </button>
@@ -19,8 +19,8 @@ const TutorEstudiantesAyudantes = () => {
                     </div>  
                     <div className="bots">
                     <div className="col table-scroll scrollbar"> 
-                                    <table className="table table-bordered bg-light ">
-                                        <thead>
+                                    <table  className="table table-bordered bg-light ">
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

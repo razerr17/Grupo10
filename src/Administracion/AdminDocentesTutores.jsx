@@ -43,7 +43,7 @@ const AdminDocentesTutores = () => {
                     <div className="TablaDT">
                     <div className="col tableScrollDT scrollDT"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead className="colTable">
+                                        <thead style={{backgroundColor:'#85b7e9'}} className="colTable">
                                             <tr>
                                                 <th>CodDocente</th>
                                                 <th>DNI</th>

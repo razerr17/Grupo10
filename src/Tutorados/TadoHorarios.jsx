@@ -14,7 +14,7 @@ const TadoHorarios = () => {
                            <div className=""><b>Lista de horarios disponibles del su tutor :</b></div>
                             <div className="col table-wrapper-scroll my-scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -112,7 +112,7 @@ const TadoHorarios = () => {
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
-                                <button className="btnSeleccionar"> <b>Seleccionar</b></button>
+                                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnSeleccionar"> <b>Seleccionar</b></button>
                             </div>
                         </Col>
                     </Row>
