@@ -64,7 +64,7 @@ const LoginTutorados = (props) => {
                     </Link>
                 </div>
             <br />
-            <div className="Principal" style={{backgroundColor:'white'}}>  
+            <div className="Principal">  
                 <div className="containerLogin">
                     <h2 className="title">Tutorado</h2>
                     <img className="lo"src="../imagenes/Tutorado.JPG" alt=""/>
@@ -99,7 +99,7 @@ const LoginTutorados = (props) => {
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
-                            <button style={{backgroundColor:'#ffc107'}} className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
+                            <button className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
                         </Link>
                     </div>
                 </div>

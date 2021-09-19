@@ -53,7 +53,7 @@ const TadoTutorAsignado = () => {
                         </div>
                     </div>
                     <div >
-                        <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnCambiarTutor"><b>Enviar</b></button>
+                        <button className="btnCambiarTutor"><b>Enviar</b></button>
                     </div>
                 </div>
             </div>

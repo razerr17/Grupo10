@@ -42,8 +42,7 @@ const AdminCrearNotifi = () => {
                                     <label for="exampleFormControlTextarea1" class="form-label"><b>Descripcion :</b></label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                                 </div>
-                                <button  style={{backgroundColor:'#000a25',color:'white'}}
-                                className="btnSend">
+                                <button className="btnSend">
                                     Enviar
                                 </button>
                             </form>

@@ -15,7 +15,7 @@ const TadoMenu = () => {
                     <div className="partTopMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

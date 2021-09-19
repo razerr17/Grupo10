@@ -12,7 +12,7 @@ const TutorEstudiantesCargo = () => {
                         <label className="lblBuscar"> <b>Buscar estudiante (tutorado) :</b></label>
                         <div className="input-group mb-3">
                             <input type="text" className="form-control" placeholder="Ingrese nombre" aria-label="Ingrese Nombre" aria-describedby="button-addon2"/>
-                            <button className="btnBuscarNombre" type="button" id="button-addon2"style={{backgroundColor:'#000a25',color:'white'}}>
+                            <button className="btnBuscarNombre" type="button" id="button-addon2">
                                 <b>Buscar</b>
                                 <AiIcons.AiOutlineFileSearch className="IconoBuscar"/>
                             </button>
@@ -20,8 +20,8 @@ const TutorEstudiantesCargo = () => {
                     </div>  
                     <div className="bots">
                     <div className="col table-scroll scrollbar"> 
-                                    <table className="table table-bordered bg-light " >
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                    <table className="table table-bordered bg-light ">
+                                        <thead>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

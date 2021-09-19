@@ -59,7 +59,7 @@ const TutorPerfil = (props) => {
 
                                 </Col>
                             </Row>
-                            <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnEditar">
+                            <button className="btnEditar">
                                 Editar
                                 <BiIcons.BiEdit className="iconSave"/>
                             </button>

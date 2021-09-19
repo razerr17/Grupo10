@@ -42,7 +42,7 @@ const AdminMenu = () => {
                     <div className="TablaAyu">
                     <div className="col tableScrollAyu scrollAyu"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

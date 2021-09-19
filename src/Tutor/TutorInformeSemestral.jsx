@@ -28,7 +28,7 @@ const TutorInformeSemestral = () => {
                        </Row>
                        <div className=" alt altur">
                             <table class=" table-bordered anchotab ">
-                                    <thead style={{backgroundColor:'#85b7e9'}}>
+                                    <thead>
                                         <tr>
                                         <th scope="col-6">Indicador</th>
                                         <th scope="col-3">Cantidad</th>
@@ -84,7 +84,7 @@ const TutorInformeSemestral = () => {
                                 </select>
                                 </Col >
                                 <Col className="col-2">
-                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
+                                    <button className="btnAdd">
                                         Añadir
                                     </button>
                                 </Col>
@@ -92,7 +92,79 @@ const TutorInformeSemestral = () => {
                         </Col>
                         <div className="col tableScrollSe alt"> 
                                     <table className="bg-light anchotab ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead>
+                                            <tr>
+                                                <th>Nro</th>
+                                                <th>Curso</th>
+                                                <th>Estudiante</th>
+                                                <th>Detalles</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>NUCLEO</td>
+                                                <td>1200.00</td>
+                                                <td><button>ver</button></td>
+                                            
+                                            </tr>
+                                            <tr>
+                                            <td>1</td>
+                                                <td>NUCLEO</td>
+                                                <td>1200.00</td>
+                                                <td><button>ver</button></td>
+                                            </tr>
+                                            <tr>
+                                            <td>1</td>
+                                                <td>NUCLEO</td>
+                                                <td>1200.00</td>
+                                                <td><button>ver</button></td>
+                                            </tr>
+                                            <tr>
+                                            <td>1</td>
+                                                <td>NUCLEO</td>
+                                                <td>1200.00</td>
+                                                <td><button>ver</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>NUCLEO</td>
+                                                <td>1200.00</td>
+                                                <td><button>ver</button></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                    </div>
+                    <div className=" part3Info">
+                    <Col>
+                            <Row>
+                                <h6>Casos de Tutoria que implican mas de dos sesiones</h6>
+                            </Row>
+                            <Row>
+                                <Col className="col-2">
+                                   <b>Tutorado :</b>
+                                </Col>
+                                <Col className="col-8">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                </Col >
+                                <Col className="col-2">
+                                    <button className="btnAdd">
+                                        Añadir
+                                    </button>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <div className="col tableScrollSe alt"> 
+                                    <table className="bg-light anchotab ">
+                                        <thead>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -131,78 +203,6 @@ const TutorInformeSemestral = () => {
                                                 <td>1</td>
                                                 <td>NUCLEO</td>
                                                 <td>1200.00</td>
-                                                <td><button >ver</button></td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                    </div>
-                    <div className=" part3Info">
-                    <Col>
-                            <Row>
-                                <h6>Casos de Tutoria que implican mas de dos sesiones</h6>
-                            </Row>
-                            <Row>
-                                <Col className="col-2">
-                                   <b>Tutorado :</b>
-                                </Col>
-                                <Col className="col-8">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                </Col >
-                                <Col className="col-2">
-                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
-                                        Añadir
-                                    </button>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <div className="col tableScrollSe alt"> 
-                                    <table className="bg-light anchotab ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
-                                            <tr>
-                                                <th>Nro</th>
-                                                <th>Curso</th>
-                                                <th>Estudiante</th>
-                                                <th>Detalles</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button >ver</button></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
-                                                <td><button>ver</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>NUCLEO</td>
-                                                <td>1200.00</td>
                                                 <td><button>ver</button></td>
                                             </tr>
                                             
@@ -210,7 +210,7 @@ const TutorInformeSemestral = () => {
                                     </table>
                                 </div>
                     </div>
-                    <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnEnviar">
+                    <button className="btnEnviar">
                         Enviar
                     </button>
                 </div>

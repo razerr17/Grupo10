@@ -13,7 +13,7 @@ const TadoEstudianteAsignado = () => {
                    <div className="partTop">
                    <div className="col table-wrapper-scroll-y my-custom-scrollbar"> 
                                 <table className="table table-bordered bg-light ">
-                                    <thead style={{backgroundColor:'#85b7e9'}} className="bg-warning">
+                                    <thead className="bg-warning">
                                         <tr>
                                             <th>Nro</th>
                                             <th>Curso</th>

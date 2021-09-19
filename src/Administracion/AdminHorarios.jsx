@@ -51,13 +51,13 @@ const AdminHorarios = () => {
                                 <div>
                                     <textarea className="inputHor" type="text" />
                                 </div>
-                                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnGuar"><b>Guardar</b></button>
+                                <button className="btnGuar"><b>Guardar</b></button>
                            </Col>
                        </Row>
                        <div className="Tabla">
                        <div className="col tableScroll scro"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
