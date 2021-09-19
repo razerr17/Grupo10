@@ -161,6 +161,7 @@ const TutorSesionTutorias = (props) => {
           </div>
           <div className="ContainerSTbtn">
             <button
+            style={{backgroundColor:'#000a25',color:'white'}}
               onClick={() => {peticionSemestre();abrirCerrarModalInsertar()}}
               className="btnSTSave"
             >
@@ -319,6 +320,7 @@ const TutorSesionTutorias = (props) => {
         </ModalBody>
         <ModalFooter>
           <button
+          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoG"
             onClick={() => {
               peticionPost();
@@ -327,8 +329,10 @@ const TutorSesionTutorias = (props) => {
           >
             Insertar
           </button>
+          style={{backgroundColor:'#000a25',color:'white'}}
           {""}
           <button
+          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoC "
             onClick={() => abrirCerrarModalInsertar()}
           >

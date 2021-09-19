@@ -1,4 +1,4 @@
-import React from 'react'
+    import React from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
 import * as ImIcons from "react-icons/im"
@@ -66,7 +66,7 @@ const LoginTutor = (props)=>{
                     </Link>
                 </div>
             <br />
-            <div className="Principal">  
+            <div className="Principal"   style={{backgroundColor:'white'}}>  
                 <div className="containerLogin">
                     <h2 className="title">Tutor</h2>
                     <img className="lo"src="../imagenes/Tutor.JPG" alt=""/>

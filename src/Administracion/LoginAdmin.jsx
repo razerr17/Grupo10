@@ -67,7 +67,7 @@ const LoginAdmin = (props)=>{
                     </Link>
                 </div>
             <br />
-            <div className="Principal">  
+            <div className="Principal" style={{backgroundColor:'white'}}>  
                 <div className="containerLogin">
                     <h2 className="title">Administracion</h2>
                     <img className="lo"src="../imagenes/Administracion.JPG" alt=""/>

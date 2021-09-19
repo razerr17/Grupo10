@@ -28,7 +28,7 @@ const TutorInformeSemestral = () => {
                        </Row>
                        <div className=" alt altur">
                             <table class=" table-bordered anchotab ">
-                                    <thead>
+                                    <thead style={{backgroundColor:'#85b7e9'}}>
                                         <tr>
                                         <th scope="col-6">Indicador</th>
                                         <th scope="col-3">Cantidad</th>
@@ -84,7 +84,7 @@ const TutorInformeSemestral = () => {
                                 </select>
                                 </Col >
                                 <Col className="col-2">
-                                    <button className="btnAdd">
+                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
                                         Añadir
                                     </button>
                                 </Col>
@@ -92,7 +92,7 @@ const TutorInformeSemestral = () => {
                         </Col>
                         <div className="col tableScrollSe alt"> 
                                     <table className="bg-light anchotab ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -131,7 +131,7 @@ const TutorInformeSemestral = () => {
                                                 <td>1</td>
                                                 <td>NUCLEO</td>
                                                 <td>1200.00</td>
-                                                <td><button>ver</button></td>
+                                                <td><button >ver</button></td>
                                             </tr>
                                             
                                         </tbody>
@@ -156,7 +156,7 @@ const TutorInformeSemestral = () => {
                                 </select>
                                 </Col >
                                 <Col className="col-2">
-                                    <button className="btnAdd">
+                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
                                         Añadir
                                     </button>
                                 </Col>
@@ -164,7 +164,7 @@ const TutorInformeSemestral = () => {
                         </Col>
                         <div className="col tableScrollSe alt"> 
                                     <table className="bg-light anchotab ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -178,7 +178,7 @@ const TutorInformeSemestral = () => {
                                                 <td>1</td>
                                                 <td>NUCLEO</td>
                                                 <td>1200.00</td>
-                                                <td><button>ver</button></td>
+                                                <td><button >ver</button></td>
                                             
                                             </tr>
                                             <tr>
@@ -210,7 +210,7 @@ const TutorInformeSemestral = () => {
                                     </table>
                                 </div>
                     </div>
-                    <button className="btnEnviar">
+                    <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnEnviar">
                         Enviar
                     </button>
                 </div>

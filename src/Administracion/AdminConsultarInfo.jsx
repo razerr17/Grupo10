@@ -54,7 +54,7 @@ const AdminConsultarInfo = () => {
                    <div className="TablaConsultarInfo">
                     <div className="col tableScrollConsultarInfo scrollConsultarInfo"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
