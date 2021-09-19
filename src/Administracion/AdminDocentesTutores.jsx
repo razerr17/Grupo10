@@ -2,7 +2,7 @@ import React from 'react'
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import AdminBar from '../Administracion/AdminBar'
-import {Col,Row} from 'react-bootstrap'
+
 import '../styles/AdminDocentes.css'
 
 const AdminDocentesTutores = () => {
@@ -25,21 +25,7 @@ const AdminDocentesTutores = () => {
             <AdminBar  nombrePage={"Docentes tutores"}/>
             <div className="contenido">
                 <div className="Principal2">
-                    <div className="datTop">
-                            <Row  >
-                                <Col className="col-3">
-                                    <b>Semestre :</b>
-                                </Col>
-                                <Col className="col-8">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                </Col>
-                            </Row>
-                    </div>
+                    <br />
                     <div className="TablaDT">
                     <div className="col tableScrollDT scrollDT"> 
                                     <table className="table table-bordered bg-light ">

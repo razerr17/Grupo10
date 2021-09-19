@@ -11,7 +11,7 @@ const AdminCrearNotifi = () => {
                     <div className="cont"> 
                         <h4>Seleccione tipo de notificacion : </h4>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>Open this select menu</option>
+                                 <option selected>Open this select menu</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>

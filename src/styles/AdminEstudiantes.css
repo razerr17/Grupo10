@@ -10,7 +10,7 @@
 }
 .TablaEstudiante {
   height: 73%;
-  margin: 2%;
+  margin: 1%;
 }
 .btnAddEst {
   background: #ed9b40;
@@ -27,4 +27,22 @@
 .anchoMo {
   width: 800px;
   background: black;
+}
+.tableScrollE {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  margin-top: 0%;
+  width: 100%;
+  border-radius: 10px;
+}
+.scrollE {
+  display: block;
+}
+.TablaE {
+  height: 80%;
+  margin-bottom: 0.5%;
+  background: #d9d9d9;
+  border-radius: 20px;
+  padding: 0.5%;
 }

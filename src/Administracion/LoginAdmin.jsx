@@ -26,7 +26,7 @@ const LoginAdmin = (props)=>{
         }).then(response=>{
             if(response.length>0){
                 var respuesta=response[0];
-                cookies.set('CodDocente',respuesta.CodDocente,{path:'/'});
+                cookies.set('CodAdmin',respuesta.CodDocente,{path:'/'});
                 cookies.set('Nombres',respuesta.Nombres,{path:'/'});
                 cookies.set('ApPaterno',respuesta.ApPaterno,{path:'/'});
                 cookies.set('ApMaterno',respuesta.ApMaterno,{path:'/'});
@@ -55,7 +55,7 @@ const LoginAdmin = (props)=>{
         }
     }
     useEffect(()=>{
-        if(cookies.get('CodDocente')){
+        if(cookies.get('CodAdmin')){
             props.history.push('/Admin_Menu');
         }
     })

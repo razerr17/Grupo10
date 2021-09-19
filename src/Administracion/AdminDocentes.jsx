@@ -7,7 +7,7 @@ import axios from 'axios';
 import * as ImIcons from "react-icons/im"
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
 import MaterialTable from "material-table";
-
+import '../styles/AdminEstudiantes.css'
 import Edit from '@material-ui/icons/Edit';
 
 const columnas = [
@@ -84,6 +84,7 @@ const AdminDocentes = () => {
         const[codDocente,setCodDocente]=useState('')
         const[nombres,setNombres]=useState('')
         const[dni,setDni]=useState('')
+        const [validate,setValidate]=useState([]);
         const[apPaterno,setApPaterno]=useState('')
         const[apMaterno,setApMaterno]=useState('')
         const[categoria,setCategoria]=useState('')
@@ -155,14 +156,37 @@ const AdminDocentes = () => {
           })
         }
         const peticionPost=async()=>{
-          if(!codDocente.trim()||!nombres.trim()||!dni.trim()||!apPaterno.trim()||!apMaterno.trim()||!celular.trim()||!email.trim()||!direccion.trim()||!esTutor.trim()){
-              setWarningview(true)
-              return
-          }     
-          if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000)|| !(parseInt(dni)<=99999999 && parseInt(dni)>=10000000)){
-              setWarningview(true)
-              return
-          }
+          var a = [];
+        if(!codDocente.trim()){
+          a.push('Codigo docente |')
+        }
+        if(!nombres.trim()){
+          a.push(' nombres |')
+        }
+        if(!apPaterno.trim()){
+          a.push(' apellido paterno  |')
+        }
+        if(!apMaterno.trim()){
+          a.push(' apellido materno  |')
+        }
+        if(!email.trim()){
+          a.push(' email  |')
+        }
+        if(!direccion.trim()){
+          a.push(' direccion |')
+        }
+        if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000) ||!celular.trim()){
+          a.push(' celular |')
+        }
+        if( !(parseInt(dni)<=99999999 && parseInt(dni)>=10000000)||!dni.trim()){
+          a.push(' dni ')
+        }
+        setValidate(a)
+        if(a.length>0){
+          setWarningview(true)
+          return
+        }
+  
           await axios.post(baseUrl,{
               CodDocente:codDocente,
               Nombres:nombres,
@@ -184,14 +208,7 @@ const AdminDocentes = () => {
           })
         }
         const peticionPut=async()=>{
-          if(!categoria.trim()||!email.trim()||!celular.trim()||!direccion.trim()||!esTutor.trim()){
-            setWarningview(true)
-            return
-          }     
-          if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000)|| !(parseInt(dni)<=99999999 && parseInt(dni)>=10000000)){
-            setWarningview(true)
-            return
-          }
+          
           await axios.put(baseUrl+`/${codDocente}`,{
             CodDocente:codDocente,
             Categoria:categoria,
@@ -256,8 +273,8 @@ const AdminDocentes = () => {
                 <div className="Principal2">
                 <div className="cont">
                        <h5>Lista de docentes:</h5>
-                        <div className="TablaDT">
-                        <div className="col tableScrollDT scrollDT"> 
+                        <div className="TablaE">
+                        <div className="col tableScrollE scrollE"> 
                             <MaterialTable
                               fixedHeader={true}
                              columns={columnas} 
@@ -351,7 +368,10 @@ const AdminDocentes = () => {
                             <input type="text" className="form-control" name="direccion" onChange={(e)=>setDireccion(e.target.value)}/>
                             <br/>
                             <label htmlFor="">Es Tutor:</label>
-                            <input type="text" className="form-control" name="esTutor" onChange={(e)=>setEsTutor(e.target.value)}/>
+                            <select class="form-select"  id="esTutor" name="esTutor" value={esTutor} onChange={ (e) => setEsTutor(e.target.value)}>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
                             </Col>
                         </Row>
                                          
@@ -363,7 +383,6 @@ const AdminDocentes = () => {
                     <button className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
                     </ModalFooter>
                 </Modal>
-
                 <Modal isOpen={modalActualizar} size="lg">
                     <ModalHeader>Actualizar datos de docente</ModalHeader>
                     <ModalBody>
@@ -372,19 +391,19 @@ const AdminDocentes = () => {
                             <Col>
                             <label>Codigo: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="IDEstudiante" value={codDocente} onChange={ (e) => setCodDocente(e.target.value)} readonly/>
+                            <input readonly=""  type="text" className="form-control" name="IDEstudiante" value={codDocente} onChange={ (e) => setCodDocente(e.target.value)}/>
                             <br/>
                             <label>Nombres: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="Nombres" value={nombres} onChange={ (e) => setNombres(e.target.value)} readonly/>
+                            <input readonly="" type="text" className="form-control" name="Nombres" value={nombres} onChange={ (e) => setNombres(e.target.value)} />
                             <br/>
                             <label>Apellido Paterno: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="ApPaterno" value={apPaterno} onChange={ (e) => setApPaterno(e.target.value)} readonly/>
+                            <input readonly="" type="text" className="form-control" name="ApPaterno" value={apPaterno} onChange={ (e) => setApPaterno(e.target.value)} />
                             <br/>
                             <label>Apellido Materno: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="ApMaterno"  value={apMaterno} onChange={ (e) => setApMaterno(e.target.value)} readonly/>
+                            <input readonly="" type="text" className="form-control" name="ApMaterno"  value={apMaterno} onChange={ (e) => setApMaterno(e.target.value)}/>
                             <br/>
                             </Col>
                             <Col>
@@ -397,7 +416,10 @@ const AdminDocentes = () => {
                             </select>
                             <br/>
                             <label htmlFor="">Es Tutor:</label>
-                            <input type="text" className="form-control" name="esTutor" value={esTutor} onChange={(e)=>setEsTutor(e.target.value)}/>
+                            <select class="form-select"  id="esTutor" name="esTutor" value={esTutor} onChange={ (e) => setEsTutor(e.target.value)}>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
                             </Col>
                         </Row>
                     </div>
@@ -410,13 +432,15 @@ const AdminDocentes = () => {
                 <Modal isOpen={warningView} centered>
 
                     <ModalHeader>
-                        <ImIcons.ImWarning />               Debe de llenar el formulario correctamente 
+                        <ImIcons.ImWarning />            el/los campo(s) : {validate} no esta(n) correctamente llenado(s) 
                     </ModalHeader>
                  
                     <ModalFooter>
                     <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
                     </ModalFooter>
-                </Modal>
+                </Modal>               
+                
+               
                 </div>
                 
 

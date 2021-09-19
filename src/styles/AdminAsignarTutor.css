@@ -8,12 +8,33 @@
 .scrollAsignarTutor {
   display: block;
 }
+.editar {
+  position: relative;
+  left: 45%;
+  width: 18px;
+  height: 18px;
+}
 .TablaAsignarTutor {
   height: 80%;
   margin-top: 1%;
   margin-bottom: 1%;
   padding: 1%;
   background: #efefef;
+  border-radius: 10px;
+}
+.TablaAsignarTutorIN {
+  height: 200px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%;
+  background: #efefef;
+  border-radius: 10px;
+}
+.tableScrollAsignarTutorIN {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
   border-radius: 10px;
 }
 .inpuT {
@@ -25,4 +46,10 @@
   width: 300px;
   height: 40px;
   float: right;
+}
+.btnNuevoAT {
+  background: #ed9b40;
+  border-radius: 20px;
+  width: 300px;
+  height: 40px;
 }
