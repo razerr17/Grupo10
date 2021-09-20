@@ -126,7 +126,7 @@ CREATE TABLE TSesionTutoria
 	TipoTutoria VARCHAR(15) NOT NULL,
 	Semestre VARCHAR(7) NOT NULL,
 	Descripcion VARCHAR(50) NOT NULL,
-	Observaciones VARCHAR(100) NOT NULL,
+	Observaciones Varchar(100) NOT NULL,
 	-- Determinar las claves 
 	PRIMARY KEY (IdSesion),
 	FOREIGN KEY (IdFichaTutoria) REFERENCES TFichaTutoria,
@@ -245,37 +245,29 @@ CREATE TABLE TLogin
 )
 use BDSistema_Tutorias
 go
+CREATE TABLE TConfidencialidad
+(
+	IdConf int IDENTITY(1,1) PRIMARY KEY,
+	CodEstudiante tyCodEstudiante,
+	TerminosConf varchar(2) check (TerminosConf like 'Si' or TerminosConf like 'No'),
+	FOREIGN KEY(CodEstudiante) REFERENCES TEstudiante,
+)
+go--drop table TConfidencialidad
+CREATE TABLE TObsEnc
+(
+	IdObs int IDENTITY(1,1) PRIMARY KEY,
+	IdSesion varchar(5),
+	ObserEnc varbinary(100),
+	FOREIGN KEY(IdSesion) REFERENCES TSesionTutoria,
+)
+go--drop table TTObsEnc
 /* *************************** Fotos Perfil *************************** */
 CREATE TABLE TFotosPerfil
 (
 	IdFotoPerfil int IDENTITY(1,1) PRIMARY KEY,
 	Correo varchar(50) NOT NULL,
-	Foto varchar(90) NULL default './imagenes/FondoTadoPerfil.JPG'
+	Foto varchar(1000) NULL default './imagenes/FondoTadoPerfil.JPG'
 )
-go
-CREATE TABLE TConfidencialidad
-(
-	IdConfidencialidad int IDENTITY(1,1) PRIMARY KEY,
-	Descripcion varchar(500) not null,
-	CodEstudiante tyCodEstudiante,
-	CodDocente tyCodDocente,
-	IdSesion VARCHAR(5) NOT NULL,
-	FOREIGN KEY(CodEstudiante) REFERENCES TEstudiante,
-	FOREIGN KEY (CodDocente) REFERENCES TDocente,
-	FOREIGN KEY (IdSesion) REFERENCES TSesionTutoria
-)
-go
-CREATE TABLE TNotificacion
-(
-	IdNotificacion int IDENTITY(1,1) PRIMARY KEY,
-	Direccion varchar(2) check (Direccion like 'ET' or Direccion like 'TE' or Direccion like 'CE' or Direccion like 'EC' or Direccion like 'TC' or Direccion like 'CT'),
-	CodEstudiante varchar(6),
-	CodDocente varchar(6),
-	CodCoordinador varchar(6),
-	Estado varchar(2) check (Estado like 'ACEPTADO' or Estado like 'RECHAZADO' or Estado like 'NO VISTO'),
-	Cantidad int default 0,
-	Tipo varchar(2)
-)--drop table TNotificacion--drop table TConfidencialidad
 go
 use BDSistema_Tutorias
 go
@@ -389,7 +381,7 @@ as
 	else
 		PRINT('Error,usuario no encontrado')
 Go
---drop proc spuVerificacionLoginDocente
+--drop proc spuVerificacionLoginCoordinador
 create procedure spuVerificacionLoginCoordinador @UsuarioOut varchar(50),@ContraseniaOut varchar(50)
 as
 	declare @ContraseniaIn varbinary(max)
@@ -406,6 +398,24 @@ as
 	else
 		PRINT('Error,usuario no encontrado')
 Go
+--CAmbio de Contraseña
+create procedure spuCambioContraseniaGeneral @Usuario varchar(50),@ContraseniaAnt varchar(50),@ContraseniaNew varchar(50)
+as
+	declare @ContraseniaIn varbinary(max)
+	set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@Usuario)
+	if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaAnt, @ContraseniaIn) = 1)>0
+		begin
+			update TLogin
+			 set Contrasenia=PWDENCRYPT(@ContraseniaNew)
+			 where Usuario=@Usuario
+		end
+	else
+	begin
+		declare @Boolean varchar(50)
+		set @Boolean='Contrasenia Incorrecta'
+		select Boolean=@Boolean
+	end
+Go--drop procedure spuCambioContraseniaGeneral
 -- Generar Codigo
 create procedure spuCodigoFicha @IdFicha varchar(8) OUTPUT
 as begin
@@ -514,7 +524,7 @@ end
 go
 --drop trigger TRInsertFotoEstudiante
 create procedure spuUpdateFotoPerfil @Correo varchar(50),
-					  @Foto varchar(90)
+					  @Foto varchar(1000)
 as 
 begin
 	update TFotosPerfil
@@ -523,6 +533,74 @@ begin
 end;
 go
 --drop proc spuVerificacionLoginCoordinador
+-- Confidencialidad
+create trigger TRCrearConfidencialidad on TEstudiante For Insert
+as
+begin
+	declare @CodEstudiante varchar(6)
+	set @CodEstudiante=(select CodEstudiante from inserted)
+	insert into TConfidencialidad (CodEstudiante,TerminosConf)values(@CodEstudiante,'No')
+end
+go
+create procedure spuUpdateConfidencialidad @CodEstudiante varchar(6),@TerminosConf varchar(2)
+as 
+begin
+	update TConfidencialidad
+		set TerminosConf=@TerminosConf
+		where CodEstudiante=@CodEstudiante
+end;--drop procedure spuUpdateConfidencialida
+go
+CREATE trigger TREncriptarObservaciones on TSesionTutoria for insert
+as
+begin
+	declare @ObserEnc as VarBinary (100),@Observaciones varchar(100),@IdSesion varchar(6)
+	set @IdSesion=(select IdSesion from inserted)
+	set @Observaciones=(select Observaciones from inserted)
+	set @ObserEnc=ENCRYPTBYPASSPHRASE('Key001',@Observaciones)
+	insert into TObsEnc values(@IdSesion,@ObserEnc)
+	print(@ObserEnc)
+	update TSesionTutoria
+		set Observaciones='Datos Encriptados'
+		where IdSesion=@IdSesion
+end
+go--drop trigger TREncriptarObservaciones
+CREATE PROCEDURE spuDevolverObservaciones @IdSesion VARCHAR(5)
+as
+begin
+	declare @CodEstudiante varchar(6),@Term varchar(2)
+	select F.IdAsignacion 
+	into #T1
+	from TSesionTutoria  S inner join TFichaTutoria F on S.IdFichaTutoria=F.IdFichaTutoria where S.IdSesion=@IdSesion
+	set @CodEstudiante=(select CodEstudiante from #T1 T inner join TAsignacion A on T.IdAsignacion=A.IdAsignacion)
+	set @Term=(select TerminosConf from TConfidencialidad where CodEstudiante=@CodEstudiante)
+	if (@Term='Si')
+	begin
+		print('Entre')
+		declare @Obb as varchar(100)
+		set @Obb=DECRYPTBYPASSPHRASE('Key001',(select T.ObserEnc from TObsEnc T where IdSesion=@IdSesion))
+		select Observacion=@Obb
+	end
+end
+go--drop procedure spuDevolverObservaciones
+CREATE PROCEDURE spuGetConfidencialidad @CodEstudiante VARCHAR(6)
+as
+begin
+	declare @Term varchar(2)
+	set @Term=(select TerminosConf from TConfidencialidad where CodEstudiante=@CodEstudiante)
+	if (@Term='Si')
+	begin
+		select Boolean=@Term 
+	end
+end
+go--drop procedure spuGetConfidencialidad
+CREATE PROCEDURE spuGetTutorByEstudiante @CodEstudiante VARCHAR(6)
+as
+begin
+	declare @CodDocente varchar(7) 
+	set @CodDocente=(select CodDocente from TAsignacion where CodEstudiante=@CodEstudiante)
+	select * from TDocente where CodDocente=@CodDocente
+end
+go--drop procedure spuGetTutorByEstudiante
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-II')
 INSERT INTO TEstudiante VALUES ('160889','FIORELLA SILVIA','CHOQUE', 'BUENO','160889@unsaac.edu.pe','P3','956897456','2020-II')

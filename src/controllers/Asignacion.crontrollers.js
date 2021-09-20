@@ -62,3 +62,16 @@ export const addListAsignacion=async (req,res)=>{
         res.status(500);
         res.send(error.message);}
 };
+export const getTutorByCodEstudiante=async (req,res)=>{
+    try{
+        const { CodEstudiante}=req.params;
+        const pool=await getConnection();
+        const result=await pool.request().input("CodEstudiante",sql.VarChar,CodEstudiante)
+        .query(queries.getTutorByCodEstudiante);
+        console.log('getTutorByCodEstudiante',CodEstudiante);  
+        res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
