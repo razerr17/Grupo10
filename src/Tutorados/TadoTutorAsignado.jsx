@@ -30,22 +30,30 @@ const TadoTutorAsignado = () => {
         await axios.get(baseUrl+`/${cookie.get('CodEstudiante')}`)
         .then(response=>{
             setData(response.data)
+            if(response.data>0){
+                console.log(response.data[0].Email)
+                peticionGet(response.data[0].Email);
+            }
+            else{
+                console.log("no tiene tutor p pulpin")
+                setDireccionUrl([{Foto:"./imagenes/perfil_blanco.png"}])
+            }
+            
         }).catch(error=>{
             console.log(error)
         })
     }
-    const peticionGet=async()=>{
-        await axios.get(baseUrlFoto+`/${data[0].Email}`)
+    const peticionGet=async(email)=>{
+        await axios.get(baseUrlFoto+`/${email}`)
       .then(response=>{
         setDireccionUrl(response.data);
+        
       }).catch(error=>{
         console.log(error);
       })
     }
     useEffect(()=>{
-        
-        peticionGetDatos();
-        peticionGet();
+        peticionGetDatos();        
     })
     return (
         <div>
