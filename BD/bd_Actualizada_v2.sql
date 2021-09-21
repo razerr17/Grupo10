@@ -266,7 +266,7 @@ CREATE TABLE TFotosPerfil
 (
 	IdFotoPerfil int IDENTITY(1,1) PRIMARY KEY,
 	Correo varchar(50) NOT NULL,
-	Foto varchar(1000) NULL default './imagenes/FondoTadoPerfil.JPG'
+	Foto varchar(1000) NULL default './imagenes/perfil_blanco.png'
 )
 go
 use BDSistema_Tutorias
