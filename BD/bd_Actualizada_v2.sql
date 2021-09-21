@@ -390,14 +390,15 @@ as
 			set @ContraseniaIn=(select Contrasenia from TLogin where Usuario=@UsuarioOut)
 			if(SELECT count(Usuario) from TLogin WHERE PWDCOMPARE(@ContraseniaOut, @ContraseniaIn) = 1)>0
 				begin
-					select * from TDocente where CodDocente=(select CodDocente from TCoordinador where CodCoordinador=@UsuarioOut)
+					select * into #T1 from TDocente where CodDocente=(select CodDocente from TCoordinador where CodCoordinador=@UsuarioOut)
+					select CodCoordinador=@UsuarioOut,* from #T1
 				end
 			else
 				PRINT('Error,contrasenia incorrecta')
 		end
 	else
 		PRINT('Error,usuario no encontrado')
-Go
+Go--drop procedure spuVerificacionLoginCoordinador
 --CAmbio de Contraseña
 create procedure spuCambioContraseniaGeneral @Usuario varchar(50),@ContraseniaAnt varchar(50),@ContraseniaNew varchar(50)
 as

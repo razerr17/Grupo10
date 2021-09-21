@@ -32,14 +32,8 @@ export const queries={
     // Queries Asignar sesion de tutoria
     getAllSesiones:"Select * from TSesionTutoria",
     getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
-    addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Semestre,@Descripcion,@Observaciones", 
-    loginDocente:"execute spuVerificacionLoginDocente @Usuario,@Contrasenia;",
-    loginCoordinador:"execute spuVerificacionLoginCoordinador @Usuario,@Contrasenia;",
+    addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Semestre,@Descripcion,@Observaciones",
     getSesionByFicha:"Select * from TSesionTutoria where IdFichaTutoria=@IdFichaTutoria",
-    // Queries Asignar sesion de tutoria
-    getAllSesiones:"Select * from TSesionTutoria",
-    getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
-    addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Descripcion,@Referencia,@Observaciones", 
     // Queries Others
     getListSemestres: "select distinct SemestreIngreso from TEstudiante",
     UpdateContraseniaGeneral:"execute spuCambioContraseniaGeneral @Usuario,@ContraseniaAnt,@ContraseniaNew",

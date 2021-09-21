@@ -41,16 +41,15 @@ export const getSesionesbyFicha=async (req,res)=>{
 
 export const addSesionTutoria=async (req,res)=>{
     try{
-        const {IdFichaTutoria,Fecha,TipoTutoria,Descripcion,Referencia,Observaciones}=req.body;
+        const {IdFichaTutoria,Fecha,TipoTutoria,Semestre,Descripcion,Observaciones}=req.body;
         const pool=await getConnection();
         await pool.request()
             .input("IdFichaTutoria",sql.VarChar,IdFichaTutoria)
             .input("Fecha",sql.Date,Fecha)
             .input("TipoTutoria",sql.VarChar,TipoTutoria)
+            .input("Semestre",sql.VarChar,Semestre)
             .input("Descripcion",sql.VarChar,Descripcion)
-            .input("Referencia",sql.VarChar,Referencia)
             .input("Observaciones",sql.VarChar,Observaciones)
-
             .query(queries.addNewSesion);
         res.json({IdFichaTutoria});
     }catch(error){
