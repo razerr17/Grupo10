@@ -1,5 +1,6 @@
 import { Router } from "express";
-import {addDocente, addDocentes,getTutorById, deleteDocenteById, getDocenteById, getDocentes, updateDocenteById,getTutores, loginDocente, loginCoordinador} from '../controllers/Docentes.crontrollers'
+
+import {addDocente, addDocentes,getTutorById, deleteDocenteById, getDocenteById, getDocentes, updateDocenteById,getTutores, loginDocente, loginCoordinador,getCoordinador} from '../controllers/Docentes.crontrollers'
 //DOCENTES ROUTES
 //importamos la funcion router para el enrutado
 const router=Router();
@@ -25,4 +26,6 @@ router.get('/tutores/:id',getTutorById);
 router.post('/loginDocente',loginDocente);
 //route login coordinador
 router.post('/loginCoordinador',loginCoordinador)
+//get coordinador 
+router.get('/coordinador',getCoordinador)
 export default router;

@@ -28,6 +28,7 @@ export const queries={
     addNewAsignacion: "execute spuInsertarAsignaciones @CodDocente ,@CodEstudiante",
     getAsignaciones: "Select * from TAsignacion",
     updateAsignacionById:"update TAsignacion set CodDocente=@CodDocente, CodEstudiante=@CodEstudiante where IdAsignacion=@IdAsignacion",
+    getTutorByCodEstudiante:"execute spuGetTutorByEstudiante @CodEstudiante",
     // Queries Asignar sesion de tutoria
     getAllSesiones:"Select * from TSesionTutoria",
     getSesionById:"Select * from TSesionTutoria where IdSesion=@IdSesion",
@@ -41,7 +42,13 @@ export const queries={
     addNewSesion:"execute spuInsertarSesion @IdFichaTutoria,@Fecha,@TipoTutoria,@Descripcion,@Referencia,@Observaciones", 
     // Queries Others
     getListSemestres: "select distinct SemestreIngreso from TEstudiante",
+    UpdateContraseniaGeneral:"execute spuCambioContraseniaGeneral @Usuario,@ContraseniaAnt,@ContraseniaNew",
     //Queries Foto Perfil
     getFotoPerfil:"select Foto from TFotosPerfil where Correo=@Correo",
-    UpdateFotoPerfil:"execute spuUpdateFotoPerfil @Correo,@Foto"
-}
+    UpdateFotoPerfil:"execute spuUpdateFotoPerfil @Correo,@Foto",
+    getCoordinadores:"Select * from TCoordinador",
+    //Queries Confidencialidad
+    UpdateConfidencialidadByCod:"execute spuUpdateConfidencialidad @CodEstudiante,@TerminosConf",
+    GetConfidencialidadByCod:"execute spuGetConfidencialidad @CodEstudiante",
+    GetObservacionEncByIdSesion:"execute spuDevolverObservaciones @IdSesion",
+  }

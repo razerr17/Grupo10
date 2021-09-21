@@ -140,6 +140,7 @@ export const loginDocente=async (req,res)=>{
         res.send(error.message);
     }
 };
+
 export const loginCoordinador=async (req,res)=>{
     try{
         const {Usuario,Contrasenia}=req.body;
@@ -150,6 +151,17 @@ export const loginCoordinador=async (req,res)=>{
             .query(queries.loginCoordinador);
         console.log('LoginCoordinador executed',Usuario)
         res.json(result.recordset);
+    }catch(error){
+        res.status(500);
+        res.send(error.message);
+    }
+};
+export const getCoordinador=async (req,res)=>{
+    try{
+        const pool=await getConnection()
+        const result=await pool.request().query(queries.getCoordinadores);
+        console.log("getCoordinador executed");
+        res.json(result.recordset)
     }catch(error){
         res.status(500);
         res.send(error.message);
