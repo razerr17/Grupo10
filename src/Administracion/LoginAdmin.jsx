@@ -19,6 +19,7 @@ const LoginAdmin = (props)=>{
     const abrirCerrarModalWarning=()=>{
         setWarningview(!warningView);
       }
+      
     const Login=async()=>{
         await axios.post(baseURL,{Usuario:user,Contrasenia:password})
         .then(response=>{
@@ -26,7 +27,8 @@ const LoginAdmin = (props)=>{
         }).then(response=>{
             if(response.length>0){
                 var respuesta=response[0];
-                cookies.set('CodDocente',respuesta.CodDocente,{path:'/'});
+                cookies.set('CodContra',respuesta.CodCoordinador,{path:'/'});
+                cookies.set('CodAdmin',respuesta.CodDocente,{path:'/'});
                 cookies.set('Nombres',respuesta.Nombres,{path:'/'});
                 cookies.set('ApPaterno',respuesta.ApPaterno,{path:'/'});
                 cookies.set('ApMaterno',respuesta.ApMaterno,{path:'/'});
@@ -55,7 +57,7 @@ const LoginAdmin = (props)=>{
         }
     }
     useEffect(()=>{
-        if(cookies.get('CodDocente')){
+        if(cookies.get('CodAdmin')){
             props.history.push('/Admin_Menu');
         }
     })
@@ -111,6 +113,8 @@ const LoginAdmin = (props)=>{
                     <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
                     </ModalFooter>
                 </Modal>
+
+               
             </div>
         </div>
     )

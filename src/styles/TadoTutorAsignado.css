@@ -44,3 +44,9 @@
   height: 50px;
   width: 90px;
 }
+.lblno {
+  position: relative;
+  left: 34%;
+  color: grey;
+  top: 70px;
+}

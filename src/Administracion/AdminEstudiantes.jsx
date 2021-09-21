@@ -6,50 +6,8 @@ import { Row,Col } from 'react-bootstrap';
 import axios from 'axios';
 import * as ImIcons from "react-icons/im"
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
-import MaterialTable from "material-table";
+import '../styles/AdminEstudiantes.css'
 
-const columnas = [
-    {
-      title:'Codigo',
-      field:'CodEstudiante',
-      width: "6%"
-    },
-    {
-      title:'Nombres',
-      field:'Nombres',
-      width: "10%"
-    },
-    {
-      title:'Ap_Paterno',
-      field:'ApPaterno',
-      width: "8%"
-    },
-    {
-      title:'Ap_Materno',
-      field:'ApMaterno',
-      width: "7%"
-    },
-    {
-      title:'Email',
-      field:'Email',
-      width: "12%"
-    },
-    {
-      title:'Direccion',
-      field:'Direccion',
-      width: "10%"
-    },
-    {
-        title:'Celular',
-        field:'Celular',
-        width: "7%"
-    },
-    {
-      title:'Semestre',
-      field:'SemestreIngreso',
-      width: "5%"
-    },
-  ]
 
 
 const AdminEstudiantes = () => {
@@ -61,6 +19,7 @@ const AdminEstudiantes = () => {
     const [nombres, setNombres] = React.useState("");
     const [apPaterno, setApPaterno] = React.useState("");
     const [apMaterno, setApMaterno] = React.useState("");
+    const [validate,setValidate]=useState([]);
     const [email,setEmail]=React.useState("");
     const [celular, setCelular] = React.useState("");
     const [direccion, setDireccion] = React.useState("");
@@ -100,13 +59,32 @@ const AdminEstudiantes = () => {
         })
       }
       const peticionPost=async()=>{
-        if(!codEstudiante.trim()||!nombres.trim()||!apPaterno.trim()||!apMaterno.trim()||!email.trim()||!direccion.trim()||!celular.trim()|| !semestreIngreso.trim()){
-            setWarningview(true)
-             return
-         }     
-        if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000)){
-            setWarningview(true)
-             return
+        var a = [];
+        if(!codEstudiante.trim()){
+          a.push('Codigo Estudiante |')
+        }
+        if(!apPaterno.trim()){
+          a.push(' apellido paterno |')
+        }
+        if(!apMaterno.trim()){
+          a.push(' apellido materno |')
+        }
+        if(!email.trim()){
+          a.push(' email  |')
+        }
+        if(!direccion.trim()){
+          a.push(' direccion |')
+        }
+        if(!semestreIngreso.trim()){
+          a.push(' semestre ingreso |')
+        }     
+        if(!(parseInt(celular)<=999999999 &&parseInt(celular)>=900000000) ||!celular.trim()){
+          a.push(' celular ')
+        }
+        setValidate(a)
+        if(a.length>0){
+          setWarningview(true)
+          return
         }
         // delete clienteSeleccionado.IdCliente;
         await axios.post(baseUrl,{CodEstudiante:codEstudiante,Nombres:nombres,ApPaterno:apPaterno,ApMaterno:apMaterno,Email:email,Direccion:direccion,Celular:celular, SemestreIngreso:semestreIngreso})
@@ -119,7 +97,6 @@ const AdminEstudiantes = () => {
           console.log(error);
         })
       }
-        
     //const guardarExcel=()=>{
       //console.log(excel)
      //document.getElementById('inputGroupFile04').value =''; 
@@ -149,6 +126,7 @@ const AdminEstudiantes = () => {
     const abrirCerrarModalInsertar=()=>{
         setModalInsertar(!modalInsertar);
       }
+
       const abrirCerrarModalWarning=()=>{
         setWarningview(!warningView);
       }
@@ -177,25 +155,40 @@ const AdminEstudiantes = () => {
       })
     return (
         <div>
-            <AdminBar nombrePage={"Estudiantes"}/>
+            <AdminBar nombrePage={"Estudiantes"} />
             <div className="contenido">
                 <div className="Principal2">
-                <div className="cont">
+                  <div className="cont">
                        <h5>Lista de estudiantes:</h5>
-                        <div className="TablaDT">
-                            <div className="col tableScrollDT scrollDT"> 
-                            <MaterialTable
-                             columns={columnas} 
-                             data={data} 
-                             title="Estudiantes"
-                             options={{
-                              headerStyle:{
-                                backgroundColor:'#ed9b40',
-                                color:'black'
-                             },
-                              tableLayout: "fixed"
-                            }}
-                        />
+                        <div className="TablaE">
+                            <div className="col tableScrollE scrollE"> 
+                            <table className="table table-bordered bg-light ">
+                                        <thead className="colTable">
+                                            <tr>
+                                                <th>codigo</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Email</th>
+                                                <th>Direccion</th>
+                                                <th>Telefono</th>
+                                                <th>Semestre</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data.map((estudiante,index)=>(
+                                                <tr key={index}>
+                                                    <td>{estudiante.CodEstudiante}</td>
+                                                    <td>{estudiante.Nombres}</td>
+                                                    <td>{estudiante.ApPaterno},{estudiante.ApMaterno}</td>
+                                                    <td>{estudiante.Email}</td>
+                                                    <td>{estudiante.Direccion}</td>                                            
+                                                    <td>{estudiante.Celular}</td>
+                                                    <td>{estudiante.SemestreIngreso}</td>
+                                                </tr>
+                                            ))}                                        
+                                        </tbody>
+                                    </table>
                                 </div>
                         </div>
                     <button onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
@@ -206,7 +199,7 @@ const AdminEstudiantes = () => {
                                 const file=e.target.files[0];
                                 readExcel(file);}}
                        />
-                       <button className="btnImportar" type="button" id="inputGroupFileAddon04" onClick={()=>{peticionPostExcel()}}>Importar</button>
+                       <button className="btnImportar" type="button" id="inputGroupFileAddon04"onClick={()=>peticionPostExcel()}>Importar</button>
                     </div>
 
                    </div>
@@ -266,7 +259,7 @@ const AdminEstudiantes = () => {
                 <Modal isOpen={warningView} centered>
 
                     <ModalHeader>
-                        <ImIcons.ImWarning />               Debe de llenar el formulario correctamente 
+                      <ImIcons.ImWarning /> el/los campo(s) : {validate} no esta(n) correctamente llenado(s) 
                     </ModalHeader>
                  
                     <ModalFooter>

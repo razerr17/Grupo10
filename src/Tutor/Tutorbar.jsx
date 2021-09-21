@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import * as BsIcons from "react-icons/bs"
 import * as ImIcons from "react-icons/im"
 import * as FaIcons from "react-icons/fa"
 import * as RiIcons from "react-icons/ri"
+import axios from 'axios'
 import * as IoIcons from "react-icons/io"
 import * as HiIcons from "react-icons/hi"
 import Cookies from 'universal-cookie'
@@ -11,6 +12,20 @@ import { Link } from 'react-router-dom'
 import '../styles/TutoradosBar.css'
 const TutoradoBar = (props) => {
    const {nombrePage}=props;
+   const baseUrl=`http://localhost:4000/FotoPerfil`;
+    const[direccionUrl,setDireccionUrl]=useState([{
+        Foto:"./imagenes/carga.gif"
+    
+    }])
+    const peticionGet=async()=>{
+        await axios.get(baseUrl+`/${cookie.get('Email')}`)
+      .then(response=>{
+        setDireccionUrl(response.data);
+        
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
    const cookie=new Cookies()
     const cerrarSesion=()=>{
         cookie.remove('CodDocente',{path:'/'});
@@ -25,6 +40,9 @@ const TutoradoBar = (props) => {
         cookie.remove('Estutor',{path:'/'});
         
     }
+    useEffect(()=>{
+        peticionGet();
+      })
     return(
         <div className="all">
             
@@ -44,8 +62,7 @@ const TutoradoBar = (props) => {
                     <h6 className="label">Tutorias</h6>
                 </div>
                 <div className="perfilContenedor">
-                    <img className="perfil" src="../imagenes/PerfilTutor.JPG" alt="" />      
-    
+                    <img className="perfil" src={direccionUrl[0].Foto} alt="" />   
                 </div>
                 <Link to="/Tutor_Menu"  style={{ textDecoration: 'none' }} title="Inicio"><  IoIcons.IoIosHome className="iconobar"/><span>Inicio</span></Link>
                 <Link to="/Tutor_Estudiantes_a_cargo"  style={{ textDecoration: 'none' }} title="Horarios"><RiIcons.RiUserSearchLine className="iconobar"/><span>Estudiantes a cargo</span></Link>

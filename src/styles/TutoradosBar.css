@@ -59,9 +59,11 @@
 
 .link {
   position: absolute;
-  left: 92%;
-  padding-top: 7px;
+  left: 94%;
+  width: 50px;
+  padding-top: 0px;
   color: #060c2d;
+  font-size: 13px;
 }
 .link:hover {
   color: #383e5f;
