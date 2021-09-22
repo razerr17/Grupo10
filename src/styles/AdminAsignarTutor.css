@@ -41,14 +41,16 @@
   width: 700px;
 }
 .btnSaveAT {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 20px;
   width: 300px;
   height: 40px;
   float: right;
 }
 .btnNuevoAT {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 20px;
   width: 300px;
   height: 40px;

@@ -9,7 +9,7 @@ import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
 import Cookies from 'universal-cookie/es6';
 import '../styles/LoginTutorados.css'
 const LoginAdmin = (props)=>{
-    const baseURL="http://localhost:4000/loginCoordinador";
+    const baseURL="https://backendtutorias.herokuapp.com/loginCoordinador";
     const cookies=new Cookies();
     const[user,setUser]=useState('')
     const[password,setPassword]=useState('')
@@ -19,6 +19,7 @@ const LoginAdmin = (props)=>{
     const abrirCerrarModalWarning=()=>{
         setWarningview(!warningView);
       }
+      
     const Login=async()=>{
         await axios.post(baseURL,{Usuario:user,Contrasenia:password})
         .then(response=>{
@@ -26,6 +27,7 @@ const LoginAdmin = (props)=>{
         }).then(response=>{
             if(response.length>0){
                 var respuesta=response[0];
+                cookies.set('CodContra',respuesta.CodCoordinador,{path:'/'});
                 cookies.set('CodAdmin',respuesta.CodDocente,{path:'/'});
                 cookies.set('Nombres',respuesta.Nombres,{path:'/'});
                 cookies.set('ApPaterno',respuesta.ApPaterno,{path:'/'});
@@ -67,35 +69,35 @@ const LoginAdmin = (props)=>{
                     </Link>
                 </div>
             <br />
-            <div className="Principal" style={{backgroundColor:'white'}}>  
+            <div className="Principal">  
                 <div className="containerLogin">
-                    <h2 className="title">Administracion</h2>
-                    <img className="lo"src="../imagenes/Administracion.JPG" alt=""/>
+                    <h2 className="title">Administración</h2>
+                    <img className="lo"src="../imagenes/management.png" alt=""/>
                     <hr />
-                    <div className="form">
-                        <label><b>Ingrese Usuario:</b> </label>
-                        <input type="text"
-                         className="form-control" 
-                         onChange={ (e) => setUser(e.target.value)} 
-                         name="username" 
-                         placeholder="Usuario"/>
+                    <div className="form-group">
+                        <label className="inputM"><b>Ingrese Usuario:</b> </label>
                         <br />
-                        <label> <b>Ingrese Contraseña:</b>  </label>
+                        <input
+                        type="text"
+                        className="form-control"
+                        name="username" 
+                        onChange={ (e) => setUser(e.target.value)} 
+                        placeholder="Usuario"
+                        />
+                        <br />
+                        <label className="inputM"> <b>Ingrese Contraseña:</b>  </label>
                         <br />
                         <input
                         type={mostrar ? 'text' : 'password'}
                         className="form-control"
-                        onChange={ (e) => setPassword(e.target.value)} 
+                        onChange={ (e) => setPassword(e.target.value)}
                         name="password"          
-                        placeholder={mostrar ? 'ingrese aqui' : '****************'}
+                        placeholder={mostrar ? 'Ingrese su contraseña' : '***********'}
                         />
-                        <Row>
-                            <Col className="col-2 ">
-                                <input  clasName="inputM" type="checkbox" onChange={CambiarMostrar}/>
-                            </Col>
-                            <Col className="col-5">
-                               <p className="fst-italic">mostrar contraseña</p> 
-                            </Col>
+                        <Row >
+                        <label className="inputM" >
+                        <input type="checkbox" onChange={CambiarMostrar} value="remember-me"/> Mostrar contraseña
+                        </label>
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
@@ -111,6 +113,8 @@ const LoginAdmin = (props)=>{
                     <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
                     </ModalFooter>
                 </Modal>
+
+               
             </div>
         </div>
     )

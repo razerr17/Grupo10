@@ -2,7 +2,8 @@ import React from 'react'
 import AdminBar from '../Administracion/AdminBar'
 import '../styles/AdminAyudantes.css'
 import {Col,Row} from 'react-bootstrap'
-const AdminMenu = () => {
+import Cookies from 'universal-cookie'
+const AdminMenu = (props) => {
     return (
         <div>
             <AdminBar nombrePage={"Ayudantes de tutoria"}/>

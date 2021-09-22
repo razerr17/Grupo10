@@ -13,12 +13,14 @@
   margin: 1%;
 }
 .btnAddEst {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
   margin-bottom: 2%;
 }
 .btnImportar {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
 }
 .colo {

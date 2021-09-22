@@ -5,7 +5,7 @@ import { Col ,Row} from 'react-bootstrap'
 const TadoEstudianteAsignado = () => {
     return (
         <div>
-            <TutoradoBar/>
+            <TutoradoBar nombrePage={"Estudiantes Asignados"} />
             <div className="contenido">
                 <div className=" Principal2">
 
@@ -13,7 +13,7 @@ const TadoEstudianteAsignado = () => {
                    <div className="partTop">
                    <div className="col table-wrapper-scroll-y my-custom-scrollbar"> 
                                 <table className="table table-bordered bg-light ">
-                                    <thead style={{backgroundColor:'#85b7e9'}} className="bg-warning">
+                                   <thead style={{backgroundColor:'#85b7e9'}}>
                                         <tr>
                                             <th>Nro</th>
                                             <th>Curso</th>
@@ -82,7 +82,7 @@ const TadoEstudianteAsignado = () => {
                        <img className="perfilAyudante" src="../imagenes/PerfilAyudante.JPG" alt="" />
                        <div className="datosAyudante">
                           <Row>
-                              <Col className="col-5">
+                              <Col className="col-6">
                                 <div>
                                   <label htmlFor=""><b>Nombres :  </b></label>
                                     <label className="lblda">  EDGAR DANIEL</label>
@@ -96,7 +96,7 @@ const TadoEstudianteAsignado = () => {
                                     <label className="lblda">171812@unsaac.edu.pe</label>
                                 </div>
                               </Col>
-                              <Col className="col-7">
+                              <Col className="col-6">
                                 <div>
                                     <label htmlFor=""><b>Direccion:  </b></label>
                                     <label className="lblda">  MICAELA BASTIDAS 221 - SANTIAGO</label>

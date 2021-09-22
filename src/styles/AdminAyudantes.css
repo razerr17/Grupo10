@@ -14,7 +14,8 @@
   margin: 2%;
 }
 .btnConsultar {
-  background: #fd9727;
+  background: #000a25;
+  color:white;
   margin-left: 80%;
   width: 200px;
   border-radius: 10px;

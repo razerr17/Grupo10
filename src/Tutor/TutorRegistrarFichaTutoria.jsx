@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Row, Col } from "react-bootstrap";
 
+
 const columnas = [
   {
     title: "CodEstudiante",
@@ -64,7 +65,7 @@ const TutorRegistrarFichaTutoria = (props) => {
 }
   const [warningView, setWarningview] = useState(false);
 
-  const baseUrl = `http://localhost:4000/fichas/asignacion/${codDocente}`;
+  const baseUrl = `https://backendtutorias.herokuapp.com/fichas/asignacion/${codDocente}`;
 
   console.log(baseUrl);
   const peticionGet = async () => {
@@ -80,7 +81,7 @@ const TutorRegistrarFichaTutoria = (props) => {
   useEffect(() => {
     peticionGet();
     if (!cookie.get("CodDocente")) {
-      props.history.push("/LoginTutor");
+      props.history.push('/LoginTutor');
     }
   });
   const Actualizar = (id) => {
@@ -105,7 +106,7 @@ const TutorRegistrarFichaTutoria = (props) => {
     setPersonaReferencia("");
     setCelularReferencia("");
   };
-  const baseUrl2 = `http://localhost:4000/fichas`;
+  const baseUrl2 = `https://backendtutorias.herokuapp.com/fichas`;
   const peticionPut = async () => {
     if (
       !(parseInt(celularRef) <= 999999999 && parseInt(celularRef) >= 900000000)
@@ -130,7 +131,7 @@ const TutorRegistrarFichaTutoria = (props) => {
   };
   return (
     <div>
-      <Tutorbar />
+      <Tutorbar  nombrePage={"Fichas de Tutoria"}/>
       <div className="contenido">
         <div className="Principal2">
           <div className="cont">
@@ -147,7 +148,7 @@ const TutorRegistrarFichaTutoria = (props) => {
                     pageSizeOptions: [8],
                     pageSize: 9,
                     headerStyle: {
-                      backgroundColor: "#ed9b40",
+                      backgroundColor: "#85b7e9",
                       color: "black",
                     },
                   }}
@@ -185,7 +186,7 @@ const TutorRegistrarFichaTutoria = (props) => {
             <ModalBody>
               <Row>
                 <Col>
-                  <label>Tutorado: </label>
+                  <label className="tituloss">Tutorado: </label>
                   <input
                     readonly=""
                     type="text"
@@ -198,9 +199,10 @@ const TutorRegistrarFichaTutoria = (props) => {
               <br />
               <Row>
                 <Col>
-                  <label>Persona de Referencia: </label>
+                  <label className="tituloss">Persona de Referencia: </label>
                   <br />
                   <input
+                    placeholder="Ingrese una persona de referencia"
                     type="text"
                     value={personaRef}
                     className="form-control"
@@ -210,9 +212,10 @@ const TutorRegistrarFichaTutoria = (props) => {
                   <br />
                 </Col>
                 <Col>
-                  <label>Celular de Referencia: </label>
+                  <label className="tituloss">Celular de Referencia: </label>
                   <br />
                   <input
+                    placeholder="Ingrese un celular de referencia"
                     type="text"
                     value={celularRef}
                     className="form-control"

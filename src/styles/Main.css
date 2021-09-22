@@ -1,3 +1,66 @@
+* {
+  font-family: 'Ubuntu Condensed', sans-serif !important;/* <-- fonts */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.li1{
+  display: table-cell;padding-left: 0;
+  height: 100%;
+}
+.sl{
+  padding-left: 0px;
+  position: absolute;
+  animation-name: slider;
+  animation-duration: 30s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  height: 100%;
+}
+@keyframes slider {
+  0%{
+    left: 0;
+   }   
+  50%{
+    left: -130%;
+  }
+  80%{ 
+    left: -200%;
+  }
+
+  100%{
+    left: 0px;
+  }
+  
+}
+.img{
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-height: 80vh;
+  padding-left: 0;
+  height: 100%;
+}
+.bod1{
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-height: 80vh;
+  overflow: hidden;
+  height: 100%;
+}
+.Centrar {
+  text-align: center;
+  align-items: center;
+  position: absolute;
+  padding:4%;
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.65);
+  margin-top: 10%;
+  height: fit-content;
+}
 .bod {
   background: url("../images/MainBackground.JPG");
   background-size: cover;
@@ -5,29 +68,51 @@
   align-items: center;
   display: flex;
   min-height: 100vh;
+  height: 100%;
 }
+
 .h1 {
-  color: #fd9727;
-  font-family: "Bauhaus 93";
-  font-size: 70px;
+  color:  orange ;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 120px;
+  position: relative;
+}
+.h2 {
+  color: #fff;
+  font-family: 'Ubuntu Condensed', sans-serif;
   position: relative;
 }
 .h3 {
   color: #fff;
-  font-family: fantasy;
+  font-family: 'Ubuntu Condensed', sans-serif;
   position: relative;
 }
+.h4 {
+  color: #fff;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  position: relative;
+}
+.h5 {
+  color: #000a25;
+  font-weight: 600;
+}
 .p {
+  font-family: 'Ubuntu Condensed', sans-serif;
   color: #fff;
   width: 700px;
 }
-.Centrar {
-  text-align: center;
-}
-.btna {
-  background-color: #fd9727;
+.body {
+  font-family: 'Ubuntu Condensed', sans-serif;
   color: #fff;
-  font-family: fantasy;
+  width: 700px;
+  height: 100%;
+}
+
+
+.btna {
+  background-color:  #000a25 ;
+  color: #fff;
+  font-family: 'Ubuntu Condensed', sans-serif;
   font-size: 20px;
   width: 200px;
   height: 40px;

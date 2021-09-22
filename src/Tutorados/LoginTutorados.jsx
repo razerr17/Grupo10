@@ -8,7 +8,7 @@ import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
 import Cookies from 'universal-cookie/es6';
 import '../styles/LoginTutorados.css'
 const LoginTutorados = (props) => {
-    const baseURL="http://localhost:4000/loginEstudiantes";
+    const baseURL="https://backendtutorias.herokuapp.com/loginEstudiantes";
     const cookies=new Cookies();
     const[user,setUser]=useState('')
     const[password,setPassword]=useState('')
@@ -64,13 +64,13 @@ const LoginTutorados = (props) => {
                     </Link>
                 </div>
             <br />
-            <div className="Principal" style={{backgroundColor:'white'}}>  
+            <div className="Principal">  
                 <div className="containerLogin">
                     <h2 className="title">Tutorado</h2>
-                    <img className="lo"src="../imagenes/Tutorado.JPG" alt=""/>
+                    <img className="imagen" src="../imagenes/reading.png" />
                     <hr />
                     <div className="form-group">
-                        <label><b>Ingrese Usuario:</b> </label>
+                        <label className="inputM"><b>Ingrese Usuario:</b> </label>
                         <br />
                         <input
                         type="text"
@@ -80,26 +80,23 @@ const LoginTutorados = (props) => {
                         placeholder="Usuario"
                         />
                         <br />
-                        <label> <b>Ingrese Contraseña:</b>  </label>
+                        <label className="inputM"> <b>Ingrese Contraseña:</b>  </label>
                         <br />
                         <input
                         type={mostrar ? 'text' : 'password'}
                         className="form-control"
                         onChange={ (e) => setPassword(e.target.value)}
                         name="password"          
-                        placeholder={mostrar ? 'ingrese aqui' : '****************'}
+                        placeholder={mostrar ? 'Ingrese su contraseña' : '***********'}
                         />
-                        <Row>
-                            <Col className="col-2 ">
-                                <input  clasName="inputM" type="checkbox" onChange={CambiarMostrar}/>
-                            </Col>
-                            <Col className="col-5">
-                               <p className="fst-italic">mostrar contraseña</p> 
-                            </Col>
+                        <Row >
+                        <label className="inputM" >
+                        <input type="checkbox" onChange={CambiarMostrar} value="remember-me"/> Mostrar contraseña
+                        </label>
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
-                            <button style={{backgroundColor:'#ffc107'}} className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
+                            <button className="ingresar" onClick={comprobar} >Iniciar Sesión</button>
                         </Link>
                     </div>
                 </div>

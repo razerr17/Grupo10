@@ -1,4 +1,5 @@
-import React from 'react'
+import React ,{useEffect,useState}from 'react'
+import axios from 'axios'
 import * as FaIcons from "react-icons/fa"
 import * as BsIcons from "react-icons/bs"
 import * as GiIcons from "react-icons/gi"
@@ -8,6 +9,23 @@ import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import '../styles/TutoradosBar.css'
 const TutoradoBar = (props) => {
+    const baseUrl=`https://backendtutorias.herokuapp.com/FotoPerfil`;
+    const[direccionUrl,setDireccionUrl]=useState([{
+        Foto:"./imagenes/carga.gif"
+    
+    }])
+    const peticionGet=async()=>{
+        await axios.get(baseUrl+`/${cookie.get('Email')}`)
+      .then(response=>{
+        setDireccionUrl(response.data);
+        
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
+    useEffect(()=>{
+        peticionGet();
+      })
     const {nombrePage}=props;
     const cookie=new Cookies()
     const cerrarSesion=()=>{
@@ -24,30 +42,30 @@ const TutoradoBar = (props) => {
     return(
         <div className="all">
              
-            <div className="encabezado " style={{backgroundColor:'#fde052'}}>
+            <div className="encabezado ">
                
                 <label className="nombre" for="check">
                 <h5>Bienvenido : {cookie.get('Nombres')}</h5>
                 </label>
                 <label className="lblNombre"><b>{nombrePage}</b></label>
                 <Link className="link" to="/LoginTutorados" onClick={()=>cerrarSesion()}style={{ textDecoration: 'none' }} for="check">
-                    <b>cerrar sesion</b>
+                    <h6>Cerrar Sesión</h6>
                 </Link>
             </div>
-            <div className="sidebar" style={{backgroundColor:'#000a25'}}>
+            <div className="sidebar">
                 <div className="cabecera">
                     <img className="carrera" src="../logo.png" alt="" />
-                    <h6 className="label">Tutorias</h6>
+                    <h6 className="label">Sistema de Tutorias</h6>
                 </div>
                 <div className="perfilContenedor">
-                    <img className="perfil" src="../imagenes/PerfilPrueba.JPG" alt="" />      
+                <img className="perfil" src={direccionUrl[0].Foto} alt="" />      
                 </div>
-                <Link to="/Tutorado_Menu"  style={{ textDecoration: 'none',color:'white' }} title="Inicio"><IoIcons.IoIosHome style={{color:'orange'}} className="iconobar"/><span>Inicio</span></Link>
-                <Link to="/Tutorado_Horarios"  style={{ textDecoration: 'none',color:'white' }} title="Horarios"><BsIcons.BsFillCalendarFill style={{color:'orange'}}className="iconobar"/><span>Horarios</span></Link>
-                <Link to="/Tutorado_TutorAsignado" style={{ textDecoration: 'none',color:'white' }} title="Tutor Asignado"><FaIcons.FaChalkboardTeacher style={{color:'orange'}}className="iconobar"/><span>Tutor Asignado</span></Link>
-                <Link to="/Tutorado_EstudianteAsignado" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><GiIcons.GiTeacher style={{color:'orange'}}className="iconobar"/><span>Estudiante Asignado</span></Link>
+                <Link to="/Tutorado_Menu"  style={{ textDecoration: 'none' }} title="Inicio"><IoIcons.IoIosHome className="iconobar"/><span>Inicio</span></Link>
+                <Link to="/Tutorado_Horarios"  style={{ textDecoration: 'none' }} title="Horarios"><BsIcons.BsFillCalendarFill className="iconobar"/><span>Horarios</span></Link>
+                <Link to="/Tutorado_TutorAsignado" style={{ textDecoration: 'none' }} title="Tutor Asignado"><FaIcons.FaChalkboardTeacher className="iconobar"/><span>Tutor Asignado</span></Link>
+                <Link to="/Tutorado_EstudianteAsignado" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><GiIcons.GiTeacher className="iconobar"/><span>Estudiante Asignado</span></Link>
                 <div className="linkPerfil">
-                  <Link to="/Tutorado_Perfil" style={{ textDecoration: 'none',color:'white' }} title="Estudiantes Asignado"><CgIcons.CgProfile style={{color:'orange'}}className="iconobar"/><span>Perfil</span></Link>
+                  <Link to="/Tutorado_Perfil" style={{ textDecoration: 'none' }} title="Estudiantes Asignado"><CgIcons.CgProfile className="iconobar"/><span>Perfil</span></Link>
                 </div>
             </div>            
         </div>

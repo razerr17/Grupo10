@@ -6,18 +6,20 @@ import * as FaIcons from "react-icons/fa"
 import '../styles/AdminAsignarTutor.css'
 import {Row,Col} from 'react-bootstrap'
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'  
-const AdminAsignarTutor = () => {
-    const baseUrlEstudiantes=`http://localhost:4000/estudiantes`;
-    const baseUrlTutores=`http://localhost:4000/tutores`;
-    const baseUrlAsignaciones=`http://localhost:4000/asignaciones`;
-    const baseUrlAsignacionesList=`http://localhost:4000/Listasignaciones`;
+import Cookies from 'universal-cookie'
+const AdminAsignarTutor = (props) => {
+  const cookie =new Cookies();
+    const baseUrlEstudiantes=`https://backendtutorias.herokuapp.com/estudiantes`;
+    const baseUrlTutores=`https://backendtutorias.herokuapp.com/tutores`;
+    const baseUrlAsignaciones=`https://backendtutorias.herokuapp.com/asignaciones`;
+    const baseUrlAsignacionesList=`https://backendtutorias.herokuapp.com/Listasignaciones`;
     const [estudiantesList,setEstudiantesList]=useState([])
     const[data,setData]=useState([]);
-    const[codEstudiante,setCodEstudiante]=useState('codigo estudiante')
-    const[codDocente,setCodDocente]=useState('codigo docente')
+    const[codEstudiante,setCodEstudiante]=useState('Codigo estudiante')
+    const[codDocente,setCodDocente]=useState('Codigo docente')
     const[estudiantes,setEstudiantes]=useState([])
     const [tutoresList,setTutoresList]=useState([])
-    const [semestre, setSemestre] =useState('elija el semestre')
+    const [semestre, setSemestre] =useState('Elija el semestre')
     const listaSemestres=["2017-I","2017-II","2018-I","2018-II","2019-I","2019-II","2020-I","2020-II"]
     const [warningView,setWarningview]=useState(false);
     const[modalInsertar,setModalInsertar]=useState(false);
@@ -125,7 +127,7 @@ const AdminAsignarTutor = () => {
         peticionPostAsignarAlea(Lista);
     }
     const comprobar=()=>{
-        if(semestre==="elija el semestre")
+        if(semestre==="Elija el semestre")
         {
             abrirCerrarModalWarning()
         }
@@ -146,7 +148,10 @@ const AdminAsignarTutor = () => {
       alert('on pressed')
     }
     useEffect(()=>{
-      peticionGetAsignaciones();    
+      peticionGetAsignaciones();  
+      if(!cookie.get('CodAdmin')){
+        props.history.push('/LoginAdministracion');
+    }  
     })
     return (
         <div>
@@ -159,7 +164,7 @@ const AdminAsignarTutor = () => {
                             <Col className="col-4">
                                
                                 <select id="drop"value={semestre} onChange={(e) => {setSemestre(e.target.value); HallarAlumnosxCurso(e.target.value);}}className="form-select form-select-sm">
-                                    <option value="elija el semestre">elija el semestre</option>
+                                    <option value="elija el semestre">Elija el semestre</option>
                                     {
                                         listaSemestres.map((item, index) => (
                                             <option key={index} value={item}>{item}</option>
@@ -172,21 +177,19 @@ const AdminAsignarTutor = () => {
                         <div className="TablaAsignarTutor">
                             <div className="col tableScrollAsignarTutor scrollAsignarTutor"> 
                             <table className="table table-bordered bg-light ">
-                                        <thead className="colTable">
+                                       <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
-                                                <th>codigo Asignacion</th>
-                                                <th>Codigo tutor</th>
-                                                <th>Codigo Estudiante</th>
-                                                <th>EDITAR</th>
+                                                <th>Nombre Tutor</th>
+                                                <th>Nombre Estudiante</th>
+                                                <th>Editar</th>
                                               
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {data.map((estudiante,index)=>(
                                                 <tr key={index}>
-                                                    <td>{estudiante.IdAsignacion}</td>
-                                                    <td>{estudiante.CodDocente}</td>
-                                                    <td>{estudiante.CodEstudiante}</td>
+                                                    <td>{estudiante.NombreE +" "}{estudiante.ApPE +" "}{estudiante.ApME}</td>
+                                                    <td>{estudiante.NombreTutor+" "}{estudiante.ApPTutor+" "}{estudiante.ApMTutor}</td>
                                                     <td >
                                                       < FaIcons.FaEdit className="editar" onClick={editar}/>
                                                     </td>
@@ -197,7 +200,7 @@ const AdminAsignarTutor = () => {
                                 </div>
                         </div>
                     <button className="btnSaveAT" onClick={comprobar}>Repartir de forma aleatoria </button>
-                    <button className="btnNuevoAT"  onClick={()=>{peticionGetEstudiantes();peticionGetTutores();abrirCerrarModalInsertar()}}>Asignar manual Mente </button>
+                    <button className="btnNuevoAT"  onClick={()=>{peticionGetEstudiantes();peticionGetTutores();abrirCerrarModalInsertar()}}>Asignar manualmente </button>
                     </div>
                 </div>
                 <Modal isOpen={warningView} centered>

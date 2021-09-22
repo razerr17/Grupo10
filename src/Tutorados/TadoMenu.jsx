@@ -7,7 +7,7 @@ const TadoMenu = () => {
     return (
         <div>
            
-           <TutoradoBar/>
+           <TutoradoBar nombrePage={"Inicio"} />
             <div className="contenido">
                 <div className="Principal2">
                 <label className="lbltop"><b>Historial de reuniones :</b></label>
@@ -23,7 +23,7 @@ const TadoMenu = () => {
                                                 <th>Detalles</th>
                                                 
                                             </tr>
-                                        </thead>
+                                        </thead >
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
@@ -108,7 +108,7 @@ const TadoMenu = () => {
                     <div className="partBotMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead>
+                                        <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -116,7 +116,7 @@ const TadoMenu = () => {
                                                 <th>Detalles</th>
                                                 
                                             </tr>
-                                        </thead>
+                                        </thead >
                                         <tbody>
                                             <tr>
                                                 <td>1</td>

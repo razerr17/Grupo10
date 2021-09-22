@@ -3,7 +3,7 @@ import Tutorbar from '../Tutor/Tutorbar'
 const TutorMenu = () => {
     return (
         <div>
-            <Tutorbar/>
+            <Tutorbar  nombrePage={"Inicio"}/>
             <div className="contenido">
                 <div className="Principal2">
                 <label className="lbltop"><b>Historial de reuniones :</b></label>
@@ -11,7 +11,7 @@ const TutorMenu = () => {
                     <div className="partTopMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead  style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>
@@ -104,7 +104,7 @@ const TutorMenu = () => {
                     <div className="partBotMenu">
                     <div className="col table-scroll scrollbar"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}}>
+                                        <thead  style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
                                                 <th>Curso</th>

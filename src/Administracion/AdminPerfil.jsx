@@ -3,8 +3,11 @@ import AdminBar from '../Administracion/AdminBar'
 import { Col ,Row} from 'react-bootstrap'
 import axios from 'axios'
 import * as BiIcons from "react-icons/bi"
+import * as FaIcons from "react-icons/fa"
 import * as RiIcons from "react-icons/ri"
 import * as AiIcons from "react-icons/ai"
+import * as MdIcons from "react-icons/md"
+import * as ImIcons from "react-icons/im"
 import * as BsIcons from "react-icons/bs"
 import Cookies from 'universal-cookie'
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
@@ -23,9 +26,38 @@ const firebaseConfig = {
 };
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 const AdminPerfil = (props) => {
-    const baseUrl=`http://localhost:4000/FotoPerfil`;
+    const baseUrl=`https://backendtutorias.herokuapp.com/FotoPerfil`;
+    const[successView,setSuccessView]=useState(false);
+    const abrirCerrarModalSuccess=()=>{
+        setSuccessView(!successView);
+    }
+    const[errorView,setErrorview]=useState(false);
+    const abrirCerrarModalError=()=>{
+        setErrorview(!errorView);
+      }
+        
+    const urlPass=`https://backendtutorias.herokuapp.com/UpPass`
+    const [passNow,setPassNow]=useState('')
+    const [passNew,setPassNew]=useState('')
+    const putPass=async()=>{
+        await axios.put(urlPass+`/${cookie.get('CodContra')}`,{ContraseniaAnt:passNow,ContraseniaNew:passNew})
+        .then(response=>{
+            return response.data;
+        }).then(response=>{
+            if(response.length>0){
+               abrirCerrarModalError()
+            }
+            else{
+                abrirCerrarModalSuccess()
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
+    
     const[direccionUrl,setDireccionUrl]=useState([{
-        Foto:"./imagenes/FondoTadoPerfil.JPG"
+        Foto:"./imagenes/carga.gif"
     }])
     const[aux,setAux]=useState([{
         Foto:"./imagenes/FondoTadoPerfil.JPG"
@@ -192,7 +224,7 @@ const AdminPerfil = (props) => {
                                    
                                     <Row className="mt-3">
                                         <Col>
-                                        <button onClick={()=>abrirCerrarModalEditarContra()} className="btnEditarContra">
+                                        <button onClick={()=>abrirCerrarModalEditarContra()} className="btnEditarContra"  >
                                         Editar contraseña 
                                         <RiIcons.RiLockPasswordFill className="iconSave"/>
                                     </button>
@@ -255,27 +287,27 @@ const AdminPerfil = (props) => {
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={modalEditarContra} centered>
-                    <ModalHeader>Editar datos</ModalHeader>
+                    <ModalHeader>Editar contraseña</ModalHeader>
                     <ModalBody>
                     <div className="form-group">
                         <Col>
                             <Row>
                             <label> Ingrese contraseña actual</label>
                             <br/> 
-                            <input type="text" className="form-control" name="IDEstudiante" />
+                            <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setPassNow(e.target.value)}/>
                             <br/>
                             </Row>
                             <Row>
                             <label>Ingrese contraseña nueva</label>
                             <br/> 
-                            <input type="text" className="form-control" name="IDEstudiante" />
+                            <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setPassNew(e.target.value)}/>
                             <br/>
                             </Row>
                         </Col>  
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                    <button className="btnColoG" >Editar</button>{""}
+                    <button className="btnColoG" onClick={()=>putPass()}>Editar</button>{""}
                     <button className="btnColoC " onClick={()=>abrirCerrarModalEditarContra()}>Cancelar</button>
                     </ModalFooter>
                 </Modal>
@@ -298,6 +330,32 @@ const AdminPerfil = (props) => {
                     <ModalFooter>
                     <button className="btnColoG" onClick={()=>peticionPut()} >Editar</button>{""}
                     <button className="btnColoC " onClick={()=>abrirCerrarModalEditarFoto()}>Cancelar</button>
+                    </ModalFooter>
+                </Modal>
+                <Modal  isOpen={successView} centered>
+                    <ModalHeader>
+                        <div className="text-center">
+                            <FaIcons.FaCheckCircle className="logoEditContra1 "/>
+                        </div>
+                        <div className="text-center lblModalContra1">
+                            <b> la contraseña se actualizo correctamente</b>
+                        </div>
+                    </ModalHeader>
+                    <ModalFooter>
+                    <ImIcons.ImCross onClick={()=>{abrirCerrarModalSuccess();abrirCerrarModalEditarContra();}}/>
+                    </ModalFooter>
+                </Modal>
+                <Modal  isOpen={errorView} centered>
+                    <ModalHeader>
+                    <div className="text-center">
+                            <MdIcons.MdError className="logoEditContra text-danger"/>
+                        </div>
+                        <div className="text-center lblModalContra">
+                            <b> la contraseña actual no es correcta</b>
+                        </div>
+                    </ModalHeader>
+                    <ModalFooter>
+                    <ImIcons.ImCross onClick={()=>abrirCerrarModalError()}/>
                     </ModalFooter>
                 </Modal>
             </div>

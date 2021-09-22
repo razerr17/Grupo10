@@ -9,7 +9,8 @@
   padding: 3%;
 }
 .btnSend {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
   position: relative;
   left: 75%;

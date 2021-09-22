@@ -13,7 +13,8 @@
   margin-bottom: 1%;
 }
 .btnBuscarNombre {
-  background: #fd9727;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
   width: 200px;
 }

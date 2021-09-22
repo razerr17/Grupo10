@@ -1,4 +1,4 @@
-    import React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
 import * as ImIcons from "react-icons/im"
@@ -8,7 +8,7 @@ import {Modal,ModalFooter,ModalHeader} from 'reactstrap'
 import Cookies from 'universal-cookie/es6';
 import '../styles/LoginTutorados.css'
 const LoginTutor = (props)=>{
-    const baseURL="http://localhost:4000/loginDocente";
+    const baseURL="https://backendtutorias.herokuapp.com/loginDocente";
     const cookies=new Cookies();
     const[user,setUser]=useState('')
     const[password,setPassword]=useState('')
@@ -46,6 +46,8 @@ const LoginTutor = (props)=>{
         })
     }
     const comprobar=()=>{
+        console.log(user)
+        console.log(password)
         if(user===''||password===''){
             abrirCerrarModalWarning();
         }
@@ -66,35 +68,35 @@ const LoginTutor = (props)=>{
                     </Link>
                 </div>
             <br />
-            <div className="Principal"   style={{backgroundColor:'white'}}>  
+            <div className="Principal">  
                 <div className="containerLogin">
                     <h2 className="title">Tutor</h2>
-                    <img className="lo"src="../imagenes/Tutor.JPG" alt=""/>
+                    <img className="lo"src="../imagenes/education.png" alt=""/>
                     <hr />
-                    <div className="form">
-                        <label><b>Ingrese Usuario:</b> </label>
-                        <input type="text"
-                         className="form-control" 
-                         onChange={ (e) => setUser(e.target.value)} 
-                         name="username" 
-                         placeholder="Usuario"/>
+                    <div className="form-group">
+                        <label className="inputM"><b>Ingrese Usuario:</b> </label>
                         <br />
-                        <label> <b>Ingrese Contraseña:</b>  </label>
+                        <input
+                        type="text"
+                        className="form-control"
+                        name="username" 
+                        onChange={ (e) => setUser(e.target.value)} 
+                        placeholder="Usuario"
+                        />
+                        <br />
+                        <label className="inputM"> <b>Ingrese Contraseña:</b>  </label>
                         <br />
                         <input
                         type={mostrar ? 'text' : 'password'}
                         className="form-control"
-                        onChange={ (e) => setPassword(e.target.value)} 
+                        onChange={ (e) => setPassword(e.target.value)}
                         name="password"          
-                        placeholder={mostrar ? 'ingrese aqui' : '****************'}
+                        placeholder={mostrar ? 'Ingrese su contraseña' : '***********'}
                         />
-                        <Row>
-                            <Col className="col-2 ">
-                                <input  clasName="inputM" type="checkbox" onChange={CambiarMostrar}/>
-                            </Col>
-                            <Col className="col-5">
-                               <p className="fst-italic">mostrar contraseña</p> 
-                            </Col>
+                        <Row >
+                        <label className="inputM" >
+                        <input type="checkbox" onChange={CambiarMostrar} value="remember-me"/> Mostrar contraseña
+                        </label>
                         </Row>
                         <br />
                         <Link  style={{ textDecoration: 'none' }}>
@@ -104,7 +106,7 @@ const LoginTutor = (props)=>{
                 </div>
                 <Modal  isOpen={warningView} centered>
                     <ModalHeader>
-                        <ImIcons.ImWarning />   La contraseña o el usuario no son correctos
+                        <ImIcons.ImWarning /> La contraseña o el usuario no son correctos
                     </ModalHeader>
                     <ModalFooter>
                     <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>

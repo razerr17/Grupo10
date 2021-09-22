@@ -37,7 +37,7 @@
   display: flex;
 }
 .tarjeta1 {
-  background-color: #efefef;
+  background-color: white;
   height: 391px;
   width: 285px;
   border-radius: 20px;
@@ -52,7 +52,11 @@
 .columnas {
   display: block;
   margin: 10px;
-  font-family: "Arial black";
+  font-family: 'Ubuntu Condensed', sans-serif;
   color: #060c2d;
   text-align: center;
+}
+.imagen{
+  margin:  20px;
+  height:'200px';
 }

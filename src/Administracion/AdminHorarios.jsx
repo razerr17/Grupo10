@@ -51,7 +51,7 @@ const AdminHorarios = () => {
                                 <div>
                                     <textarea className="inputHor" type="text" />
                                 </div>
-                                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnGuar"><b>Guardar</b></button>
+                                <button className="btnGuar"><b>Guardar</b></button>
                            </Col>
                        </Row>
                        <div className="Tabla">

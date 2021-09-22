@@ -20,7 +20,7 @@ const log_menu = () => {
                         <div className="tarjeta1">
                            <Col className="columnas">
                                 <div>
-                                    <img  src="../imagenes/Tutorado.JPG" alt="" />
+                                <img className="imagen" src="../imagenes/reading.png" />
                                 </div>
                                 <div >
                                     <h2>Tutorados</h2>
@@ -40,7 +40,7 @@ const log_menu = () => {
                         <div className="tarjeta1">
                             <Col className="columnas">
                                         <div>
-                                            <img  src="../imagenes/Tutor.JPG" alt="" />
+                                            <img className="imagen" src="../imagenes/education.png" />
                                         </div>
                                         <div >
                                             <h2>Tutor</h2>
@@ -59,10 +59,10 @@ const log_menu = () => {
                             <div className="tarjeta1">
                                     <Col className="columnas">
                                             <div>
-                                                <img  src="../imagenes/Administracion.JPG" alt="" />
+                                               <img className="imagen" src="../imagenes/management.png" />
                                             </div>
                                             <div >
-                                                <h2>Administracion</h2>
+                                                <h2>Administración</h2>
                                             </div>
                                             <div>
                                                 <Link to="/LoginAdministracion" style={{ textDecoration: 'none' }}>

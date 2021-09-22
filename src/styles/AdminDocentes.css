@@ -24,7 +24,8 @@
   padding: 0.5%;
 }
 .btnColoG {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 2px;
   width: 80px;
   height: 38px;
@@ -32,7 +33,7 @@
   border-style: none;
 }
 .btnColoC {
-  background: #383e5f;
+  background: #000a25;
   border-radius: 2px;
   width: 80px;
   height: 38px;
@@ -43,12 +44,17 @@
   background: #ed9b40;
 }
 .btnAddEst {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
   margin-bottom: 2%;
+  height: 60px;
+  width: 150px;
+  margin-top: 1%;
 }
 .btnImportar {
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 10px;
 }
 .anchoMo {

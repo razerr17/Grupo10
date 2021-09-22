@@ -2,10 +2,22 @@
   padding: 1%;
   height: 36%;
 }
+
+.Principala {
+  margin-top: 23px;
+  margin-bottom: -20px;
+  border-radius: 5px;
+  background: white;
+  border-radius: 20px;
+  height: 28%;
+  width: 100%;
+  /* IMPORTANTE */
+}
+
 .part2Info {
-  height: 25%;
+  height: 45%;
   margin-top: 1%;
-  margin-left: 2%;
+  margin-left: 1%;
   margin-right: 2%;
   padding: 1%;
   border-radius: 20px;
@@ -14,18 +26,18 @@
 .part3Info {
   height: 25%;
   margin-top: 1%;
-  margin-left: 2%;
+  margin-left: 1%;
   margin-right: 2%;
   padding: 1%;
   border-radius: 20px;
   background: #efefef;
 }
 .alturaDrop {
-  height: 55px;
+  height: 35px;
 }
 .altur {
   position: relative;
-  height: 400px;
+  height: 200px;
   overflow: auto;
   margin-top: 1%;
   width: 100%;
@@ -42,7 +54,7 @@
 }
 .tableScrollSe {
   position: relative;
-  height: 80px;
+  height: 120px;
   padding-left: 1%;
   padding-right: 1%;
   overflow: auto;
@@ -51,15 +63,24 @@
   border-radius: 0px;
 }
 .btnAdd {
-  background: #ed9b40;
-  border-radius: 20px;
-  width: 100px;
+  background: #000a25;
+  color:white;
+  border-radius: 10px;
+  width: 200px;
+  margin-left: 55px;
+  height: 32px;
 }
 .btnEnviar {
-  background: #ed9b40;
-  border-radius: 20px;
+  background: #000a25;
+  color:white;
+  border-radius: 10px;
   position: relative;
   left: 80%;
-  top: 3%;
+  top: 10%;
   width: 200px;
+  height: 32px;
+  margin-top: 20px;
+}
+.titulo{
+  font-weight: bolder;
 }

@@ -7,13 +7,13 @@ import axios from 'axios';
 import * as ImIcons from "react-icons/im"
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
 import '../styles/AdminEstudiantes.css'
+import Cookies from 'universal-cookie'
 
 
-
-const AdminEstudiantes = () => {
-
-    const baseUrl=`http://localhost:4000/estudiantes`;
-    const baseUrlExcel=`http://localhost:4000/estudiantesLista`;
+const AdminEstudiantes = (props) => {
+  const cookie =new Cookies();
+    const baseUrl=`https://backendtutorias.herokuapp.com/estudiantes`;
+    const baseUrlExcel=`https://backendtutorias.herokuapp.com/estudiantesLista`;
     const[modalInsertar,setModalInsertar]=useState(false);
     const [codEstudiante, setCodEstudiante] = React.useState("");
     const [nombres, setNombres] = React.useState("");
@@ -58,6 +58,7 @@ const AdminEstudiantes = () => {
         console.log(error);
         })
       }
+      
       const peticionPost=async()=>{
         var a = [];
         if(!codEstudiante.trim()){
@@ -152,6 +153,9 @@ const AdminEstudiantes = () => {
     }
     useEffect(()=>{
         peticionGet();
+        if(!cookie.get('CodAdmin')){
+          props.history.push('/LoginAdministracion');
+      }
       })
     return (
         <div>
@@ -163,9 +167,9 @@ const AdminEstudiantes = () => {
                         <div className="TablaE">
                             <div className="col tableScrollE scrollE"> 
                             <table className="table table-bordered bg-light ">
-                                        <thead className="colTable">
+                                       <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
-                                                <th>codigo</th>
+                                                <th>Código</th>
                                                 <th>Nombres</th>
                                                 <th>Apellidos</th>
                                                 <th>Email</th>
@@ -191,7 +195,7 @@ const AdminEstudiantes = () => {
                                     </table>
                                 </div>
                         </div>
-                    <button style={{backgroundColor:'#000a25',color:'white'}} onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
+                    <button onClick={()=>abrirCerrarModalInsertar()} className="btnAddEst"> <b>Agregar estudiante</b></button> 
                     
                     <div class="input-group">
                        <input type="file"  className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"
@@ -251,8 +255,8 @@ const AdminEstudiantes = () => {
                     </div>
                     </ModalBody>
                     <ModalFooter>
-                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnColoG" onClick={()=>peticionPost()} >Insertar</button>{""}
-                    <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
+                    <button className="btnColoG" onClick={()=>peticionPost()} >Insertar</button>{""}
+                    <button className="btnColoC " onClick={()=>abrirCerrarModalInsertar()}>Cancelar</button>
                     </ModalFooter>
                 </Modal>
                 

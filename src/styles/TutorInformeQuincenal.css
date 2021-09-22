@@ -4,17 +4,18 @@
 }
 .AsistenciaPart {
   background: #efefef;
-  height: 40%;
+  height: 43%;
   margin: 1%;
-  padding: 2%;
+  padding: 1.5%;
   border-radius: 20px;
 }
 .ResumenPart {
   background: #efefef;
-  height: 43%;
+  height: 35%;
   margin: 1%;
-  padding: 2%;
+  padding: 1.5%;
   border-radius: 20px;
+  font-weight: bold;
 }
 
 .switchlbl {
@@ -38,10 +39,11 @@
 }
 .btnEnviarQuince {
   position: relative;
-  left: 80%;
-  top: 2%;
+  left: 90%;
+  top: 8%;
   border-radius: 20px;
-  width: 20%;
-  height: 30px;
-  background: #ed9b40;
+  width: 10%;
+  height: 40px;
+  background: #000a25;
+  color:white;
 }

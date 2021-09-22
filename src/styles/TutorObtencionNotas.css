@@ -20,16 +20,18 @@
 }
 .btnSe {
   border-radius: 20px;
-  background: #fd9727;
+  background: #000a25 ;
+  color:white;
   width: 200px;
 }
 .CardAsig {
   border-radius: 40px;
   background: white;
   height: 100px;
-  padding: 2%;
+  padding: 1% 2%;
   list-style: none;
   margin-bottom: 1%;
+  margin-top: 1%;
 }
 .inputNota {
   margin-left: 1%;
@@ -48,7 +50,7 @@
   position: absolute;
   bottom: 12%;
   left: 55%;
-  background: #383e5f;
+  background: #000a25;
   border-radius: 50%;
 
   border-color: #efefef;
@@ -57,13 +59,14 @@
 }
 .iconoAdd {
   font-size: 28px;
-  color: #fd9727;
+  color:  #FFDB68 ;
 }
 .btnGua {
   position: relative;
-  left: 80%;
-  top: -5px;
-  background: #fd9727;
+  left: 87%;
+  top: 5px;
+  background: #000a25;
+  color:white;
   border-radius: 20px;
   height: 40px;
   width: 200px;

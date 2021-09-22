@@ -2,11 +2,12 @@ import React from 'react'
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import AdminBar from '../Administracion/AdminBar'
-
+import Cookies from 'universal-cookie'
 import '../styles/AdminDocentes.css'
 
-const AdminDocentesTutores = () => {
-    const baseUrl=`http://localhost:4000/tutores`;
+const AdminDocentesTutores = (props) => {
+    const cookie =new Cookies();
+    const baseUrl=`https://backendtutorias.herokuapp.com/tutores`;
     const[data,setData]=useState([]);
     const peticionGet=async()=>{
         await axios.get(baseUrl)
@@ -18,7 +19,10 @@ const AdminDocentesTutores = () => {
         })  
       }
     useEffect(()=>{
-      peticionGet();  
+      peticionGet(); 
+      if(!cookie.get('CodAdmin')){
+        props.history.push('/LoginAdministracion');
+    } 
     })
     return (
         <div>
@@ -29,7 +33,7 @@ const AdminDocentesTutores = () => {
                     <div className="TablaDT">
                     <div className="col tableScrollDT scrollDT"> 
                                     <table className="table table-bordered bg-light ">
-                                        <thead style={{backgroundColor:'#85b7e9'}} className="colTable">
+                                       <thead   className="colTable" style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>CodDocente</th>
                                                 <th>DNI</th>

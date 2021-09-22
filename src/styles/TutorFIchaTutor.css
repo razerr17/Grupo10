@@ -53,7 +53,8 @@
   position: relative;
   top: 10%;
   left: 70%;
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   border-radius: 20px;
   width: 100px;
   height: 40px;
@@ -69,5 +70,9 @@
   width: 40%;
   height: 40px;
   left: 33%;
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
+}
+.tituloss{
+  font-weight: bolder;
 }

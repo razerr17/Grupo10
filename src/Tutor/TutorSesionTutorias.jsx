@@ -8,6 +8,9 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import TextField from "@material-ui/core/TextField";
 import Cookies from "universal-cookie";
 import axios from "axios";
+import * as ImIcons from "react-icons/im"
+
+var moment = require('moment');
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,14 +38,54 @@ const TutorSesionTutorias = (props) => {
   const [observaciones, setObservaciones] = useState("");
   const [codDocente, setCodDocente] = useState(cookie.get("CodDocente"));
   const [modalInsertar, setModalInsertar] = useState(false);
+  const [mostrar,setMostrar]=useState(false);
+  const abrirCerrarMostrar=()=>{setMostrar(!mostrar)}
+  const[warningView,setWarningview]=useState(false);
+  const url=`https://backendtutorias.herokuapp.com/Conf/Observacion`
+  const getInfo=async(ses,index)=>{
+    await axios.get(url+`/${ses}`)
+    .then(response=>{
+      return response.data;
+    }).then(response=>{
+            if(response.length>0){
+               abrirCerrarMostrar()
+               if(mostrar){
+                document.getElementById("inputmal"+index).value="******************-"
+                document.getElementById("btnVerDatos"+index).innerText="Ver datos privados"
+               }
+               else{
+                document.getElementById("inputmal"+index).value=response[0].Observacion
+                document.getElementById("btnVerDatos"+index).innerText="Ocultar datos"
+               }
+            }
+            else{
+              abrirCerrarMostrar()
+              if(mostrar){
+                document.getElementById("inputmal"+index).value="******************"
+                document.getElementById("btnVerDatos"+index).innerText="Ver datos privados"
+               }
+               else{
+                document.getElementById("inputmal"+index).value="SU TUTORADO NO LE DIO ACCESO A ESTA INFORMACION"
+                document.getElementById("btnVerDatos"+index).innerText="Ocultar datos "
+               }
+              
+            }
+        })
+    .catch(error=>{
+      console.log(error);
+    })
+  }
+  const abrirCerrarModalWarning=()=>{
+    setWarningview(!warningView);
+}
   const limpiar = () => {
     setTipoTutoria("");
     setDescripcion("");
     setObservaciones("");
     setFecha("");
   };
-  const baseUrl = `http://localhost:4000/fichas/asignacion/${codDocente}`;
-  const baseUrlSemestre = `http://localhost:4000/coordinador`;
+  const baseUrl = `https://backendtutorias.herokuapp.com/fichas/asignacion/${codDocente}`;
+  const baseUrlSemestre = `https://backendtutorias.herokuapp.com/coordinador`;
 
   const peticionGet = async () => {
     await axios
@@ -70,7 +113,7 @@ const TutorSesionTutorias = (props) => {
       setSemestre(elemento.Periodo);
     });
   };
-  const baseUrlSesiones = `http://localhost:4000/sesiones`;
+  const baseUrlSesiones = `https://backendtutorias.herokuapp.com/sesiones`;
   const peticionPost = async () => {
     await axios
       .post(baseUrlSesiones, {
@@ -87,26 +130,27 @@ const TutorSesionTutorias = (props) => {
         abrirCerrarModalInsertar();
       })
       .catch((error) => {
+        setWarningview(true);
         console.log(error);
       });
   };
 
   const peticionSesiones = async (id) => {
     await axios
-      .get(`http://localhost:4000/sesiones/ficha/${id}`)
+      .get(`https://backendtutorias.herokuapp.com/sesiones/ficha/${id}`)
       .then((response) => {
-        console.log(id);
-        console.log(`http://localhost:4000/sesiones/ficha/${id}`);
-        setSesiones(sesiones.concat(response.data));
+        setSesiones(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  
   useEffect(() => {
     //peticionSesiones();
     if (!cookie.get("CodDocente")) {
-      props.history.push("/LoginAdministracion");
+      props.history.push('/LoginTutor');
     }
   });
   const abrirCerrarModalInsertar = () => {
@@ -116,28 +160,26 @@ const TutorSesionTutorias = (props) => {
   };
   return (
     <div>
-      <Tutorbar nombrePage={"Sesion de tutoria"} />
+      <Tutorbar nombrePage={"Sesiones de tutoria"} />
       <div className="contenido">
         <div className="Principal2">
           <br />
           <div className="STtop">
             <Row className="mt-4">
-              <Col className="col-2">
+              <Col className="col-5">
                 <b>Tutorado : </b>
               </Col>
-              <Col className="col-4">
+              <Col className="col-6">
                 <select
                   class="form-select form-select-sm"
                   aria-label=".form-select-sm example"
-                  onClick = {(e) => peticionGet()}
+                  onClick = {() => peticionGet()}
                   onChange={(e) => {
+                    peticionSemestre();
                     setIdFichaTutoria(e.target.value);
                     peticionSesiones(e.target.value);
                   }}
                 >
-                  <option value="" selected>
-                    {" "}
-                  </option>
                   {data.map((obj) => (
                     <option value={obj.IdFichaTutoria}>
                       {obj.Nombres + " " + obj.ApPaterno + " " + obj.ApMaterno}
@@ -145,24 +187,12 @@ const TutorSesionTutorias = (props) => {
                   ))}
                 </select>
               </Col>
-              <Col className="col-2">
-                <b>Semestre : </b>
-              </Col>
-              <Col className="col-3">
-                <select
-                  class="form-select form-select-sm"
-                  aria-label=".form-select-sm example"
-                >
-                  <option value="3">2021-I</option>
-                </select>
-              </Col>
-              <Col></Col>
+              
             </Row>
           </div>
           <div className="ContainerSTbtn">
             <button
-            style={{backgroundColor:'#000a25',color:'white'}}
-              onClick={() => {peticionSemestre();abrirCerrarModalInsertar()}}
+              onClick={() => {abrirCerrarModalInsertar()}}
               className="btnSTSave"
             >
               <b>Nueva Sesion</b>
@@ -172,19 +202,20 @@ const TutorSesionTutorias = (props) => {
           <div className="STbot">
             <div className="TablaST">
               <div className="col tableScrollST scrollST">
-                {sesiones.map((obj) => (
+                {sesiones.map((obj,index) => (
                   <div className="sesion">
                     <Row className="w-100">
-                      <Col className="col-6">
+                      <Col className="col-4">
                         <b>Fecha</b>
                         <input
                           type="text"
                           className="form-control"
                           name="Fecha"
-                          value={obj.Fecha} readOnly
+                          value={moment(obj.Fecha).format("MM/DD/YYYY")} readOnly
                         />
+                        
                       </Col>
-                      <Col className="col-6">
+                      <Col className="col-4">
                         <b>Semestre</b>
                         <input
                           type="text"
@@ -194,27 +225,34 @@ const TutorSesionTutorias = (props) => {
                           readOnly
                         />
                       </Col>
+                      <Col className="col-4 mt-4">
+                        <button className="btnDatos" id={"btnVerDatos"+index} onClick={()=>getInfo(obj.IdSesion,index)} >
+                          Ver datos privados
+                        </button>
+                        
+                      </Col>
                     </Row>
                     <Row className="w-100">
                       <Col className="col-6">
                         <b>Descripcion</b>
-                        <input
-                          type="text"
+                        <textarea class="form-control" type="text"
                           className="form-control"
                           name="Descripcion"
                           value = {obj.Descripcion}
-                          readOnly
-                        />
+                          readOnly rows="2"></textarea>
                       </Col>
                       <Col className="col-6">
                         <b>Observaciones</b>
-                        <input
+                        <textarea
+                          id={"inputmal"+index}
                           type="text"
                           className="form-control"
                           name="Observaciones"
-                          value = {obj.Observaciones} readOnly
+                          value="******************"
+                          readOnly
                         />
                       </Col>
+
                     </Row>
                   </div>
                 ))}
@@ -238,7 +276,7 @@ const TutorSesionTutorias = (props) => {
                 <Col>
                   <Row>
                     <Col className="col-2">
-                      <h6>Semestre: </h6>
+                      <h6 className="titulos">Semestre: </h6>
                     </Col>
                     <Col className="col-4">
                       <input
@@ -250,7 +288,7 @@ const TutorSesionTutorias = (props) => {
                       />
                     </Col>
                     <Col className="col-2">
-                      <h6>Tipo Tutoria :</h6>
+                      <h6 className="titulos" >Tipo Tutoria :</h6>
                     </Col>
 
                     <Col className="col-4">
@@ -259,9 +297,6 @@ const TutorSesionTutorias = (props) => {
                         aria-label=".form-select-sm example"
                         onChange={(e) => setTipoTutoria(e.target.value)}
                       >
-                        <option value="" selected>
-                          {" "}
-                        </option>
                         <option value="Académica">Académica</option>
                         <option value="Personal">Personal</option>
                         <option value="Profesional">Profesional</option>
@@ -273,7 +308,7 @@ const TutorSesionTutorias = (props) => {
 
               <Row className="mt-2">
                 <Col className="col-2">
-                  <h6>Fecha :</h6>
+                  <h6 className="titulos">Fecha :</h6>
                 </Col>
                 <Col className="col-4">
                   <form className={classes.container} noValidate>
@@ -290,12 +325,14 @@ const TutorSesionTutorias = (props) => {
                 </Col>
               </Row>
             </Row>
+            <hr/>
             <Row>
               <Col>
                 <label for="exampleFormControlTextarea1" class="form-label">
-                  <b>Descripcion :</b>
+                  <b>Descripción :</b>
                 </label>
                 <textarea
+                  placeholder="Ingrese la descripción de la sesión"
                   onChange={(e) => setDescripcion(e.target.value)}
                   class="form-control"
                   id="exampleFormControlTextarea1"
@@ -305,10 +342,11 @@ const TutorSesionTutorias = (props) => {
             </Row>
             <Row>
               <Col>
-                <label for="exampleFormControlTextarea1" class="form-label">
+                <label for="exampleFormControlTextarea1" class="form-label mt-2">
                   <b>Observaciones :</b>
                 </label>
                 <textarea
+                  placeholder="Ingrese las observaciones de la sesión"
                   onChange={(e) => setObservaciones(e.target.value)}
                   class="form-control"
                   id="exampleFormControlTextarea1"
@@ -320,7 +358,6 @@ const TutorSesionTutorias = (props) => {
         </ModalBody>
         <ModalFooter>
           <button
-          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoG"
             onClick={() => {
               peticionPost();
@@ -329,10 +366,8 @@ const TutorSesionTutorias = (props) => {
           >
             Insertar
           </button>
-          style={{backgroundColor:'#000a25',color:'white'}}
           {""}
           <button
-          style={{backgroundColor:'#000a25',color:'white'}}
             className="btnColoC "
             onClick={() => abrirCerrarModalInsertar()}
           >
@@ -340,6 +375,16 @@ const TutorSesionTutorias = (props) => {
           </button>
         </ModalFooter>
       </Modal>
+      <Modal isOpen={warningView} centered>
+
+                    <ModalHeader>
+                        <ImIcons.ImWarning />          Algun(os) de los campos no esta(n) correctamente llenado(s) 
+                    </ModalHeader>
+                 
+                    <ModalFooter>
+                    <ImIcons.ImCross onClick={()=>abrirCerrarModalWarning()}/>
+                    </ModalFooter>
+                </Modal> 
     </div>
   );
 };

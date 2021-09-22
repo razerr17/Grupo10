@@ -18,7 +18,8 @@
 }
 .title {
   color: #060c2d;
-  font-family: "Arial black";
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-weight: bold;
 }
 .Principal {
   position: absolute;
@@ -29,7 +30,7 @@
   border: #060c2d 8px outset;
   border-radius: 20px;
   padding: 40px;
-  background-color: #efefef;
+  background-color: white;
   width: 500px;
 }
 
@@ -46,10 +47,17 @@
   margin-top: 100px;
 }
 .ingresar {
-  background: #fd9727;
+  background:  #060c2d ;
   border-radius: 20px;
-  font-family: "Arial black";
-  color: #060c2d;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  color: #fff;
   height: 40px;
   width: 200px;
+}
+.ingresar:hover {
+  background: #272d53;
+}
+.inputM{
+  padding-top: 8px;
+  padding-bottom: 8px;
 }

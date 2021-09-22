@@ -1,10 +1,9 @@
 .partTopTutor {
-  height: 45%;
+  
   background: #efefef;
   width: 70%;
   margin-top: 1%;
-  padding: 10px;
-  padding-top: 4.5%;
+  padding: 4% 1% 4% 1%;
   border-radius: 10px;
   margin-left: 2%;
   border-style: groove;
@@ -23,24 +22,22 @@
 }
 .cardImagenPerfil {
   position: absolute;
-  left: 78%;
-  width: 18%;
-  top: 14%;
-  height: 38%;
-  border-radius: 50%;
+  left: 82%;
+  top: 10%;
+  height: 140px;
+  border-radius: 20%;
   border-style: groove;
 }
 .celda {
   margin-left: 10%;
-
-  height: 80%;
 }
 .btnCambiarTutor {
   position: absolute;
   left: 87%;
-  top: 87%;
+  top: 48%;
   border-radius: 50px;
-  background: #ed9b40;
+  background: #000a25;
+  color:white;
   height: 50px;
-  width: 90px;
+  width: 130px;
 }

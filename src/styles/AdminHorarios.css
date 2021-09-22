@@ -13,14 +13,16 @@
 .btnDelete {
   float: right;
   border-radius: 10px;
-  background: #fd9727;
+  background: #000a25;
+  color:white;
   width: 200px;
   margin-top: 10px;
 }
 .btnGuar {
   float: left;
   border-radius: 10px;
-  background: #fd9727;
+  background: #000a25;
+  color:white;
   width: 200px;
   margin-top: 10px;
 }

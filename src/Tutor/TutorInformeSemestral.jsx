@@ -5,20 +5,20 @@ import '../styles/TutorInformeSemestral.css'
 const TutorInformeSemestral = () => {
     return (
         <div>
-            <Tutorbar/>
+            <Tutorbar  nombrePage={"Informe Semestral"}/>
             <div className="contenido">
-                <div className="Principal2">
+                <div className="Principala">
                     <div className=" part1Info">
                        <Row>
                            <Col className="col-6">
-                                <h4>Cuadro resumen</h4>
+                                <h4 className="titulo" >Cuadro resumen</h4>
                            
                            </Col>
                            <Col className="col-2">
-                                <h4>Semestre :</h4>                            
+                                <h4 className="titulo"> Semestre :</h4>                            
                            </Col>
                            <Col className="col-4">
-                           <select className="form-select form-select-lg mb-2 alturaDrop" aria-label=".form-select-lg example">
+                           <select className="form-select form-select-sm mb-2 alturaDrop" aria-label=".form-select-sm example">
                                     <option selected>Open this select menu</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -35,7 +35,7 @@ const TutorInformeSemestral = () => {
                                         <th scope="col-3">Porcetaje</th>
                                         
                                         </tr>
-                                    </thead>
+                                    </thead >
                                     <tbody className="alturaTabla">
                                         <tr className="alturaCelda">
                                             <td>Tutorados total</td>
@@ -66,13 +66,15 @@ const TutorInformeSemestral = () => {
                                     </table>
                        </div>
                     </div>
+                    </div>
+                    <div>
                     <div className=" part2Info">
                         <Col>
-                            <Row>
+                            <Row className="mx-1" >
                                 <h6>Casos de Tutoria que implican mas de dos sesiones</h6>
                             </Row>
                             <Row>
-                                <Col className="col-2">
+                                <Col className="col-1 mx-3">
                                    <b>Tutorado :</b>
                                 </Col>
                                 <Col className="col-8">
@@ -84,14 +86,14 @@ const TutorInformeSemestral = () => {
                                 </select>
                                 </Col >
                                 <Col className="col-2">
-                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
+                                    <button className="btnAdd">
                                         Añadir
                                     </button>
                                 </Col>
                             </Row>
                         </Col>
                         <div className="col tableScrollSe alt"> 
-                                    <table className="bg-light anchotab ">
+                                    <table className="table table-bordered bg-light ">
                                         <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
@@ -131,7 +133,7 @@ const TutorInformeSemestral = () => {
                                                 <td>1</td>
                                                 <td>NUCLEO</td>
                                                 <td>1200.00</td>
-                                                <td><button >ver</button></td>
+                                                <td><button>ver</button></td>
                                             </tr>
                                             
                                         </tbody>
@@ -140,11 +142,11 @@ const TutorInformeSemestral = () => {
                     </div>
                     <div className=" part3Info">
                     <Col>
-                            <Row>
+                    <Row className="mx-1" >
                                 <h6>Casos de Tutoria que implican mas de dos sesiones</h6>
                             </Row>
                             <Row>
-                                <Col className="col-2">
+                                <Col className="col-1 mx-3">
                                    <b>Tutorado :</b>
                                 </Col>
                                 <Col className="col-8">
@@ -156,14 +158,14 @@ const TutorInformeSemestral = () => {
                                 </select>
                                 </Col >
                                 <Col className="col-2">
-                                    <button style={{backgroundColor:'#000a25',color:'white'}} className="btnAdd">
+                                    <button className="btnAdd">
                                         Añadir
                                     </button>
                                 </Col>
                             </Row>
                         </Col>
                         <div className="col tableScrollSe alt"> 
-                                    <table className="bg-light anchotab ">
+                                    <table  className="table table-bordered bg-light ">
                                         <thead style={{backgroundColor:'#85b7e9'}}>
                                             <tr>
                                                 <th>Nro</th>
@@ -178,7 +180,7 @@ const TutorInformeSemestral = () => {
                                                 <td>1</td>
                                                 <td>NUCLEO</td>
                                                 <td>1200.00</td>
-                                                <td><button >ver</button></td>
+                                                <td><button>ver</button></td>
                                             
                                             </tr>
                                             <tr>
@@ -210,7 +212,7 @@ const TutorInformeSemestral = () => {
                                     </table>
                                 </div>
                     </div>
-                    <button  style={{backgroundColor:'#000a25',color:'white'}} className="btnEnviar">
+                    <button className="btnEnviar">
                         Enviar
                     </button>
                 </div>

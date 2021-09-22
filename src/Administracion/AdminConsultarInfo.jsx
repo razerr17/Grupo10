@@ -2,6 +2,7 @@ import React from 'react'
 import AdminBar from '../Administracion/AdminBar'
 import '../styles/AdminConsultarInfo.css'
 import {Col,Row} from 'react-bootstrap'
+import Cookies from 'universal-cookie'
 const AdminConsultarInfo = () => {
     return (
         <div>

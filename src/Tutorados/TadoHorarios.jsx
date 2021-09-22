@@ -5,13 +5,13 @@ import { Col ,Row} from 'react-bootstrap'
 const TadoHorarios = () => {
     return (
         <div>
-            <TutoradoBar/>
+             <TutoradoBar nombrePage={"Horarios Disponibles"} />
             <div className="contenido">
                 <div className="Principal2">
                     <Row className="altura">                    
                         <Col className="altura">   
                            <div className="Lado1">
-                           <div className=""><b>Lista de horarios disponibles del su tutor :</b></div>
+                           <div className=""><b>Lista de horarios disponibles del su tutor:</b></div>
                             <div className="col table-wrapper-scroll my-scrollbar"> 
                                     <table className="table table-bordered bg-light ">
                                         <thead style={{backgroundColor:'#85b7e9'}}>
@@ -22,7 +22,7 @@ const TadoHorarios = () => {
                                                 <th>Detalles</th>
                                                 
                                             </tr>
-                                        </thead>
+                                        </thead >
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
@@ -105,14 +105,14 @@ const TadoHorarios = () => {
                         </Col>
                         <Col className="altura">
                            <div className="Lado2">
-                                <div className="lblTutores2"><b>Escoga una fecha y hora en la que necesite una reunion :</b></div>
+                                <div className="lblTutores2"><b>Escoja una fecha y hora en la que necesite una reunion :</b></div>
                                 <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option selected>Open this select menu</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
-                                <button style={{backgroundColor:'#000a25',color:'white'}} className="btnSeleccionar"> <b>Seleccionar</b></button>
+                                <button className="btnSeleccionar"> <b>Seleccionar</b></button>
                             </div>
                         </Col>
                     </Row>
