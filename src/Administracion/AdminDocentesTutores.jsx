@@ -20,9 +20,7 @@ const AdminDocentesTutores = (props) => {
       }
     useEffect(()=>{
       peticionGet(); 
-      if(!cookie.get('CodAdmin')){
-        props.history.push('/LoginAdministracion');
-    } 
+      
     })
     return (
         <div>

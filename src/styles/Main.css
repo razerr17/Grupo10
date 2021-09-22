@@ -6,30 +6,28 @@
 }
 .li1{
   display: table-cell;padding-left: 0;
-  height: 100%;
 }
 .sl{
   padding-left: 0px;
   position: absolute;
   animation-name: slider;
-  animation-duration: 30s;
-  animation-direction: alternate;
+  animation-duration: 20s;
+ 
   animation-iteration-count: infinite;
-  height: 100%;
 }
 @keyframes slider {
   0%{
     left: 0;
    }   
-  50%{
-    left: -130%;
+  35%{
+    left: -220vh;
   }
-  80%{ 
-    left: -200%;
+  60%{ 
+      left: -500vh;
   }
 
   100%{
-    left: 0px;
+      left: 0px;
   }
   
 }
@@ -40,7 +38,6 @@
   display: flex;
   min-height: 80vh;
   padding-left: 0;
-  height: 100%;
 }
 .bod1{
   background-size: cover;
@@ -49,17 +46,14 @@
   display: flex;
   min-height: 80vh;
   overflow: hidden;
-  height: 100%;
 }
 .Centrar {
   text-align: center;
-  align-items: center;
   position: absolute;
-  padding:4%;
-  border-radius: 20px;
-  background-color: rgba(0,0,0,0.65);
-  margin-top: 10%;
-  height: fit-content;
+  padding: 50px;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 10px;
 }
 .bod {
   background: url("../images/MainBackground.JPG");
@@ -68,13 +62,12 @@
   align-items: center;
   display: flex;
   min-height: 100vh;
-  height: 100%;
 }
 
 .h1 {
   color:  orange ;
   font-family: 'Ubuntu Condensed', sans-serif;
-  font-size: 120px;
+  font-size: 50px;
   position: relative;
 }
 .h2 {
@@ -105,7 +98,6 @@
   font-family: 'Ubuntu Condensed', sans-serif;
   color: #fff;
   width: 700px;
-  height: 100%;
 }
 
 
@@ -121,3 +113,5 @@
 .btna span {
   color: #fff;
 }
+
+

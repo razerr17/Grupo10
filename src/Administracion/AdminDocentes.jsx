@@ -8,8 +8,45 @@ import * as ImIcons from "react-icons/im"
 import {Modal,ModalBody,ModalFooter,ModalHeader} from 'reactstrap'
 import MaterialTable from "material-table";
 import '../styles/AdminEstudiantes.css'
-import Edit from '@material-ui/icons/Edit';
+import { forwardRef } from 'react';
 import Cookies from 'universal-cookie'
+
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+
+const tableIcons = {
+  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
+
 const columnas = [
     {
       title:'Codigo',
@@ -266,9 +303,7 @@ const AdminDocentes = (props) => {
       //}
       useEffect(()=>{
           peticionGet();
-          if(!cookie.get('CodAdmin')){
-            props.history.push('/LoginAdministracion');
-        }
+
     })
     return (
         <div>
@@ -283,6 +318,7 @@ const AdminDocentes = (props) => {
                               fixedHeader={true}
                              columns={columnas} 
                              data={data} 
+                             icons={tableIcons}
                              title="Docentes Tutores"
                              options={
                                   
@@ -290,7 +326,9 @@ const AdminDocentes = (props) => {
                                   
                                     headerStyle:{
                                 backgroundColor:'#85b7e9',
-                                color:'black'
+                                color:'black',
+                                fontSize: '15px',
+                                textAlign:'center'
                              },
                              tableLayout: "auto"
                                  }
@@ -322,23 +360,23 @@ const AdminDocentes = (props) => {
                             <Col>
                             <label>Codigo: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setCodDocente(e.target.value)}/>
+                            <input placeholder="Ej. D00001" type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setCodDocente(e.target.value)}/>
                             <br/>
                             <label>Nombres: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="Nombres" onChange={ (e) => setNombres(e.target.value)}/>
+                            <input placeholder="Ej. Cesar Augusto" type="text" className="form-control" name="Nombres" onChange={ (e) => setNombres(e.target.value)}/>
                             <br/>
                             <label>Apellido Paterno: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="ApPaterno" onChange={ (e) => setApPaterno(e.target.value)}/>
+                            <input  placeholder="Ej. Altamirano" type="text" className="form-control" name="ApPaterno" onChange={ (e) => setApPaterno(e.target.value)}/>
                             <br/>
                             <label>Apellido Materno: </label>
                             <br/> 
-                            <input type="text" className="form-control" name="ApMaterno" onChange={ (e) => setApMaterno(e.target.value)}/>
+                            <input placeholder="Ej. Vega" type="text" className="form-control" name="ApMaterno" onChange={ (e) => setApMaterno(e.target.value)}/>
                             <br/>
                             <label>DNI: </label>
                             <br/>
-                            <input type="text" className="form-control" name="dni" onChange={ (e) => setDni(e.target.value)}/>
+                            <input placeholder="Ej. 12232212"  type="text" className="form-control" name="dni" onChange={ (e) => setDni(e.target.value)}/>
                             <br/>
                             </Col>
                             <Col>
@@ -352,14 +390,14 @@ const AdminDocentes = (props) => {
                             <br/>
                             <label>Email: </label>
                             <br/> 
-                            <input type="email" className="form-control" name="correo" onChange={ (e) => setEmail(e.target.value)}/>
+                            <input placeholder="Ej. prueba@prueba.com" type="email" className="form-control" name="correo" onChange={ (e) => setEmail(e.target.value)}/>
                             <br/>       
                             <label>Celular :</label>
                             <br />
-                            <input type="text" className="form-control" name="telefono" onChange={(e)=>setCelular(e.target.value)} />
+                            <input placeholder="Ej. 983332131" type="text" className="form-control" name="telefono" onChange={(e)=>setCelular(e.target.value)} />
                             <br/>
                             <label htmlFor="">Direccion:</label>
-                            <input type="text" className="form-control" name="direccion" onChange={(e)=>setDireccion(e.target.value)}/>
+                            <input  placeholder="Av. Abancay S/N" type="text" className="form-control" name="direccion" onChange={(e)=>setDireccion(e.target.value)}/>
                             <br/>
                             <label htmlFor="">Es Tutor:</label>
                             <select class="form-select"  id="esTutor" name="esTutor" value={esTutor} onChange={ (e) => setEsTutor(e.target.value)}>

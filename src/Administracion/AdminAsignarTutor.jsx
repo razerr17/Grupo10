@@ -149,9 +149,6 @@ const AdminAsignarTutor = (props) => {
     }
     useEffect(()=>{
       peticionGetAsignaciones();  
-      if(!cookie.get('CodAdmin')){
-        props.history.push('/LoginAdministracion');
-    }  
     })
     return (
         <div>

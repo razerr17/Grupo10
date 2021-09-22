@@ -2,33 +2,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Main.css'
-import slide1 from '../images/slider1.jpg'
-import slide2 from '../images/slider2.jpg'
-import slide3 from '../images/slider3.jpg'
-
 const main = () => {
     return (
-        <div>
-        
-        
-        <div className="bod1">
-            
-            
-            
-            
-            <ul className="sl" >
-                <li className="li1">  <img  className="img" src={slide3} alt=""    />
-                   
-                </li>
-
-                <li className="li1">  <img  className="img" src={slide2} alt="" />
-                </li>
-
-                <li className="li1">  <img  className="img" src={slide1} alt="" /></li>
-
-
-            </ul>
-             
+        <div className="bod">
             <div className="Centrar">
                 <h1 className="h1">SISTEMA DE TUTORIAS</h1>
                 <h3 className="h3">Ingenieria Informatica y de Sistemas</h3>
@@ -43,7 +19,6 @@ const main = () => {
                     </button>
                 </Link>
             </div>
-        </div>
         </div>
     )
 }

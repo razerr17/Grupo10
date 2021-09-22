@@ -326,7 +326,7 @@ const TadoPerfil = (props) => {
                         </Row>
                         <Row>
                             <Col>
-                            <label htmlFor="">Direccion</label>
+                            <label htmlFor="">Dirección</label>
                             <input placeholder="Ej. Urb. Abancay L-8" type="text" className="form-control" value={cookie.get('Direccion')} name="direccion"/></Col>
                         </Row>
                                          

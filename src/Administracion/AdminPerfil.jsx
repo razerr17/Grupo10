@@ -158,33 +158,32 @@ const AdminPerfil = (props) => {
                                         <label > {cookie.get('Email')}</label>
                                     </div>
                                     <div className="email">
-                                        <label className="email">categoria : {cookie.get('Categoria')}</label>
+                                        <label className="email">Categoria : {cookie.get('Categoria')}</label>
                                     </div>
                                    
                                 </Col>
-                                <Col className="col-8 mt-4 column1 ">
-                                    <Row className="mt-4 mb-2">
+                                <Col className="col mt-4 column1 ">
+                                <Row className="mt-4 mb-2">
                                         <Col>
                                             <div className="cardDatos mx-auto">
                                                 <Row>
-                                                    <Col className=" col-3 ">
+                                                    <Col className="col-1 pt-2">
                                                         <AiIcons.AiOutlinePhone className="mx-auto iconCard"/>
                                                     </Col>
-                                                    <Col className="col-9 pt-3 ">
+                                                    <Col className="col-9 mt-3 mx-auto ">
                                                         <label className="lblCard"> <h6>{cookie.get('Celular')}</h6></label>    
                                                     </Col>
-                                                </Row>
-                                                
+                                                </Row>                                                
                                             </div>
                                         </Col>
                                         <Col>
                                             <div className="cardDatos mx-auto">
                                                 <Row>
-                                                    <Col className=" col-3 ">
+                                                    <Col className="col-1 pt-2">
                                                         <AiIcons.AiOutlineIdcard className="mx-auto iconCard"/>
                                                     </Col>
-                                                    <Col className="col-9 pt-3 ">
-                                                         <label className="lblCard">  (dni)-{cookie.get('DNI')}</label>   
+                                                    <Col className="col-9 mt-3 mx-auto">
+                                                         <label className="lblCard">  (DNI) - {cookie.get('DNI')}</label>   
                                                     </Col>
                                                 </Row>
                                                
@@ -196,7 +195,7 @@ const AdminPerfil = (props) => {
                                         <Col>
                                             <div className="cardDatos mx-auto">
                                                 <Row>
-                                                    <Col className=" col-1 pt-2">
+                                                    <Col className="col-1 pt-2">
                                                      <BsIcons.BsGeoAlt className="iconCard1"/>
                                                     </Col>
                                                     <Col className="col-9 mt-3 mx-auto" >
@@ -208,28 +207,29 @@ const AdminPerfil = (props) => {
                                         <Col>
                                             <div className="cardDatos mx-auto">
                                                 <Row>
-                                                    <Col className="col-5 mt-3">
-                                                    <label ><b>Es tutor :  </b></label>
+                                                    <Col className="col-4 pt-2 my-2 mx-3">
+                                                    <label ><b>Es Tutor :  </b></label>
                                                     </Col>
-                                                    <Col className="col-2 pt-3 ">
+                                                    <Col className="col-3 pt-3 ">
                                                     <label className=""> {cookie.get('Estutor')}</label>
                                                     </Col>
                                                 </Row>
                                                 
                                               
                                             </div>
+                                            
                                         </Col>
                                     </Row>
                                     
                                    
                                     <Row className="mt-3">
-                                        <Col>
+                                        <Col  className="mx-auto">
                                         <button onClick={()=>abrirCerrarModalEditarContra()} className="btnEditarContra"  >
                                         Editar contraseña 
                                         <RiIcons.RiLockPasswordFill className="iconSave"/>
                                     </button>
                                         </Col>
-                                        <Col>
+                                        <Col  className="mx-auto">
                                         <button onClick={()=>abrirCerrarModalEditar()} className="btnEditar">
                                         Editar
                                         <BiIcons.BiEdit className="iconSave"/>
@@ -287,21 +287,26 @@ const AdminPerfil = (props) => {
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={modalEditarContra} centered>
-                    <ModalHeader>Editar contraseña</ModalHeader>
+                    <ModalHeader>Cambiar contraseña</ModalHeader>
                     <ModalBody>
                     <div className="form-group">
                         <Col>
                             <Row>
+                            <Col>
                             <label> Ingrese contraseña actual</label>
                             <br/> 
                             <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setPassNow(e.target.value)}/>
-                            <br/>
+                            </Col> 
                             </Row>
                             <Row>
+                            </Row>
+                            <Row>
+                            <Col className="mt-2">
                             <label>Ingrese contraseña nueva</label>
                             <br/> 
                             <input type="text" className="form-control" name="IDEstudiante" onChange={ (e) => setPassNew(e.target.value)}/>
                             <br/>
+                            </Col>
                             </Row>
                         </Col>  
                     </div>
@@ -338,7 +343,7 @@ const AdminPerfil = (props) => {
                             <FaIcons.FaCheckCircle className="logoEditContra1 "/>
                         </div>
                         <div className="text-center lblModalContra1">
-                            <b> la contraseña se actualizo correctamente</b>
+                            <b>La contraseña se actualizo correctamente</b>
                         </div>
                     </ModalHeader>
                     <ModalFooter>
@@ -351,7 +356,7 @@ const AdminPerfil = (props) => {
                             <MdIcons.MdError className="logoEditContra text-danger"/>
                         </div>
                         <div className="text-center lblModalContra">
-                            <b> la contraseña actual no es correcta</b>
+                            <b>La contraseña actual no es correcta</b>
                         </div>
                     </ModalHeader>
                     <ModalFooter>
