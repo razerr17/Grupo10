@@ -36,7 +36,7 @@
 
 ## Despliegue ⌨️👀 
 * [Backend](https://backendtutorias.herokuapp.com/)
-* [Frontend](https://frontendtutoria.herokuapp.com/)
+* [Frontend Heroku](https://frontendtutoria.herokuapp.com/) [Frontend Netlify](https://sistema-tutorias-daii.netlify.app/)
 
 ## Autores ✒️
 * **Juan Carlos Condori Lopez - 170429** - [juancarlos170429](https://github.com/juancarlos170429)
