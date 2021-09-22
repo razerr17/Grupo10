@@ -1,27 +1,29 @@
-# Grupo-1-I.S-Segunda-Unidad
 # Proyecto - Sistema de Tutorías
 - **Universidad Nacional de San Antonio Abad del Cusco**
-- **Escuela Profesional de Ingenieria Informatica y de Sistemas**
-- **Ing. de Software I - Grupo 1**
-#### Docente:
+- **Escuela Profesional de Ingenieria Informática y de Sistemas**
+- **Ing. de Software I - Grupo 5**
+#### **Docente**:
 - **Quintanilla Portugal Roxana Lisette** - [Concytec](http://directorio.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=40930).
-## Segundo entregable
-### **Consideraciones previas**
-El presente segundo entregable esta hecho en base al trabajo entregado por el equipo de trabajo
-_[PeruvianTechnologies](https://github.com/Claudiars20/PeruvianTechnologies_IngSoft)_ 
-y con conceptos de los distintos grupos de trabajo:
-* _[TeamRocket](https://github.com/VkCarlin/TeamRocket)_
-* _[FastConnection](https://github.com/AlexHelder-Tyzer/IngSoft-FastConnection)_
-* _[CompumundoHiperMegaRed4G](https://github.com/razerr17/Compumundo_Hiper_Mega_Red_G4)_
-* _[Testigos-del-bitcoin](https://github.com/WidmarO/Testigos-del-bitcoin)_
+---
+## Backlog: Tercer entregable 🚀
 
-agredecemos los aportes extraidos de vuestros trabajos
-### **Informe**
-* _[Informe](https://docs.google.com/document/d/1pgaCNmPrK4FzlS2riLuAyA2kxl1-kagwGfYvNBnqboM/edit)_
-
+| ID | Tareas |
+| ------------- | ------------- |
+| R.1  | Registrar estudiantes |
+| R.2 | Registrar docentes |
+| R.3  | Filtrar a los docentes que serán tutores |
+| R.4 | Confidencialidad Inicio de Sesión |
+| R.5  | Registrar fichas de tutoría |
+| R.6 | Confidencialidad Fichas de Tutoría |
+| R.9  | Actualizar datos personales |
 
 
-## Autores
+## **Repositorio - Implementación MPV - Cruds ⌨️👩🏻‍💻** 
+* [Backend](https://github.com/razerr17/Grupo10/tree/Backend_main)
+* [Frontend](https://github.com/razerr17/Grupo10/tree/Frontend_main)
+
+
+## Autores ✒️
 * **Juan Carlos Condori Lopez - 170429** - [juancarlos170429](https://github.com/juancarlos170429)
 * **Angie Escobedo Mescco - 174442** - [AngieEM](https://github.com/AnnieLoli)
 * **Melissa Briggitte Espejo Franco - 171258** - [melissaespejo](https://github.com/melissaespejo)
@@ -31,3 +33,4 @@ agredecemos los aportes extraidos de vuestros trabajos
 * **Edgar Daniel Ramos Alvarez - 171570** - [razerr17](https://github.com/razerr17)
 * **Claudia Luz Rojas Soto - 171805** - [Claudiars20](https://github.com/Claudiars20)
 ---
+⌨️ con ❤️ por [Claudiars20](https://github.com/Claudiars20) 😊
