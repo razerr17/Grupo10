@@ -3,12 +3,8 @@
 - **Escuela Profesional de Ingenieria Informática y de Sistemas**
 - **Ing. de Software I - Grupo 1**
 #### **Docente**:
-- **Quintanilla Portugal Roxana Lisette** - [Concytec](http://directorio.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=40930).
+- **Quintanilla Portugal Roxana Lisette** - [Concytec](http://directorio.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=40930)
 ---
-## Documentación Final
-
-
-
 ## Backlog: Tercer entregable 🚀
 
 | ID | Tareas |
