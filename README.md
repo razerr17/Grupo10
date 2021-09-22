@@ -1,10 +1,14 @@
 # Proyecto - Sistema de Tutorías
 - **Universidad Nacional de San Antonio Abad del Cusco**
 - **Escuela Profesional de Ingenieria Informática y de Sistemas**
-- **Ing. de Software I - Grupo 5**
+- **Ing. de Software I - Grupo 1**
 #### **Docente**:
 - **Quintanilla Portugal Roxana Lisette** - [Concytec](http://directorio.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=40930).
 ---
+## Documentación Final
+
+
+
 ## Backlog: Tercer entregable 🚀
 
 | ID | Tareas |
@@ -18,10 +22,25 @@
 | R.9  | Actualizar datos personales |
 
 
-## **Repositorio - Implementación MPV - Cruds ⌨️👩🏻‍💻** 
+## **Repositorio - Implementación MPV - Cruds 👩🏻‍💻** 
 * [Backend](https://github.com/razerr17/Grupo10/tree/Backend_main)
 * [Frontend](https://github.com/razerr17/Grupo10/tree/Frontend_main)
 
+## Construido con 🛠️
+* SQL-Azure - Base de datos
+* [Node.js](https://nodejs.org/es/docs/) 
+* [Express.js](https://expressjs.com/es/) 
+* [React.js](https://es.reactjs.org/docs/getting-started.html) 
+* [Babel](https://babeljs.io/)
+* Firebase
+
+### Para inicializar el proyecto (local)
+* Front-end: `npm start`
+* Back-end - API : `npm run dev`
+
+## Despliegue ⌨️👀 
+* [Backend](https://backendtutorias.herokuapp.com/)
+* [Frontend](https://frontendtutoria.herokuapp.com/)
 
 ## Autores ✒️
 * **Juan Carlos Condori Lopez - 170429** - [juancarlos170429](https://github.com/juancarlos170429)
