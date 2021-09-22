@@ -602,6 +602,13 @@ begin
 	select * from TDocente where CodDocente=@CodDocente
 end
 go--drop procedure spuGetTutorByEstudiante
+create procedure getAsignacionesEspecial 
+as
+begin
+	select D.Nombres,D.ApPaterno,D.ApMaterno,CodEstudiante into #T1 from TAsignacion A inner join TDocente D on A.CodDocente=D.CodDocente
+	select NombreTutor=T.Nombres,ApPTutor=T.ApPaterno,ApMTutor=T.ApMaterno,NombreE=E.Nombres,ApPE=E.ApPaterno,ApME=E.ApMaterno from #T1 T inner join TEstudiante E on T.CodEstudiante=E.CodEstudiante
+end
+go
 -- DATOS TABLA ALUMNO
 INSERT INTO TEstudiante VALUES ('174908','VLADIMIR DANTE','CASILLA','PERCCA','174908@unsaac.edu.pe','P2','956897456','2020-II')
 INSERT INTO TEstudiante VALUES ('160889','FIORELLA SILVIA','CHOQUE', 'BUENO','160889@unsaac.edu.pe','P3','956897456','2020-II')
@@ -646,7 +653,6 @@ INSERT INTO TEstudiante VALUES ('93160','CESAR','CHARA' ,'TACURI','93160@unsaac.
 INSERT INTO TEstudiante VALUES ('161731','DAVID','SONCCO' ,'CACHURA','161731@unsaac.edu.pe','P42','984445633','2018-II')
 INSERT INTO TEstudiante VALUES ('171058','ROSMEL URIEL','DEZA' ,'CONDORI','171058@unsaac.edu.pe','P43','984658758','2018-II')
 go
-
 use BDSistema_Tutorias
 go
 -- DATOS TABLA DOCENTE
